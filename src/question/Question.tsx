@@ -1,3 +1,5 @@
+import {QuestionC} from "./QuestionC";
+
 export default class Question {
     question: string;
     answers: string[];
@@ -5,6 +7,10 @@ export default class Question {
     constructor(question: string, answers: string[]) {
         this.question = question;
         this.answers = answers;
+    }
+
+    makeComponent() {
+        return new QuestionC(this);
     }
 }
 
