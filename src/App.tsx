@@ -13,7 +13,7 @@ class App extends Component<{}, AppState> {
         super(props);
 
         this.state = {
-            socket: new WebSocket("ws://localhost:7070/play"),
+            socket: new WebSocket("ws://" + window.location.hostname + ":7070/play"),
             command: new WaitCommand()
         };
         this.initialiseApp()
