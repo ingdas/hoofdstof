@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Question from './question/Question'
 import {Container} from "@material-ui/core";
-import {commandFromObject} from "./command/command";
+import {commandFromObject, WaitCommand} from "./command/command";
 
 interface AppState {
     socket: WebSocket
@@ -13,11 +12,9 @@ class App extends Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
 
-        const question = new Question("Wie?", ["A", "B", "C"]);
-
         this.state = {
             socket: new WebSocket("ws://localhost:7070/play"),
-            currentWindow: question.makeComponent()
+            currentWindow: new WaitCommand().makeComponent()
         };
         this.initialiseApp()
     }
@@ -37,8 +34,8 @@ class App extends Component<{}, AppState> {
     private initialiseApp() {
         const ws = this.state.socket
         ws.onmessage = (evt) => {
-            const command = commandFromObject(JSON.parse(evt.data));
-            const newComponent = command.makeComponent()
+            const command = commandFromObject(JSON.parse(evt.data), this.state.socket);
+            const newComponent = command.makeComponent();
             const newState: AppState = {socket: ws, currentWindow: newComponent};
             this.setState(newState)
         };

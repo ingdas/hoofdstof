@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {WaitScreen} from "../waiting/WaitScreen";
-import Question from "../question/Question";
+import {QuestionC, QuestionProps} from "../question/QuestionC";
 
 export abstract class Command {
 
@@ -8,11 +8,6 @@ export abstract class Command {
 }
 
 export class WaitCommand extends Command {
-
-    constructor(obj: Object) {
-        super()
-    }
-
     makeComponent(): Component {
         return new WaitScreen({})
     }
@@ -23,17 +18,22 @@ interface QuestionInput {
     ans: string[]
 }
 
-export class NewQuestionCommand extends Command {
-    question: Question
+export class NewQuestionCommand extends Command implements QuestionProps {
+    question: string;
+    answers: string[];
+    answerCb: (answer: string) => void;
 
-    constructor(obj: Object) {
+
+    constructor(obj: Object, ws: WebSocket) {
         super();
-        const qi = obj as QuestionInput
-        this.question = new Question(qi.q, qi.ans)
+        const qi = obj as QuestionInput;
+        this.question = qi.q;
+        this.answers = qi.ans;
+        this.answerCb = (s: string) => ws.send(JSON.stringify({answer: s}));
     }
 
     makeComponent(): Component {
-        return this.question.makeComponent()
+        return new QuestionC(this)
     }
 }
 
@@ -42,13 +42,13 @@ interface CommandoJson {
     args: Object
 }
 
-export function commandFromObject(obj: CommandoJson): Command {
+export function commandFromObject(obj: CommandoJson, ws: WebSocket): Command {
     switch (obj.name) {
         case "newQuestion" : {
-            return new NewQuestionCommand(obj.args);
+            return new NewQuestionCommand(obj.args, ws);
         }
         case "wait" : {
-            return new WaitCommand(obj.args);
+            return new WaitCommand();
         }
     }
     throw new Error("Unknown Command Name: " + obj.name)

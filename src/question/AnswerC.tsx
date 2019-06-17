@@ -1,13 +1,17 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import Typography from "@material-ui/core/Typography";
 import "./AnswerC.css"
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
+interface AnswerProps {
+    value : string;
+    onClick : MouseEventHandler
+}
 
-export class AnswerC extends React.Component<{ value: string }> {
+export class AnswerC extends React.Component<AnswerProps> {
 
-    constructor(props: { value: string }) {
+    constructor(props: AnswerProps) {
         super(props);
         this.state = props
     }
@@ -16,7 +20,7 @@ export class AnswerC extends React.Component<{ value: string }> {
 
         return (
             <Grid item xs={6}>
-                <Paper className="card">
+                <Paper onClick={this.props.onClick} className="card">
                     <Typography variant="h5" component="h2">
                         {this.props.value}
                     </Typography>

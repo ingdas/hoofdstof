@@ -1,11 +1,16 @@
 import React from "react";
-import Question from "./Question";
 import {AnswerC} from "./AnswerC";
 import "./QuestionC.css"
 import {Grid} from "@material-ui/core";
 
-export class QuestionC extends React.Component<Question> {
-    constructor(question: Question) {
+export interface QuestionProps {
+    question: string;
+    answers : string[];
+    answerCb: (answer: string) => void
+}
+
+export class QuestionC extends React.Component<QuestionProps> {
+    constructor(question: QuestionProps) {
         super(question);
         this.state = question
     }
@@ -14,7 +19,8 @@ export class QuestionC extends React.Component<Question> {
         let answers = [];
 
         for (let i = 0; i < this.props.answers.length; i++) {
-            answers.push(<AnswerC value={this.props.answers[i]}/>)
+            answers.push(<AnswerC value={this.props.answers[i]}
+                                  onClick={e => this.props.answerCb(this.props.answers[i])}/>)
         }
 
         const quest = (
