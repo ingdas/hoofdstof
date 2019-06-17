@@ -1,15 +1,19 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {WaitScreen} from "../waiting/WaitScreen";
 import {QuestionC, QuestionProps} from "../question/QuestionC";
 
-export abstract class Command {
-
-    abstract makeComponent(): Component
+export abstract class Command extends Component {
 }
 
 export class WaitCommand extends Command {
-    makeComponent(): Component {
-        return new WaitScreen({})
+    constructor() {
+        super({})
+    }
+
+    render() {
+        return (
+            <WaitScreen></WaitScreen>
+        )
     }
 }
 
@@ -25,15 +29,16 @@ export class NewQuestionCommand extends Command implements QuestionProps {
 
 
     constructor(obj: Object, ws: WebSocket) {
-        super();
+        super({});
         const qi = obj as QuestionInput;
         this.question = qi.q;
         this.answers = qi.ans;
         this.answerCb = (s: string) => ws.send(JSON.stringify({answer: s}));
     }
 
-    makeComponent(): Component {
-        return new QuestionC(this)
+
+    render() {
+        return <QuestionC question={this.question} answers={this.answers} answerCb={this.answerCb}></QuestionC>
     }
 }
 
