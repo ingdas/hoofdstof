@@ -1,8 +1,12 @@
 import React, {Component} from "react";
 import {WaitScreen} from "../waiting/WaitScreen";
 import {QuestionC, QuestionProps} from "../question/QuestionC";
+import {Update} from "./update";
 
 export abstract class Command extends Component {
+    update(update: Update){
+        throw Error("Can't handle updates");
+    }
 }
 
 export class WaitCommand extends Command {

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import {Command, commandFromObject, WaitCommand} from "./command/command";
+import {Command, commandFromObject, WaitCommand} from "./message/command";
+import {updateFromObject} from "./message/update";
 
 interface AppState {
     socket: WebSocket
@@ -12,8 +13,15 @@ class App extends Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
 
+        let url = "ws://" + window.location.hostname + ":7070/";
+        if (document.location.pathname === "/d") {
+            url += "display";
+        } else {
+            url += "play";
+        }
+
         this.state = {
-            socket: new WebSocket("ws://" + window.location.hostname + ":7070/play"),
+            socket: new WebSocket(url),
             command: new WaitCommand()
         };
         this.initialiseApp()
@@ -35,9 +43,17 @@ class App extends Component<{}, AppState> {
     private initialiseApp() {
         const ws = this.state.socket;
         ws.onmessage = (evt) => {
-            const command = commandFromObject(JSON.parse(evt.data), this.state.socket);
-            const newState: AppState = {socket: ws, command: command};
-            this.setState(newState)
+            const data = JSON.parse(evt.data);
+            if (data.type === "command") {
+                const command = commandFromObject(data, this.state.socket);
+                const newState: AppState = {socket: ws, command: command};
+                this.setState(newState)
+            } else if (data.type === "update") {
+                const update = updateFromObject(data, this.state.socket);
+                this.state.command.update(update)
+            } else {
+                throw Error("Unknown Message type")
+            }
         };
     }
 
