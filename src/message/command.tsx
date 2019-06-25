@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {WaitScreen} from "../waiting/WaitScreen";
 import {QuestionC, QuestionProps} from "../question/QuestionC";
 import {Update} from "./update";
+import {DisplayQuestionC} from "../displayBars/DisplayQuestionC";
 
 export abstract class Command extends Component {
     update(update: Update){
@@ -46,6 +47,25 @@ export class NewQuestionCommand extends Command implements QuestionProps {
     }
 }
 
+export class DisplayQuestionCommand extends Command {
+    question: string;
+    answers: string[];
+
+
+    constructor(obj: Object, ws: WebSocket) {
+        super({});
+        const qi = obj as QuestionInput;
+        this.question = qi.q;
+        this.answers = qi.ans
+
+    }
+
+
+    render() {
+        return <DisplayQuestionC question={this.question} answers={this.answers}></DisplayQuestionC>
+    }
+}
+
 interface CommandoJson {
     name: String
     args: Object
@@ -55,6 +75,9 @@ export function commandFromObject(obj: CommandoJson, ws: WebSocket): Command {
     switch (obj.name) {
         case "newQuestion" : {
             return new NewQuestionCommand(obj.args, ws);
+        }
+        case "displayQuestion" : {
+            return new DisplayQuestionCommand(obj.args, ws);
         }
         case "wait" : {
             return new WaitCommand();
