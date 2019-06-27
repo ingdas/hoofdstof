@@ -1,73 +1,35 @@
-import {List, Map} from "immutable";
-import {AnswerQuestionState, AppState, ChartQuestionState, WaitScreenState} from "./states";
+import {WindowName} from "./states";
 
 export enum ActionType {
-    WaitScreen = "WaitScreen",
-    AnswerQuestion = "AnswerQuestion",
-    ChartQuestion = "Chartquestion",
+    NewScreen = "NewScreen",
     HandleAnswer = "HandleAnswer"
 }
-
 
 export interface Action {
     type: ActionType
 }
 
 export interface BuilderAction extends Action {
-    build(): AppState
+    window: WindowName
+    payload: object
 }
 
-export function isBuilder(object: Action): object is BuilderAction {
-    return 'build' in object;
+export interface HandleAnswerAction extends Action {
+    answer: number
 }
 
-export class WaitScreenAction implements BuilderAction {
-    type = ActionType.WaitScreen;
-
-    build(): AppState {
-        return new WaitScreenState()
-    }
+export function handleAnswer(answer: number): HandleAnswerAction {
+    return {type: ActionType.HandleAnswer, answer}
 }
 
-export class AnswerQuestionAction implements BuilderAction {
-    type = ActionType.AnswerQuestion;
-    question: string;
-    answers: List<string>;
-
-    constructor(question: string, answers: List<string>) {
-        this.question = question;
-        this.answers = answers;
-    }
-
-    build(): AppState {
-        return new AnswerQuestionState(this.question, this.answers)
-    }
-
+export function waitScreen(): BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.WaitScreen, payload: {}}
 }
 
-export class HandleAnswerAction implements Action {
-    type = ActionType.HandleAnswer;
-    answer: string;
-
-    constructor(answer: string) {
-        this.answer = answer;
-    }
+export function chartQuestion(question: string, answers: string[]): BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.ChartQuestion, payload: {question, answers}}
 }
 
-export class ChartQuestionAction implements BuilderAction {
-    type = ActionType.ChartQuestion;
-    question: string;
-    answers: List<string>;
-
-    constructor(question: string, answers: List<string>) {
-        this.question = question;
-        this.answers = answers;
-    }
-
-    build(): AppState {
-        let ansmap = Map<string, number>();
-        this.answers.forEach(v => ansmap = ansmap.set(v, 0));
-        return new ChartQuestionState(this.question, ansmap)
-    }
+export function answerQuestion(question: string, answers: string[]): BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.AnswerQuestion, payload: {question, answers}}
 }
-

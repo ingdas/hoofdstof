@@ -1,40 +1,30 @@
 import React from "react";
-import {AnswerC} from "./AnswerC";
+import {Answer} from "./AnswerC";
 import "./QuestionC.css"
 import {Grid} from "@material-ui/core";
+import {AnswerQuestionState} from "../redux/states";
+import {connect} from "react-redux";
 
-export interface QuestionProps {
-    question: string;
-    answers: string[];
-    answerCb: (answer: string) => void
+interface Props {
+    question: string,
+    answers: string[]
 }
 
-export class QuestionC extends React.Component<QuestionProps, { sel: number }> {
-    constructor(question: QuestionProps) {
-        super(question);
-        this.state = {sel: -1}
-    }
+const QuestionC = ({question, answers}: Props) => {
+    return (
+        <Grid container spacing={3}>
+            <Grid item xs={12} className="qTitle">{question}</Grid>
+            {answers.map((v, index) => <Answer key={index} index={index}/>)}
+        </Grid>)
+};
 
-    handeClick(index: number) {
-        console.log(this)
-        console.log("Clicked "+ index);
-        this.props.answerCb(this.props.answers[index]);
-        this.setState({sel: index})
-    }
-
-    renderAnswer(index: number) {
-        return <AnswerC key={index}
-                        selected={index === this.state.sel} value={this.props.answers[index]}
-                        onClick={() => this.handeClick(index)}></AnswerC>
-    }
-
-    render() {
-        let ansR = this.props.answers.map((e, i) => this.renderAnswer(i));
-        const quest = (
-            <Grid container spacing={3}>
-                <Grid item xs={12} className="qTitle">{this.props.question}</Grid>
-                {ansR}
-            </Grid>);
-        return quest;
-    }
+export function mapStateToProps(state: AnswerQuestionState, ownProps: {}): Props {
+    const {question, answers} = state;
+    return {question, answers: answers.toJS()}
 }
+
+export function mapDispatchToProps(dispatch: any, ownProps: {}) {
+    return {}
+}
+
+export const Question = connect(mapStateToProps, mapDispatchToProps)(QuestionC);

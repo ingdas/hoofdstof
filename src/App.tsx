@@ -1,62 +1,43 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import {Command, commandFromObject, WaitCommand} from "./message/command";
-import {updateFromObject} from "./message/update";
+import {AppState, WindowName} from "./redux/states";
+import {Question} from "./question/QuestionC";
+import {WaitScreen} from "./waiting/WaitScreen";
+import {connect} from "react-redux";
+import ChartQuestion from "./chartQuestion/ChartQuestion";
 
-interface AppState {
-    socket: WebSocket
-    command: Command
+interface Props {
+    window: WindowName
 }
 
-class App extends Component<{}, AppState> {
-    constructor(props: {}) {
-        super(props);
+const App = ({window}: Props) => {
+    const bumperStyle = {
+        height: "50px"
+    };
 
-        let url = "ws://" + window.location.hostname + ":7070/";
-        if (document.location.pathname === "/d") {
-            url += "display";
-        } else {
-            url += "play";
-        }
-
-        this.state = {
-            socket: new WebSocket(url),
-            command: new WaitCommand()
-        };
-        this.initialiseApp()
+    let appWindow;
+    switch (window) {
+        case WindowName.AnswerQuestion:
+            appWindow = <Question/>;
+            break;
+        case WindowName.ChartQuestion:
+            appWindow = <ChartQuestion/>;
+            break;
+        default:
+            appWindow = <WaitScreen/>;
+            break;
     }
 
-    render() {
-        const bumperStyle = {
-            height: "50px"
-        };
+    return (<Container maxWidth="md">
+        <div style={bumperStyle}/>
+        {appWindow}
+    </Container>);
 
-        const cont = (<Container maxWidth="md">
-            <div style={bumperStyle}/>
-            {this.state.command.render()}
-        </Container>);
-        return cont
-    }
+};
 
-
-    private initialiseApp() {
-        const ws = this.state.socket;
-        ws.onmessage = (evt) => {
-            const data = JSON.parse(evt.data);
-            if (data.type === "command") {
-                const command = commandFromObject(data, this.state.socket);
-                const newState: AppState = {socket: ws, command: command};
-                this.setState(newState)
-            } else if (data.type === "update") {
-                const update = updateFromObject(data, this.state.socket);
-                this.state.command.update(update)
-            } else {
-                throw Error("Unknown Message type")
-            }
-        };
-    }
-
+export function mapStateToProps({window}: AppState): Props {
+    return {window}
 }
 
-export default App;
+export default connect(mapStateToProps)(App)
