@@ -1,4 +1,5 @@
-import {WindowName} from "./states";
+import {AppState, WindowName} from "./states";
+import {ThunkAction} from "redux-thunk";
 
 export enum ActionType {
     NewScreen = "NewScreen",
@@ -18,8 +19,16 @@ export interface HandleAnswerAction extends Action {
     answer: number
 }
 
-export function handleAnswer(answer: number): HandleAnswerAction {
-    return {type: ActionType.HandleAnswer, answer}
+function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebSocket }, Action> {
+    return (dispatch: any, getState: any, {ws}: { ws: WebSocket }) => {
+        ws.send(JSON.stringify(action));
+        dispatch(action)
+    }
+}
+
+export function handleAnswer(answer: number) {
+    const action: HandleAnswerAction = {type: ActionType.HandleAnswer, answer};
+    return dispatchAndEmit(action)
 }
 
 export function waitScreen(): BuilderAction {
