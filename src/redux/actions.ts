@@ -1,9 +1,12 @@
 import {AppState, WindowName} from "./states";
 import {ThunkAction} from "redux-thunk";
+import {Action} from "redux";
+import {act} from "react-dom/test-utils";
 
 export enum ActionType {
     NewScreen = "NewScreen",
-    HandleAnswer = "HandleAnswer"
+    HandleAnswer = "HandleAnswer",
+    HandleUpdate = "HandleUpdate"
 }
 
 export interface Action {
@@ -19,6 +22,10 @@ export interface HandleAnswerAction extends Action {
     answer: number
 }
 
+export interface HandleTextInput extends Action {
+    answer: string
+}
+
 function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebSocket }, Action> {
     return (dispatch: any, getState: any, {ws}: { ws: WebSocket }) => {
         ws.send(JSON.stringify(action));
@@ -29,6 +36,16 @@ function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebS
 export function handleAnswer(answer: number) {
     const action: HandleAnswerAction = {type: ActionType.HandleAnswer, answer};
     return dispatchAndEmit(action)
+}
+
+export function handleTextInput(answer: string) {
+    const action : HandleTextInput= {type : ActionType.HandleAnswer, answer};
+    return dispatchAndEmit(action)
+}
+
+export function handleTextUpdate(answer: string) {
+    const action : HandleTextInput= {type : ActionType.HandleUpdate, answer};
+    return action
 }
 
 export function waitScreen(): BuilderAction {

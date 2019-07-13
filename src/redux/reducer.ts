@@ -1,8 +1,15 @@
 import {Action} from "redux";
 import {ActionType, BuilderAction} from "./actions";
-import {AnswerQuestionState, AppState, ChartQuestionState, WaitScreenState, WindowName} from "./states";
-import {fromJS} from "immutable";
-
+import {
+    AnswerQuestionState,
+    AppState,
+    ChartQuestionState,
+    TextInputState,
+    WaitScreenState,
+    WindowName,
+    WordCloudState
+} from "./states";
+import {fromJS, Map} from "immutable";
 
 export const initialState = new WaitScreenState();
 
@@ -25,6 +32,14 @@ function build(action: BuilderAction) {
         }
         case WindowName.WaitScreen: {
             return new WaitScreenState();
+        }
+        case WindowName.WordCloud: {
+            const {question} = action.payload as { question: string };
+            return new WordCloudState(question, Map<string,number>())
+        }
+        case WindowName.TextInput: {
+            const {question} = action.payload as { question: string };
+            return new TextInputState(question,"")
         }
     }
 }
