@@ -1,3 +1,7 @@
 html {
   background-color: lightgrey;
 }
+
+html, body, #root, #root>div, .fullHeight {
+  height: 100%
+}

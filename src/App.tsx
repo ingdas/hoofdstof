@@ -29,7 +29,7 @@ const App = ({window}: Props) => {
             break;
     }
 
-    return (<Container maxWidth="md">
+    return (<Container className="fullHeight" maxWidth="md">
         <div style={bumperStyle}/>
         {appWindow}
     </Container>);
