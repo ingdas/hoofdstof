@@ -42,13 +42,13 @@ function mapDispatchToProps(dispatch: any, ownProps: {}) {
     return {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
+            window.navigator.vibrate([100]);
             dispatch(waitScreen())
         },
         acceptChange: (str: string) => {
             // @ts-ignore
             dispatch(handleTextUpdate(str))
         }
-
     };
 }
 

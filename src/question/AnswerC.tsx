@@ -54,6 +54,7 @@ function mapStateToProps(state: AnswerQuestionState, ownProps: OwnProps): { valu
 function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: MouseEventHandler } {
     return {
         onClick: (evt) => {
+            window.navigator.vibrate([100]);
             dispatch(handleAnswer(ownProps.index));
         }
     };
