@@ -1,7 +1,6 @@
 import {AppState, WindowName} from "./states";
 import {ThunkAction} from "redux-thunk";
 import {Action} from "redux";
-import {act} from "react-dom/test-utils";
 
 export enum ActionType {
     NewScreen = "NewScreen",
@@ -50,6 +49,10 @@ export function handleTextUpdate(answer: string) {
 
 export function waitScreen(): BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.WaitScreen, payload: {}}
+}
+
+export function loginScreen(onLogin: (naam : string) => void): BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.Login, payload: {onLogin : onLogin}}
 }
 
 export function chartQuestion(question: string, answers: string[]): BuilderAction {

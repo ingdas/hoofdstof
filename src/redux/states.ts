@@ -7,7 +7,8 @@ export enum WindowName {
     AnswerQuestion = "Answer",
     WaitScreen = "Wait",
     TextInput = "Text",
-    WordCloud = "WordCloud"
+    WordCloud = "WordCloud",
+    Login = "Login"
 }
 
 export abstract class AppState {
@@ -75,8 +76,8 @@ export class WaitScreenState extends AppState {
 
 
 export class TextInputState extends AppState {
-    question : string;
-    answer : string;
+    question: string;
+    answer: string;
     window = WindowName.TextInput;
 
 
@@ -98,12 +99,12 @@ export class TextInputState extends AppState {
 }
 
 export class WordCloudState extends AppState {
-    question : string;
-    count : Map<string,number>;
+    question: string;
+    count: Map<string, number>;
     window = WindowName.WordCloud;
 
 
-    constructor(question: string, count: Map<string,number>) {
+    constructor(question: string, count: Map<string, number>) {
         super();
         this.question = question;
         this.count = count;
@@ -119,4 +120,28 @@ export class WordCloudState extends AppState {
                 return this
         }
     }
+}
+
+export class LoginState extends AppState {
+    window = WindowName.Login;
+    name : string;
+    doLogin: (name: string) => void;
+
+    constructor(doLogin: (name: string) => void, name : string = "") {
+        super();
+        this.doLogin = doLogin;
+        this.name = name
+    }
+
+    reduce(action: Action): AppState {
+        console.log(this, action)
+        switch (action.type) {
+            case ActionType.HandleUpdate:
+                const {answer} = action as HandleTextInput;
+                return new LoginState(this.doLogin, answer);
+            default:
+                return this
+        }
+    }
+
 }

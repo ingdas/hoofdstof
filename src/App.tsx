@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import WordCloud from "./text/WordCloud";
 import TextInput from "./text/TextInput";
 import ChartQuestion from "./question/ChartQuestion";
+import Login from "./waiting/Login";
 
 interface Props {
     window: WindowName
@@ -34,6 +35,9 @@ const App = ({window}: Props) => {
             break;
         case WindowName.WaitScreen:
             appWindow = <WaitScreen/>;
+            break;
+        case WindowName.Login:
+            appWindow = <Login/>;
             break;
     }
 

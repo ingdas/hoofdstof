@@ -3,7 +3,7 @@ import {ActionType, BuilderAction} from "./actions";
 import {
     AnswerQuestionState,
     AppState,
-    ChartQuestionState,
+    ChartQuestionState, LoginState,
     TextInputState,
     WaitScreenState,
     WindowName,
@@ -35,11 +35,15 @@ function build(action: BuilderAction) {
         }
         case WindowName.WordCloud: {
             const {question} = action.payload as { question: string };
-            return new WordCloudState(question, Map<string,number>())
+            return new WordCloudState(question, Map<string, number>())
         }
         case WindowName.TextInput: {
             const {question} = action.payload as { question: string };
-            return new TextInputState(question,"")
+            return new TextInputState(question, "")
+        }
+        case WindowName.Login : {
+            const {onLogin} = action.payload as { onLogin: (naam: String) => void };
+            return new LoginState(onLogin)
         }
     }
 }

@@ -6,26 +6,75 @@ import App from './App'
 import {initialState, reducer} from "./redux/reducer";
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
+import ReconnectingWebSocket from "reconnecting-websocket";
+import {loginScreen} from "./redux/actions";
 
+// window.localStorage[LOGINIDKEY] = "";
+// window.localStorage[USERNAMEKEY] = "";
 
-let url = "ws://" + window.location.hostname + ":7070/";
-if (document.location.pathname === "/d") {
-    url += "display";
-} else {
-    url += "play";
+export enum Loc {
+    PLAYER,
+    BEAMER
 }
 
-const ws = new WebSocket(url);
+export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER : Loc.PLAYER;
 
+function getURL() {
+    let url = "ws://" + window.location.hostname + ":7070/";
+    if (AppLocation === Loc.BEAMER) {
+        url += "display";
+    } else {
+        url += "play";
+    }
+    return url
+}
+
+const ws = new ReconnectingWebSocket(getURL());
 export const store = createStore(reducer, initialState, applyMiddleware(thunk.withExtraArgument({ws})));
 
-ws.onmessage = (evt) => {
-    const data = JSON.parse(evt.data);
-    store.dispatch(data)
-};
+function activateSocket() {
+    ws.onmessage = (evt) => {
+        const data = JSON.parse(evt.data);
+        store.dispatch(data)
+    };
+}
+
+const LOGINIDKEY = "loginID";
+function getLoginId() {
+    let loginId = window.localStorage[LOGINIDKEY];
+    if (loginId === "") {
+        window.localStorage[LOGINIDKEY] = Math.random()
+    }
+    return window.localStorage[LOGINIDKEY]
+}
+
+const USERNAMEKEY = "username";
+function getUserName() {
+    let loginId = window.localStorage[USERNAMEKEY];
+    if (loginId === "") {
+        return null
+    }
+    return window.localStorage[USERNAMEKEY]
+}
 
 
-const rootElement = document.getElementById('root')
+if (AppLocation === Loc.BEAMER) {
+    activateSocket();
+} else {
+    const onLogin = function(naam: string) {
+        window.localStorage[USERNAMEKEY] = naam;
+        ws.send(JSON.stringify({state: {name: naam, id: getLoginId()}, type: "UpdateState"}));
+        activateSocket()
+    };
+    if(getUserName() != null){
+        onLogin(getUserName())
+    }else{
+        store.dispatch(loginScreen(onLogin));
+    }
+}
+
+
+const rootElement = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
         <App/>
