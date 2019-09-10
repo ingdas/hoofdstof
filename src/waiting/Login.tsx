@@ -1,4 +1,4 @@
-import React, {FormEvent, FormEventHandler, MouseEventHandler} from "react";
+import React, {FormEvent, FormEventHandler} from "react";
 import {LoginState} from "../redux/states";
 import {connect} from "react-redux";
 import {handleTextUpdate, waitScreen} from "../redux/actions";

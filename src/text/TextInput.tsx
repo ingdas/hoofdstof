@@ -1,16 +1,30 @@
-import React, {FormEvent, FormEventHandler, MouseEventHandler} from "react";
-import {TextInputState} from "../redux/states";
+import React, {FormEvent, MouseEventHandler} from "react";
+import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
-import {handleAnswer, handleTextInput, handleTextUpdate} from "../redux/actions";
+import {handleTextInput, handleTextUpdate} from "../redux/actions";
 
 interface Props {
+    type: TextInputType
     question: string,
     onClick: ((answer: string) => MouseEventHandler)
     answer: string
-    onChange : FormEventHandler
+    acceptChange: ((answer: string) => void)
 }
 
-const TextInputC = ({question, onClick, onChange, answer}: Props) => {
+const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
+
+    const onChange = function (evt: FormEvent) {
+        // @ts-ignore
+        const value: string = evt.target.value
+        if (type === TextInputType.Number) {
+            const re = /^[0-9\b]+$/;
+            if (value === '' || re.test(value)) {
+                acceptChange(value)
+            }
+        } else {
+            acceptChange(value)
+        }
+    };
     return (
         <div>
             <h2>{question}</h2>
@@ -20,18 +34,18 @@ const TextInputC = ({question, onClick, onChange, answer}: Props) => {
 };
 
 function mapStateToProps(state: TextInputState, ownProps: {}) {
-    const {question, answer} = state;
-    return {question, answer}
+    const {question, answer, type} = state;
+    return {question, answer, type}
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: {}) {
     return {
-        onClick: (answer : string) => (evt : any) => {
+        onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
         },
-        onChange: (evt : FormEvent) => {
+        acceptChange: (str: string) => {
             // @ts-ignore
-            dispatch(handleTextUpdate(evt.target.value))
+            dispatch(handleTextUpdate(str))
         }
 
     };

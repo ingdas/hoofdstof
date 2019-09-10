@@ -4,7 +4,7 @@ import {
     AnswerQuestionState,
     AppState,
     ChartQuestionState, LoginState,
-    TextInputState,
+    TextInputState, TextInputType,
     WaitScreenState,
     WindowName,
     WordCloudState
@@ -38,8 +38,8 @@ function build(action: BuilderAction) {
             return new WordCloudState(question, Map<string, number>())
         }
         case WindowName.TextInput: {
-            const {question} = action.payload as { question: string };
-            return new TextInputState(question, "")
+            const {question, type} = action.payload as { question: string, type: TextInputType };
+            return new TextInputState(question, "", type)
         }
         case WindowName.Login : {
             const {onLogin} = action.payload as { onLogin: (naam: String) => void };

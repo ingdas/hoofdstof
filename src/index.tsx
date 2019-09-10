@@ -45,7 +45,7 @@ function activateSocket() {
 
 function getLoginId() {
     let loginId = window.localStorage[LOGINIDKEY];
-    if (loginId === "") {
+    if (loginId === undefined) {
         window.localStorage[LOGINIDKEY] = Math.random()
     }
     return window.localStorage[LOGINIDKEY]
@@ -53,7 +53,7 @@ function getLoginId() {
 
 function getUserName() {
     let loginId = window.localStorage[USERNAMEKEY];
-    if (loginId === "") {
+    if (loginId === undefined) {
         return null
     }
     return window.localStorage[USERNAMEKEY]

@@ -74,24 +74,30 @@ export class WaitScreenState extends AppState {
     window = WindowName.WaitScreen
 }
 
+export enum TextInputType {
+    Text = "Text",
+    Number = "Number"
+}
 
 export class TextInputState extends AppState {
     question: string;
     answer: string;
+    type : TextInputType;
     window = WindowName.TextInput;
 
 
-    constructor(question: string, answer: string) {
+    constructor(question: string, answer: string, type : TextInputType) {
         super();
         this.question = question;
         this.answer = answer;
+        this.type = type;
     }
 
     reduce(action: Action): AppState {
         switch (action.type) {
             case ActionType.HandleUpdate:
                 const {answer} = action as HandleTextInput;
-                return new TextInputState(this.question, answer);
+                return new TextInputState(this.question, answer, this.type);
             default:
                 return this
         }
