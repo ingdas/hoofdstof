@@ -3,6 +3,7 @@ import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
 import {handleTextInput, handleTextUpdate, waitScreen} from "../redux/actions";
 import {vibrate} from "../util";
+import {AppState} from "../redux/appstate";
 
 interface Props {
     type: TextInputType
@@ -34,12 +35,12 @@ const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
         </div>)
 };
 
-function mapStateToProps(state: TextInputState, ownProps: {}) {
-    const {question, answer, type} = state;
+function mapStateToProps(state: AppState) {
+    const {question, answer, type} = state.window as TextInputState;
     return {question, answer, type}
 }
 
-function mapDispatchToProps(dispatch: any, ownProps: {}) {
+function mapDispatchToProps(dispatch: any) {
     return {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));

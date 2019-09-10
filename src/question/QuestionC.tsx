@@ -4,6 +4,7 @@ import "./QuestionC.css"
 import {Grid} from "@material-ui/core";
 import {AnswerQuestionState} from "../redux/states";
 import {connect} from "react-redux";
+import {AppState} from "../redux/appstate";
 
 interface Props {
     question: string,
@@ -18,12 +19,12 @@ const QuestionC = ({question, answers}: Props) => {
         </Grid>)
 };
 
-export function mapStateToProps(state: AnswerQuestionState, ownProps: {}): Props {
-    const {question, answers} = state;
+export function mapStateToProps(state: AppState): Props {
+    const {question, answers} = state.window as AnswerQuestionState;
     return {question, answers: answers.toJS()}
 }
 
-export function mapDispatchToProps(dispatch: any, ownProps: {}) {
+export function mapDispatchToProps(dispatch: any) {
     return {}
 }
 

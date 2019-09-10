@@ -3,6 +3,7 @@ import {WordCloudState} from "../redux/states";
 import {connect} from "react-redux";
 import {Map} from "immutable";
 import ReactWordcloud from 'react-wordcloud';
+import {AppState} from "../redux/appstate";
 
 interface Props {
     question: string
@@ -51,12 +52,12 @@ const WordCloudC = ({question, count}: Props) => (
     </div>
 );
 
-export function mapStateToProps(state: WordCloudState, ownProps: {}): Props {
-    const {question, count} = state;
+export function mapStateToProps(state: AppState): Props {
+    const {question, count} = state.window as WordCloudState;
     return {question, count}
 }
 
-export function mapDispatchToProps(dispatch: any, ownProps: {}) {
+export function mapDispatchToProps(dispatch: any) {
     return {}
 }
 

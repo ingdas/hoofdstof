@@ -2,6 +2,7 @@ import React, {FormEvent, FormEventHandler} from "react";
 import {LoginState} from "../redux/states";
 import {connect} from "react-redux";
 import {handleTextUpdate, waitScreen} from "../redux/actions";
+import {AppState} from "../redux/appstate";
 
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const LoginC = ({doLogin, finishLogin, onChange, name}: Props) => {
+    console.log("Rendering Login");
     const showButton = name === "" ? {display: 'none'} : {};
     return (
         <div>
@@ -26,8 +28,8 @@ const LoginC = ({doLogin, finishLogin, onChange, name}: Props) => {
         </div>)
 };
 
-function mapStateToProps(state: LoginState) {
-    const {doLogin, name} = state;
+function mapStateToProps(state: AppState) {
+    const {doLogin, name} = state.window as LoginState;
     return {name, doLogin}
 }
 

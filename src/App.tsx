@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import {AppState, WindowName} from "./redux/states";
+import {WindowName} from "./redux/states";
 import {Question} from "./question/QuestionC";
 import {WaitScreen} from "./waiting/WaitScreen";
 import {connect} from "react-redux";
@@ -10,18 +10,19 @@ import TextInput from "./text/TextInput";
 import ChartQuestion from "./question/ChartQuestion";
 import Login from "./waiting/Login";
 import {AdminScreen} from "./admin/Admin";
+import {AppState} from "./redux/appstate";
 
 interface Props {
-    window: WindowName
+    windowName: WindowName
 }
 
-const App = ({window}: Props) => {
+const App = ({windowName}: Props) => {
     const bumperStyle = {
         height: "50px"
     };
 
     let appWindow;
-    switch (window) {
+    switch (windowName) {
         case WindowName.AnswerQuestion:
             appWindow = <Question/>;
             break;
@@ -53,7 +54,7 @@ const App = ({window}: Props) => {
 };
 
 export function mapStateToProps({window}: AppState): Props {
-    return {window}
+    return {windowName: window.windowName}
 }
 
 export default connect(mapStateToProps)(App)

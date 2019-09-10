@@ -1,11 +1,16 @@
-import {AppState, WindowName} from "./states";
+import {WindowState, WindowName} from "./states";
 import {ThunkAction} from "redux-thunk";
 import {Action} from "redux";
 
 export enum ActionType {
+    //Used for new screens
     NewScreen = "NewScreen",
+    //Used for sending the answer
     HandleAnswer = "HandleAnswer",
-    HandleUpdate = "HandleUpdate"
+    //Used for textfield updates
+    HandleUpdate = "HandleUpdate",
+    //Used for setting the timer
+    NewTimer = "NewTimer"
 }
 
 export interface Action {
@@ -25,7 +30,12 @@ export interface HandleTextInput extends Action {
     answer: string
 }
 
-function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebSocket }, Action> {
+export interface TimerAction extends Action {
+    totalTime: number
+    timeLeft: number
+}
+
+function dispatchAndEmit(action: Action): ThunkAction<void, WindowState, { ws: WebSocket }, Action> {
     return (dispatch: any, getState: any, {ws}: { ws: WebSocket }) => {
         ws.send(JSON.stringify(action));
         dispatch(action)
@@ -38,12 +48,12 @@ export function handleAnswer(answer: number) {
 }
 
 export function handleTextInput(answer: string) {
-    const action : HandleTextInput= {type : ActionType.HandleAnswer, answer};
+    const action: HandleTextInput = {type: ActionType.HandleAnswer, answer};
     return dispatchAndEmit(action)
 }
 
 export function handleTextUpdate(answer: string) {
-    const action : HandleTextInput= {type : ActionType.HandleUpdate, answer};
+    const action: HandleTextInput = {type: ActionType.HandleUpdate, answer};
     return action
 }
 
@@ -51,8 +61,8 @@ export function waitScreen(): BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.WaitScreen, payload: {}}
 }
 
-export function loginScreen(onLogin: (naam : string) => void): BuilderAction {
-    return {type: ActionType.NewScreen, window: WindowName.Login, payload: {onLogin : onLogin}}
+export function loginScreen(onLogin: (naam: string) => void): BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.Login, payload: {onLogin: onLogin}}
 }
 
 export function chartQuestion(question: string, answers: string[]): BuilderAction {

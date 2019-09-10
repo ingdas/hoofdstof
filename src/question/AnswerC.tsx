@@ -7,6 +7,7 @@ import {AnswerQuestionState} from "../redux/states";
 import {connect} from "react-redux";
 import {handleAnswer} from "../redux/actions";
 import {vibrate} from "../util";
+import {AppState} from "../redux/appstate";
 
 interface AnswerProps {
     selected: boolean;
@@ -45,10 +46,11 @@ interface OwnProps {
     index: number
 }
 
-function mapStateToProps(state: AnswerQuestionState, ownProps: OwnProps): { value: string, selected: boolean, active: boolean } {
-    const value = state.answers.get(ownProps.index, "ERROR: Invalid Index");
-    const selected = state.selected === ownProps.index;
-    const active = state.selected < 0;
+function mapStateToProps(state: AppState, ownProps: OwnProps): { value: string, selected: boolean, active: boolean } {
+    const windowState = state.window as AnswerQuestionState
+    const value = windowState.answers.get(ownProps.index, "ERROR: Invalid Index");
+    const selected = windowState.selected === ownProps.index;
+    const active = windowState.selected < 0;
     return {value, selected, active}
 }
 

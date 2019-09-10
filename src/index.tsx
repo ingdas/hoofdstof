@@ -12,8 +12,8 @@ import {adminScreen, loginScreen} from "./redux/actions";
 const LOGINIDKEY = "loginID";
 const USERNAMEKEY = "username";
 
-// window.localStorage[LOGINIDKEY] = "";
-// window.localStorage[USERNAMEKEY] = "";
+// windowName.localStorage[LOGINIDKEY] = "";
+// windowName.localStorage[USERNAMEKEY] = "";
 
 export enum Loc {
     PLAYER,
@@ -22,7 +22,7 @@ export enum Loc {
 }
 
 export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER :
-    document.location.pathname === "/a" ? Loc.PLAYER : Loc.ADMIN;
+    document.location.pathname === "/a" ? Loc.ADMIN : Loc.PLAYER;
 
 function getURL() {
     let url = "ws://" + window.location.hostname + ":7070/";

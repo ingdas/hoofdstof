@@ -3,6 +3,7 @@ import {ChartQuestionState} from "../redux/states";
 import {connect} from "react-redux";
 import {List, Map} from "immutable";
 import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
+import {AppState} from "../redux/appstate";
 
 interface Props {
     question: string
@@ -38,12 +39,12 @@ const ChartQuestion = ({question, answers, count}: Props) => (
     </div>
 );
 
-export function mapStateToProps(state: ChartQuestionState, ownProps: {}): Props {
-    const {question, answers, count} = state;
+export function mapStateToProps(state: AppState): Props {
+    const {question, answers, count} = state.window as ChartQuestionState;
     return {question, answers, count}
 }
 
-export function mapDispatchToProps(dispatch: any, ownProps: {}) {
+export function mapDispatchToProps(dispatch: any) {
     return {}
 }
 

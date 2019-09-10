@@ -12,20 +12,31 @@ export enum WindowName {
     Login = "Login"
 }
 
-export abstract class AppState {
-    abstract window: WindowName;
+export class TimerState {
+    timeLeft: number;
+    totalTime: number;
 
-    reduce(action: Action): AppState {
+    constructor(timeLeft: number, totalTime: number) {
+        this.timeLeft = timeLeft;
+        this.totalTime = totalTime;
+    }
+}
+
+
+export abstract class WindowState {
+    abstract windowName: WindowName;
+
+    reduce(action: Action): WindowState {
         return this;
     }
 }
 
 
-export class ChartQuestionState extends AppState {
+export class ChartQuestionState extends WindowState {
     question: string;
     answers: List<string>;
     count: Map<number, number>;
-    window = WindowName.ChartQuestion;
+    windowName = WindowName.ChartQuestion;
 
 
     constructor(question: string, answers: List<string>, count: Map<number, number> = Map()) {
@@ -35,7 +46,7 @@ export class ChartQuestionState extends AppState {
         this.count = count;
     }
 
-    reduce(action: Action): AppState {
+    reduce(action: Action): WindowState {
         switch (action.type) {
             case ActionType.HandleAnswer:
                 const up = action as HandleAnswerAction;
@@ -47,11 +58,11 @@ export class ChartQuestionState extends AppState {
     }
 }
 
-export class AnswerQuestionState extends AppState {
+export class AnswerQuestionState extends WindowState {
     question: string;
     answers: List<string>;
     selected: number;
-    window = WindowName.AnswerQuestion;
+    windowName = WindowName.AnswerQuestion;
 
     constructor(question: string, answers: List<string>, selected: number = -1) {
         super();
@@ -60,7 +71,7 @@ export class AnswerQuestionState extends AppState {
         this.selected = selected;
     }
 
-    reduce(action: Action): AppState {
+    reduce(action: Action): WindowState {
         switch (action.type) {
             case ActionType.HandleAnswer:
                 const {answer} = action as HandleAnswerAction;
@@ -71,12 +82,12 @@ export class AnswerQuestionState extends AppState {
     }
 }
 
-export class WaitScreenState extends AppState {
-    window = WindowName.WaitScreen
+export class WaitScreenState extends WindowState {
+    windowName = WindowName.WaitScreen
 }
 
-export class AdminState extends AppState {
-    window = WindowName.Admin
+export class AdminState extends WindowState {
+    windowName = WindowName.Admin
 }
 
 export enum TextInputType {
@@ -84,21 +95,21 @@ export enum TextInputType {
     Number = "Number"
 }
 
-export class TextInputState extends AppState {
+export class TextInputState extends WindowState {
     question: string;
     answer: string;
-    type : TextInputType;
-    window = WindowName.TextInput;
+    type: TextInputType;
+    windowName = WindowName.TextInput;
 
 
-    constructor(question: string, answer: string, type : TextInputType) {
+    constructor(question: string, answer: string, type: TextInputType) {
         super();
         this.question = question;
         this.answer = answer;
         this.type = type;
     }
 
-    reduce(action: Action): AppState {
+    reduce(action: Action): WindowState {
         switch (action.type) {
             case ActionType.HandleUpdate:
                 const {answer} = action as HandleTextInput;
@@ -109,10 +120,10 @@ export class TextInputState extends AppState {
     }
 }
 
-export class WordCloudState extends AppState {
+export class WordCloudState extends WindowState {
     question: string;
     count: Map<string, number>;
-    window = WindowName.WordCloud;
+    windowName = WindowName.WordCloud;
 
 
     constructor(question: string, count: Map<string, number>) {
@@ -121,7 +132,7 @@ export class WordCloudState extends AppState {
         this.count = count;
     }
 
-    reduce(action: Action): AppState {
+    reduce(action: Action): WindowState {
         switch (action.type) {
             case ActionType.HandleAnswer:
                 const up = action as HandleTextInput;
@@ -133,18 +144,18 @@ export class WordCloudState extends AppState {
     }
 }
 
-export class LoginState extends AppState {
-    window = WindowName.Login;
-    name : string;
+export class LoginState extends WindowState {
+    windowName = WindowName.Login;
+    name: string;
     doLogin: (name: string) => void;
 
-    constructor(doLogin: (name: string) => void, name : string = "") {
+    constructor(doLogin: (name: string) => void, name: string = "") {
         super();
         this.doLogin = doLogin;
         this.name = name
     }
 
-    reduce(action: Action): AppState {
+    reduce(action: Action): WindowState {
         console.log(this, action)
         switch (action.type) {
             case ActionType.HandleUpdate:

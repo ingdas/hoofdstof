@@ -1,58 +1,11 @@
 import {Action} from "redux";
-import {ActionType, BuilderAction} from "./actions";
-import {
-    AdminState,
-    AnswerQuestionState,
-    AppState,
-    ChartQuestionState,
-    LoginState,
-    TextInputState,
-    TextInputType,
-    WaitScreenState,
-    WindowName,
-    WordCloudState
-} from "./states";
-import {fromJS, Map} from "immutable";
-import {vibrate} from "../util";
+import {TimerState, WaitScreenState} from "./states";
+import {AppState} from "./appstate";
 
-export const initialState = new WaitScreenState();
+export const initialState = new AppState(new WaitScreenState(), new TimerState(-1, -1));
 
 export function reducer(state: AppState = initialState, action: Action): AppState {
-    if (action.type === ActionType.NewScreen) {
-        return build(action as BuilderAction)
-    }
+    console.log(state, action)
     return state.reduce(action)
 }
 
-function build(action: BuilderAction) {
-    switch (action.window) {
-        case WindowName.AnswerQuestion: {
-            vibrate([500]);
-            const {question, answers} = action.payload as { question: string, answers: string[] };
-            return new AnswerQuestionState(question, fromJS(answers), -1);
-        }
-        case WindowName.ChartQuestion: {
-            const {question, answers} = action.payload as { question: string, answers: string[] };
-            return new ChartQuestionState(question, fromJS(answers));
-        }
-        case WindowName.WaitScreen: {
-            return new WaitScreenState();
-        }
-        case WindowName.WordCloud: {
-            const {question} = action.payload as { question: string };
-            return new WordCloudState(question, Map<string, number>())
-        }
-        case WindowName.TextInput: {
-            vibrate([500]);
-            const {question, type} = action.payload as { question: string, type: TextInputType };
-            return new TextInputState(question, "", type)
-        }
-        case WindowName.Login : {
-            const {onLogin} = action.payload as { onLogin: (naam: String) => void };
-            return new LoginState(onLogin)
-        }
-        case WindowName.Admin: {
-            return new AdminState()
-        }
-    }
-}
