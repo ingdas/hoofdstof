@@ -9,6 +9,9 @@ import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import {loginScreen} from "./redux/actions";
 
+const LOGINIDKEY = "loginID";
+const USERNAMEKEY = "username";
+
 // window.localStorage[LOGINIDKEY] = "";
 // window.localStorage[USERNAMEKEY] = "";
 
@@ -35,11 +38,11 @@ export const store = createStore(reducer, initialState, applyMiddleware(thunk.wi
 function activateSocket() {
     ws.onmessage = (evt) => {
         const data = JSON.parse(evt.data);
-        store.dispatch(data)
+        store.dispatch(data);
     };
 }
 
-const LOGINIDKEY = "loginID";
+
 function getLoginId() {
     let loginId = window.localStorage[LOGINIDKEY];
     if (loginId === "") {
@@ -48,7 +51,6 @@ function getLoginId() {
     return window.localStorage[LOGINIDKEY]
 }
 
-const USERNAMEKEY = "username";
 function getUserName() {
     let loginId = window.localStorage[USERNAMEKEY];
     if (loginId === "") {
@@ -63,7 +65,7 @@ if (AppLocation === Loc.BEAMER) {
 } else {
     const onLogin = function(naam: string) {
         window.localStorage[USERNAMEKEY] = naam;
-        ws.send(JSON.stringify({state: {name: naam, id: getLoginId()}, type: "UpdateState"}));
+        ws.send(JSON.stringify({newstate: {name: naam, id: getLoginId()}, type: "UpdateState"}));
         activateSocket()
     };
     if(getUserName() != null){
