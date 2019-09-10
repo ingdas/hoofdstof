@@ -8,9 +8,10 @@ import {connect} from "react-redux";
 import {handleAnswer} from "../redux/actions";
 
 interface AnswerProps {
-    selected: boolean
+    selected: boolean;
     value: string;
-    onClick: MouseEventHandler
+    onClick: MouseEventHandler;
+    active: boolean;
 }
 
 class AnswerC extends React.Component<AnswerProps> {
@@ -27,7 +28,8 @@ class AnswerC extends React.Component<AnswerProps> {
 
         return (
             <Grid item xs={6}>
-                <Paper onClick={this.props.onClick} className="card" style={{backgroundColor: this.getColor()}}>
+                <Paper onClick={this.props.active ? this.props.onClick : () => {
+                }} className="card" style={{backgroundColor: this.getColor()}}>
                     <Typography variant="h5" component="h2">
                         {this.props.value}
                     </Typography>
@@ -42,10 +44,11 @@ interface OwnProps {
     index: number
 }
 
-function mapStateToProps(state: AnswerQuestionState, ownProps: OwnProps): { value: string, selected: boolean } {
+function mapStateToProps(state: AnswerQuestionState, ownProps: OwnProps): { value: string, selected: boolean, active: boolean } {
     const value = state.answers.get(ownProps.index, "ERROR: Invalid Index");
     const selected = state.selected === ownProps.index;
-    return {value, selected}
+    const active = state.selected < 0;
+    return {value, selected, active}
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: MouseEventHandler } {

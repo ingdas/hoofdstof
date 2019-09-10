@@ -1,7 +1,7 @@
 import React, {FormEvent, MouseEventHandler} from "react";
 import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
-import {handleTextInput, handleTextUpdate} from "../redux/actions";
+import {handleTextInput, handleTextUpdate, waitScreen} from "../redux/actions";
 
 interface Props {
     type: TextInputType
@@ -42,6 +42,7 @@ function mapDispatchToProps(dispatch: any, ownProps: {}) {
     return {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
+            dispatch(waitScreen())
         },
         acceptChange: (str: string) => {
             // @ts-ignore
