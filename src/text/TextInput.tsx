@@ -2,6 +2,7 @@ import React, {FormEvent, MouseEventHandler} from "react";
 import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
 import {handleTextInput, handleTextUpdate, waitScreen} from "../redux/actions";
+import {vibrate} from "../util";
 
 interface Props {
     type: TextInputType
@@ -42,7 +43,7 @@ function mapDispatchToProps(dispatch: any, ownProps: {}) {
     return {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
-            window.navigator.vibrate([100]);
+            vibrate([100]);
             dispatch(waitScreen())
         },
         acceptChange: (str: string) => {

@@ -10,6 +10,7 @@ import {
     WordCloudState
 } from "./states";
 import {fromJS, Map} from "immutable";
+import {vibrate} from "../util";
 
 export const initialState = new WaitScreenState();
 
@@ -23,7 +24,7 @@ export function reducer(state: AppState = initialState, action: Action): AppStat
 function build(action: BuilderAction) {
     switch (action.window) {
         case WindowName.AnswerQuestion: {
-            window.navigator.vibrate([500]);
+            vibrate([500]);
             const {question, answers} = action.payload as { question: string, answers: string[] };
             return new AnswerQuestionState(question, fromJS(answers), -1);
         }
@@ -39,7 +40,7 @@ function build(action: BuilderAction) {
             return new WordCloudState(question, Map<string, number>())
         }
         case WindowName.TextInput: {
-            window.navigator.vibrate([500]);
+            vibrate([500]);
             const {question, type} = action.payload as { question: string, type: TextInputType };
             return new TextInputState(question, "", type)
         }

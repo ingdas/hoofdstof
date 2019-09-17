@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import {AnswerQuestionState} from "../redux/states";
 import {connect} from "react-redux";
 import {handleAnswer} from "../redux/actions";
+import {vibrate} from "../util";
 
 interface AnswerProps {
     selected: boolean;
@@ -54,7 +55,7 @@ function mapStateToProps(state: AnswerQuestionState, ownProps: OwnProps): { valu
 function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: MouseEventHandler } {
     return {
         onClick: (evt) => {
-            window.navigator.vibrate([100]);
+            vibrate([100]);
             dispatch(handleAnswer(ownProps.index));
         }
     };
