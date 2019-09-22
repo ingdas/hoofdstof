@@ -15,6 +15,7 @@ import {
 } from "./states";
 import {fromJS, Map} from "immutable";
 import {store} from "../index";
+import {vibrate} from "../util";
 
 export class AppState {
     window: WindowState;
@@ -32,12 +33,18 @@ export class AppState {
                 if(this.time.timeOutmarker != null){
                     clearTimeout(this.time.timeOutmarker);
                 }
-                var timeOutMarker : number | null = null;
+                let timeOutMarker: number | null = null;
                 if(timeLeft >= 0){
                     // @ts-ignore
                     timeOutMarker = setTimeout(() => {
                         store.dispatch(newTimer(totalTime, timeLeft-1))
                     }, 1000);
+                }
+                switch (timeLeft) {
+                    case 3: vibrate([100]); break;
+                    case 2: vibrate([100,400,100]); break;
+                    case 1: vibrate([100,150,100,150,100,150,100]); break;
+                    case 0: vibrate([400]); break;
                 }
                 return new AppState(this.window, new TimerState(timeLeft, totalTime, timeOutMarker));
             }
@@ -52,7 +59,7 @@ export class AppState {
     build(action: BuilderAction) : WindowState{
         switch (action.window) {
             case WindowName.AnswerQuestion: {
-                window.navigator.vibrate([500]);
+                vibrate([500]);
                 const {question, answers} = action.payload as { question: string, answers: string[] };
                 return new AnswerQuestionState(question, fromJS(answers), -1);
             }
@@ -68,7 +75,7 @@ export class AppState {
                 return new WordCloudState(question, Map<string, number>())
             }
             case WindowName.TextInput: {
-                window.navigator.vibrate([500]);
+                vibrate([500]);
                 const {question, type} = action.payload as { question: string, type: TextInputType };
                 return new TextInputState(question, "", false, type)
             }
