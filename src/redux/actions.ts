@@ -73,6 +73,10 @@ export function answerQuestion(question: string, answers: string[]): BuilderActi
     return {type: ActionType.NewScreen, window: WindowName.AnswerQuestion, payload: {question, answers}}
 }
 
+export function newTimer(totalTime: number, timeLeft: number): TimerAction {
+    return {type: ActionType.NewTimer, totalTime, timeLeft}
+}
+
 export function adminScreen() : BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.Admin, payload: {}}
 }

@@ -20,7 +20,6 @@ interface Props {
 
 const App = ({windowName}: Props) => {
     const bumperStyle = {
-        height: "50px"
     };
 
     let appWindow;

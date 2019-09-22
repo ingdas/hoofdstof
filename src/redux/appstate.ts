@@ -1,5 +1,5 @@
 import {Action} from "redux";
-import {ActionType, BuilderAction, TimerAction} from "./actions";
+import {ActionType, BuilderAction, newTimer, TimerAction} from "./actions";
 import {
     AdminState,
     AnswerQuestionState,
@@ -14,6 +14,7 @@ import {
     WordCloudState
 } from "./states";
 import {fromJS, Map} from "immutable";
+import {store} from "../index";
 
 export class AppState {
     window: WindowState;
@@ -28,7 +29,17 @@ export class AppState {
         switch (action.type) {
             case ActionType.NewTimer: {
                 const {totalTime, timeLeft} = action as TimerAction;
-                return new AppState(this.window, new TimerState(timeLeft, totalTime));
+                if(this.time.timeOutmarker != null){
+                    clearTimeout(this.time.timeOutmarker);
+                }
+                var timeOutMarker : number | null = null;
+                if(timeLeft >= 0){
+                    // @ts-ignore
+                    timeOutMarker = setTimeout(() => {
+                        store.dispatch(newTimer(totalTime, timeLeft-1))
+                    }, 1000);
+                }
+                return new AppState(this.window, new TimerState(timeLeft, totalTime, timeOutMarker));
             }
             case ActionType.NewScreen: {
                 return new AppState(this.build(action as BuilderAction), this.time);

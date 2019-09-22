@@ -80,13 +80,13 @@ if (AppLocation === Loc.BEAMER) {
         activateSocket()
     };
     if (getUserName() != null) {
-        onLogin(getUserName())
+        onLogin(getUserName());
     } else {
         store.dispatch(loginScreen(onLogin));
     }
 } else if(AppLocation === Loc.ADMIN){
-    activateSocket()
-    store.dispatch(adminScreen())
+    activateSocket();
+    store.dispatch(adminScreen());
 }
 
 

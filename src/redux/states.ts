@@ -15,10 +15,12 @@ export enum WindowName {
 export class TimerState {
     timeLeft: number;
     totalTime: number;
+    timeOutmarker : number | null;
 
-    constructor(timeLeft: number, totalTime: number) {
+    constructor(timeLeft: number, totalTime: number, timeOutmarker : number | null) {
         this.timeLeft = timeLeft;
         this.totalTime = totalTime;
+        this.timeOutmarker = timeOutmarker;
     }
 }
 
