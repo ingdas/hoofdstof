@@ -4,6 +4,10 @@ import {connect} from "react-redux";
 import {handleTextInput, handleTextUpdate, waitScreen} from "../redux/actions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/appstate";
+import {TextField} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+import "./TextInput.css"
 
 interface Props {
     type: TextInputType
@@ -28,10 +32,25 @@ const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
         }
     };
     return (
-        <div>
-            <h2>{question}</h2>
-            <textarea onChange={onChange} value={answer}></textarea>
-            <button onClick={onClick(answer)}>Submit</button>
+        <div style={{"backgroundColor" : "white"}}>
+            <div className="qTitle">{question}</div>
+            <div style={{"padding" : "10px", "backgroundColor": "white"}}>
+            <TextField
+                style={ {} }
+                label="Antwoord"
+                value={answer}
+                onChange={onChange}
+            />
+            </div>
+            <Button
+                style={{"margin": "20px"}}
+                variant="contained"
+                color="primary"
+                onClick={onClick(answer)}
+            >
+                Send
+                <Icon>send</Icon>
+            </Button>
         </div>)
 };
 
