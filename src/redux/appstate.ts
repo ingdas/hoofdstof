@@ -4,7 +4,7 @@ import {
     AdminState,
     AnswerQuestionState,
     ChartQuestionState,
-    LoginState,
+    LoginState, OpeningState,
     TextInputState,
     TextInputType,
     TimerState,
@@ -30,21 +30,29 @@ export class AppState {
         switch (action.type) {
             case ActionType.NewTimer: {
                 const {totalTime, timeLeft} = action as TimerAction;
-                if(this.time.timeOutmarker != null){
+                if (this.time.timeOutmarker != null) {
                     clearTimeout(this.time.timeOutmarker);
                 }
                 let timeOutMarker: number | null = null;
-                if(timeLeft >= 0){
+                if (timeLeft >= 0) {
                     // @ts-ignore
                     timeOutMarker = setTimeout(() => {
-                        store.dispatch(newTimer(totalTime, timeLeft-1))
+                        store.dispatch(newTimer(totalTime, timeLeft - 1))
                     }, 1000);
                 }
                 switch (timeLeft) {
-                    case 3: vibrate([100]); break;
-                    case 2: vibrate([100,400,100]); break;
-                    case 1: vibrate([100,150,100,150,100,150,100]); break;
-                    case 0: vibrate([400]); break;
+                    case 3:
+                        vibrate([100]);
+                        break;
+                    case 2:
+                        vibrate([100, 400, 100]);
+                        break;
+                    case 1:
+                        vibrate([100, 150, 100, 150, 100, 150, 100]);
+                        break;
+                    case 0:
+                        vibrate([400]);
+                        break;
                 }
                 return new AppState(this.window.reduce(action), new TimerState(timeLeft, totalTime, timeOutMarker));
             }
@@ -56,7 +64,7 @@ export class AppState {
         }
     }
 
-    build(action: BuilderAction) : WindowState{
+    build(action: BuilderAction): WindowState {
         switch (action.window) {
             case WindowName.AnswerQuestion: {
                 vibrate([500]);
@@ -77,14 +85,18 @@ export class AppState {
             case WindowName.TextInput: {
                 vibrate([500]);
                 const {question, type} = action.payload as { question: string, type: TextInputType };
-                return new TextInputState(question, "", false, type)
+                return new TextInputState(question, "", false, type);
             }
             case WindowName.Login : {
                 const {onLogin} = action.payload as { onLogin: (naam: String) => void };
-                return new LoginState(onLogin)
+                return new LoginState(onLogin);
             }
             case WindowName.Admin: {
-                return new AdminState()
+                return new AdminState();
+            }
+            case WindowName.Opening: {
+                const {professionList} = action.payload as { professionList: Array<string> };
+                return new OpeningState(professionList);
             }
         }
     }

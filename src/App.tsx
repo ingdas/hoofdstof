@@ -13,6 +13,8 @@ import {AdminScreen} from "./admin/Admin";
 import {AppState} from "./redux/appstate";
 import 'react-circular-progressbar/dist/styles.css';
 import ProgressReporter from "./progress/ProgressReporter";
+import OpeningC from "./waiting/Opening";
+import Opening from "./waiting/Opening";
 
 interface Props {
     windowName: WindowName
@@ -46,6 +48,9 @@ const App = ({windowName}: Props) => {
         case WindowName.Admin:
             appWindow = <AdminScreen/>;
             break;
+        case WindowName.Opening:
+            appWindow = <Opening/>
+
     }
 
     return (<Container className="fullHeight" maxWidth="md">

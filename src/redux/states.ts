@@ -1,6 +1,6 @@
 import {List, Map} from 'immutable'
 import {Action} from "redux";
-import {ActionType, HandleAnswerAction, handleTextInput, HandleTextInput, TimerAction} from "./actions";
+import {ActionType, HandleAnswerAction, HandleTextInput, TimerAction} from "./actions";
 import {webSocket} from "../index";
 
 export enum WindowName {
@@ -10,7 +10,8 @@ export enum WindowName {
     WaitScreen = "Wait",
     TextInput = "Text",
     WordCloud = "WordCloud",
-    Login = "Login"
+    Login = "Login",
+    Opening = "Opening"
 }
 
 export class TimerState {
@@ -82,6 +83,8 @@ export class AnswerQuestionState extends WindowState {
             case ActionType.NewTimer:
                 if((action as TimerAction).timeLeft === 0 && this.selected === -1){
                     return new AnswerQuestionState(this.question, this.answers, 999)
+                }else{
+                    return this;
                 }
             default:
                 return this
@@ -130,6 +133,8 @@ export class TextInputState extends WindowState {
                     console.log("Last minute send of ", this.answer)
                     webSocket.send(JSON.stringify({type: ActionType.HandleAnswer, answer : this.answer}));
                     return new TextInputState(this.question, this.answer, true, this.type);
+                }else{
+                    return this
                 }
             default:
                 return this
@@ -173,7 +178,6 @@ export class LoginState extends WindowState {
     }
 
     reduce(action: Action): WindowState {
-        console.log(this, action)
         switch (action.type) {
             case ActionType.HandleUpdate:
                 const {answer} = action as HandleTextInput;
@@ -182,5 +186,27 @@ export class LoginState extends WindowState {
                 return this
         }
     }
+}
 
+export class OpeningState extends WindowState {
+    windowName = WindowName.Opening;
+    professionList : Array<string>;
+
+    constructor(professionList: Array<string>) {
+        super();
+        this.professionList = professionList;
+    }
+
+    reduce(action: Action): WindowState {
+        switch (action.type) {
+            case ActionType.NewTimer:
+                if ((action as TimerAction).timeLeft === 0) {
+                    return new WaitScreenState();
+                } else {
+                    return this
+                }
+            default:
+                return this
+        }
+    }
 }
