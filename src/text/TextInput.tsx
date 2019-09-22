@@ -1,7 +1,7 @@
 import React, {FormEvent, MouseEventHandler} from "react";
 import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
-import {handleTextInput, handleTextUpdate, waitScreen} from "../redux/actions";
+import {handleTextInput, handleTextUpdate} from "../redux/actions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/appstate";
 import {TextField} from "@material-ui/core";

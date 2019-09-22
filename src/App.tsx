@@ -11,6 +11,8 @@ import ChartQuestion from "./question/ChartQuestion";
 import Login from "./waiting/Login";
 import {AdminScreen} from "./admin/Admin";
 import {AppState} from "./redux/appstate";
+import 'react-circular-progressbar/dist/styles.css';
+import ProgressReporter from "./progress/ProgressReporter";
 
 interface Props {
     windowName: WindowName
@@ -47,7 +49,9 @@ const App = ({windowName}: Props) => {
     }
 
     return (<Container className="fullHeight" maxWidth="md">
-        <div style={bumperStyle}/>
+        <div style={bumperStyle}>
+            <ProgressReporter/>
+        </div>
         {appWindow}
     </Container>);
 
