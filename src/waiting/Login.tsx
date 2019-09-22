@@ -3,6 +3,9 @@ import {LoginState} from "../redux/states";
 import {connect} from "react-redux";
 import {handleTextUpdate, waitScreen} from "../redux/actions";
 import {AppState} from "../redux/appstate";
+import {TextField} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
 
 
 interface Props {
@@ -17,14 +20,29 @@ const LoginC = ({doLogin, finishLogin, onChange, name}: Props) => {
     const showButton = name === "" ? {display: 'none'} : {};
     return (
         <div>
-            <h2>Welkom bij hoofdstof. Wat is je naam?</h2>
-            <textarea onChange={onChange} value={name}></textarea>
-            <button style={showButton}
+            <div style={{"backgroundColor" : "white"}}>
+                <div className="qTitle">Welkom bij hoofdstof. Wat is je naam?</div>
+                <div style={{"padding" : "10px", "backgroundColor": "white"}}>
+                    <TextField
+                        style={ {} }
+                        label="Naam"
+                        value={name}
+                        onChange={onChange}
+                    />
+                </div>
+                {name.length > 0 && <Button
+                    style={{"margin": "20px"}}
+                    variant="contained"
+                    color="primary"
                     onClick={() => {
                         doLogin(name);
                         finishLogin();
-                    }}>Log In
-            </button>
+                    }}
+                >
+                    Log In
+                    <Icon>send</Icon>
+                </Button>}
+            </div>
         </div>)
 };
 
