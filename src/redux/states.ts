@@ -3,6 +3,7 @@ import {Action} from "redux";
 import {ActionType, HandleAnswerAction, HandleTextInput} from "./actions";
 
 export enum WindowName {
+    Admin = "Admin",
     ChartQuestion = "Chart",
     AnswerQuestion = "Answer",
     WaitScreen = "Wait",
@@ -72,6 +73,10 @@ export class AnswerQuestionState extends AppState {
 
 export class WaitScreenState extends AppState {
     window = WindowName.WaitScreen
+}
+
+export class AdminState extends AppState {
+    window = WindowName.Admin
 }
 
 export enum TextInputType {

@@ -1,10 +1,13 @@
 import {Action} from "redux";
 import {ActionType, BuilderAction} from "./actions";
 import {
+    AdminState,
     AnswerQuestionState,
     AppState,
-    ChartQuestionState, LoginState,
-    TextInputState, TextInputType,
+    ChartQuestionState,
+    LoginState,
+    TextInputState,
+    TextInputType,
     WaitScreenState,
     WindowName,
     WordCloudState
@@ -47,6 +50,9 @@ function build(action: BuilderAction) {
         case WindowName.Login : {
             const {onLogin} = action.payload as { onLogin: (naam: String) => void };
             return new LoginState(onLogin)
+        }
+        case WindowName.Admin: {
+            return new AdminState()
         }
     }
 }

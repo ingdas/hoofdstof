@@ -7,7 +7,7 @@ import {initialState, reducer} from "./redux/reducer";
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
-import {loginScreen} from "./redux/actions";
+import {adminScreen, loginScreen} from "./redux/actions";
 
 const LOGINIDKEY = "loginID";
 const USERNAMEKEY = "username";
@@ -17,17 +17,28 @@ const USERNAMEKEY = "username";
 
 export enum Loc {
     PLAYER,
-    BEAMER
+    BEAMER,
+    ADMIN
 }
 
-export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER : Loc.PLAYER;
+export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER :
+    document.location.pathname === "/a" ? Loc.PLAYER : Loc.ADMIN;
 
 function getURL() {
     let url = "ws://" + window.location.hostname + ":7070/";
-    if (AppLocation === Loc.BEAMER) {
-        url += "display";
-    } else {
-        url += "play";
+    switch (AppLocation) {
+        case Loc.ADMIN: {
+            url += "admin";
+            break;
+        }
+        case Loc.BEAMER: {
+            url += "display";
+            break;
+        }
+        case Loc.PLAYER: {
+            url += "play";
+            break;
+        }
     }
     return url
 }
@@ -62,17 +73,20 @@ function getUserName() {
 
 if (AppLocation === Loc.BEAMER) {
     activateSocket();
-} else {
-    const onLogin = function(naam: string) {
+} else if (AppLocation === Loc.PLAYER) {
+    const onLogin = function (naam: string) {
         window.localStorage[USERNAMEKEY] = naam;
         ws.send(JSON.stringify({newstate: {name: naam, id: getLoginId()}, type: "UpdateState"}));
         activateSocket()
     };
-    if(getUserName() != null){
+    if (getUserName() != null) {
         onLogin(getUserName())
-    }else{
+    } else {
         store.dispatch(loginScreen(onLogin));
     }
+} else if(AppLocation === Loc.ADMIN){
+    activateSocket()
+    store.dispatch(adminScreen())
 }
 
 

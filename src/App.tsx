@@ -9,6 +9,7 @@ import WordCloud from "./text/WordCloud";
 import TextInput from "./text/TextInput";
 import ChartQuestion from "./question/ChartQuestion";
 import Login from "./waiting/Login";
+import {AdminScreen} from "./admin/Admin";
 
 interface Props {
     window: WindowName
@@ -38,6 +39,9 @@ const App = ({window}: Props) => {
             break;
         case WindowName.Login:
             appWindow = <Login/>;
+            break;
+        case WindowName.Admin:
+            appWindow = <AdminScreen/>;
             break;
     }
 

@@ -62,3 +62,7 @@ export function chartQuestion(question: string, answers: string[]): BuilderActio
 export function answerQuestion(question: string, answers: string[]): BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.AnswerQuestion, payload: {question, answers}}
 }
+
+export function adminScreen() : BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.Admin, payload: {}}
+}
