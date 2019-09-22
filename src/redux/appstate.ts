@@ -59,7 +59,7 @@ export class AppState {
             case WindowName.TextInput: {
                 window.navigator.vibrate([500]);
                 const {question, type} = action.payload as { question: string, type: TextInputType };
-                return new TextInputState(question, "", type)
+                return new TextInputState(question, "", false, type)
             }
             case WindowName.Login : {
                 const {onLogin} = action.payload as { onLogin: (naam: String) => void };

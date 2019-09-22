@@ -98,14 +98,16 @@ export enum TextInputType {
 export class TextInputState extends WindowState {
     question: string;
     answer: string;
+    done: boolean;
     type: TextInputType;
     windowName = WindowName.TextInput;
 
 
-    constructor(question: string, answer: string, type: TextInputType) {
+    constructor(question: string, answer: string, done: boolean, type: TextInputType) {
         super();
         this.question = question;
         this.answer = answer;
+        this.done = done;
         this.type = type;
     }
 
@@ -113,7 +115,9 @@ export class TextInputState extends WindowState {
         switch (action.type) {
             case ActionType.HandleUpdate:
                 const {answer} = action as HandleTextInput;
-                return new TextInputState(this.question, answer, this.type);
+                return new TextInputState(this.question, answer, this.done, this.type);
+            case ActionType.HandleAnswer:
+                return new TextInputState(this.question, this.answer, true, this.type);
             default:
                 return this
         }

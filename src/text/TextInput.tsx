@@ -15,9 +15,10 @@ interface Props {
     onClick: ((answer: string) => MouseEventHandler)
     answer: string
     acceptChange: ((answer: string) => void)
+    done : boolean
 }
 
-const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
+const TextInputC = ({question, onClick, acceptChange, answer, type, done}: Props) => {
 
     const onChange = function (evt: FormEvent) {
         // @ts-ignore
@@ -39,10 +40,10 @@ const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
                 style={ {} }
                 label="Antwoord"
                 value={answer}
-                onChange={onChange}
+                onChange={done ? (() => {}) : onChange}
             />
             </div>
-            <Button
+            {!done && <Button
                 style={{"margin": "20px"}}
                 variant="contained"
                 color="primary"
@@ -50,13 +51,13 @@ const TextInputC = ({question, onClick, acceptChange, answer, type}: Props) => {
             >
                 Send
                 <Icon>send</Icon>
-            </Button>
+            </Button>}
         </div>)
 };
 
 function mapStateToProps(state: AppState) {
-    const {question, answer, type} = state.window as TextInputState;
-    return {question, answer, type}
+    const {question, answer, type, done} = state.window as TextInputState;
+    return {question, answer, type, done}
 }
 
 function mapDispatchToProps(dispatch: any) {
@@ -64,10 +65,8 @@ function mapDispatchToProps(dispatch: any) {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
             vibrate([100]);
-            dispatch(waitScreen())
         },
         acceptChange: (str: string) => {
-            // @ts-ignore
             dispatch(handleTextUpdate(str))
         }
     };
