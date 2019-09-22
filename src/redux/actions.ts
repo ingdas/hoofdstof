@@ -10,7 +10,8 @@ export enum ActionType {
     //Used for textfield updates
     HandleUpdate = "HandleUpdate",
     //Used for setting the timer
-    NewTimer = "NewTimer"
+    NewTimer = "NewTimer",
+    ClearLogin = "ClearLogin"
 }
 
 export interface Action {

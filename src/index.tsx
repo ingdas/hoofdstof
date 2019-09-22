@@ -9,11 +9,8 @@ import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import {adminScreen, loginScreen} from "./redux/actions";
 
-const LOGINIDKEY = "loginID";
-const USERNAMEKEY = "username";
-
-// windowName.localStorage[LOGINIDKEY] = "";
-// windowName.localStorage[USERNAMEKEY] = "";
+export const LOGINIDKEY = "loginID";
+export const USERNAMEKEY = "username";
 
 export enum Loc {
     PLAYER,
