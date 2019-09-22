@@ -21,7 +21,7 @@ function toData(answers: List<string>, count: Map<number, number>): any[] {
 
 const ChartQuestion = ({question, answers, count}: Props) => (
     <div className="fullHeight">
-        <h2>{question}</h2>
+        <div className="qTitle">{question}</div>
         <ResponsiveContainer width="80%" height="70%">
             <BarChart
                 layout="vertical"

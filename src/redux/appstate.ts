@@ -46,7 +46,7 @@ export class AppState {
                     case 1: vibrate([100,150,100,150,100,150,100]); break;
                     case 0: vibrate([400]); break;
                 }
-                return new AppState(this.window, new TimerState(timeLeft, totalTime, timeOutMarker));
+                return new AppState(this.window.reduce(action), new TimerState(timeLeft, totalTime, timeOutMarker));
             }
             case ActionType.NewScreen: {
                 return new AppState(this.build(action as BuilderAction), this.time);

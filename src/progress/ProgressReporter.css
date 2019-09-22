@@ -1,0 +1,8 @@
+.CircularProgressbar-background {
+    stroke: #28b674;
+    stroke-width: 5px;
+}
+
+.CircularProgressbar {
+    overflow: visible;
+}

@@ -4,15 +4,23 @@ import {AppState} from "../redux/appstate";
 import {connect} from "react-redux";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
+import './ProgressReporter.css';
 
 const App = ({timeLeft, totalTime}: TimerState) => {
 
     if(timeLeft < 0){
-        return <div style={{height: "100px"}}></div>
+        return <div></div>
     }
     const percentage = timeLeft* 1.0 / totalTime;
     return (
-        <div style={{float: "right", height : "100px", width: "100px"}}>
+        <div style={{
+            height: "100px",
+            width: "100px",
+            position: "absolute",
+            cursor: "default",
+            right: 0,
+            margin: "10px"
+        }}>
             <CircularProgressbar
                 value={totalTime-timeLeft}
                 maxValue={totalTime}

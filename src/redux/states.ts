@@ -1,6 +1,7 @@
 import {List, Map} from 'immutable'
 import {Action} from "redux";
-import {ActionType, HandleAnswerAction, HandleTextInput} from "./actions";
+import {ActionType, HandleAnswerAction, handleTextInput, HandleTextInput, TimerAction} from "./actions";
+import {webSocket} from "../index";
 
 export enum WindowName {
     Admin = "Admin",
@@ -78,6 +79,10 @@ export class AnswerQuestionState extends WindowState {
             case ActionType.HandleAnswer:
                 const {answer} = action as HandleAnswerAction;
                 return new AnswerQuestionState(this.question, this.answers, answer);
+            case ActionType.NewTimer:
+                if((action as TimerAction).timeLeft === 0 && this.selected === -1){
+                    return new AnswerQuestionState(this.question, this.answers, 999)
+                }
             default:
                 return this
         }
@@ -120,6 +125,12 @@ export class TextInputState extends WindowState {
                 return new TextInputState(this.question, answer, this.done, this.type);
             case ActionType.HandleAnswer:
                 return new TextInputState(this.question, this.answer, true, this.type);
+            case ActionType.NewTimer:
+                if((action as TimerAction).timeLeft === 0 && !this.done){
+                    console.log("Last minute send of ", this.answer)
+                    webSocket.send(JSON.stringify({type: ActionType.HandleAnswer, answer : this.answer}));
+                    return new TextInputState(this.question, this.answer, true, this.type);
+                }
             default:
                 return this
         }

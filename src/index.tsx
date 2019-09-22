@@ -40,11 +40,11 @@ function getURL() {
     return url
 }
 
-const ws = new ReconnectingWebSocket(getURL());
-export const store = createStore(reducer, initialState, applyMiddleware(thunk.withExtraArgument({ws})));
+export const webSocket = new ReconnectingWebSocket(getURL());
+export const store = createStore(reducer, initialState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})));
 
 function activateSocket() {
-    ws.onmessage = (evt) => {
+    webSocket.onmessage = (evt) => {
         const data = JSON.parse(evt.data);
         store.dispatch(data);
     };
@@ -73,7 +73,7 @@ if (AppLocation === Loc.BEAMER) {
 } else if (AppLocation === Loc.PLAYER) {
     const onLogin = function (naam: string) {
         window.localStorage[USERNAMEKEY] = naam;
-        ws.send(JSON.stringify({newstate: {name: naam, id: getLoginId()}, type: "UpdateState"}));
+        webSocket.send(JSON.stringify({newstate: {name: naam, id: getLoginId()}, type: "UpdateState"}));
         activateSocket()
     };
     if (getUserName() != null) {

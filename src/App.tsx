@@ -20,6 +20,7 @@ interface Props {
 
 const App = ({windowName}: Props) => {
     const bumperStyle = {
+        height: "50px"
     };
 
     let appWindow;
@@ -49,8 +50,8 @@ const App = ({windowName}: Props) => {
 
     return (<Container className="fullHeight" maxWidth="md">
         <div style={bumperStyle}>
-            <ProgressReporter/>
         </div>
+        <ProgressReporter/>
         {appWindow}
     </Container>);
 

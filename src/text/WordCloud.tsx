@@ -25,8 +25,10 @@ function toData(count: Map<string, number>): WordCloudEntry[] {
 
 const WordCloudC = ({question, count}: Props) => (
     <div className="fullHeight">
-        <h2>{question}</h2>
-        <ReactWordcloud words={toData(count)}
+        <div className="qTitle">{question}</div>
+        <div style={{height: 600, width: 1200}}>
+        <ReactWordcloud
+                        words={toData(count)}
                         options={{
                             colors: [
                                 '#1f77b4',
@@ -49,6 +51,7 @@ const WordCloudC = ({question, count}: Props) => (
                             spiral: 'archimedean',
                             transitionDuration: 1000,
                         }}/>
+        </div>
     </div>
 );
 
