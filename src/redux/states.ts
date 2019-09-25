@@ -11,7 +11,8 @@ export enum WindowName {
     TextInput = "Text",
     WordCloud = "WordCloud",
     Login = "Login",
-    Opening = "Opening"
+    Opening = "Opening",
+    Ping = "Ping"
 }
 
 export class TimerState {
@@ -98,6 +99,16 @@ export class WaitScreenState extends WindowState {
 
 export class AdminState extends WindowState {
     windowName = WindowName.Admin
+}
+
+export class PingState extends WindowState {
+    windowName = WindowName.Ping;
+    notification : string;
+
+    constructor(notification: string) {
+        super();
+        this.notification = notification;
+    }
 }
 
 export enum TextInputType {

@@ -3,18 +3,18 @@ import './App.css';
 import {Container} from "@material-ui/core";
 import {WindowName} from "./redux/states";
 import {Question} from "./question/QuestionC";
-import {WaitScreen} from "./waiting/WaitScreen";
+import {WaitScreen} from "./simple/WaitScreen";
 import {connect} from "react-redux";
 import WordCloud from "./text/WordCloud";
 import TextInput from "./text/TextInput";
 import ChartQuestion from "./question/ChartQuestion";
-import Login from "./waiting/Login";
-import {AdminScreen} from "./admin/Admin";
+import Login from "./simple/Login";
 import {AppState} from "./redux/appstate";
 import 'react-circular-progressbar/dist/styles.css';
 import ProgressReporter from "./progress/ProgressReporter";
-import OpeningC from "./waiting/Opening";
-import Opening from "./waiting/Opening";
+import Opening from "./simple/Opening";
+import {Ping} from "./simple/Ping";
+import AdminScreen from "./admin/Admin";
 
 interface Props {
     windowName: WindowName
@@ -49,7 +49,9 @@ const App = ({windowName}: Props) => {
             appWindow = <AdminScreen/>;
             break;
         case WindowName.Opening:
-            appWindow = <Opening/>
+            appWindow = <Opening/>;
+        case WindowName.Ping:
+            appWindow = <Ping/>;
 
     }
 

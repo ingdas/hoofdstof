@@ -8,7 +8,7 @@ export const initialState = new AppState(new WaitScreenState(), new TimerState(-
 
 export function reducer(state: AppState = initialState, action: Action): AppState {
     console.log(state, action);
-    if(action.type == ActionType.ClearLogin){
+    if(action.type === ActionType.ClearLogin){
         delete window.localStorage[LOGINIDKEY];
         delete window.localStorage[USERNAMEKEY];
         // eslint-disable-next-line no-restricted-globals

@@ -4,7 +4,8 @@ import {
     AdminState,
     AnswerQuestionState,
     ChartQuestionState,
-    LoginState, OpeningState,
+    LoginState,
+    OpeningState, PingState,
     TextInputState,
     TextInputType,
     TimerState,
@@ -97,6 +98,10 @@ export class AppState {
             case WindowName.Opening: {
                 const {professionList} = action.payload as { professionList: Array<string> };
                 return new OpeningState(professionList);
+            }
+            case WindowName.Ping: {
+                const {notification} = action.payload as {notification : string};
+                return new PingState(notification)
             }
         }
     }
