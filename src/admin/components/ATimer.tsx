@@ -3,9 +3,9 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import {ButtonGroup} from '@material-ui/core';
 import Icon from "@material-ui/core/Icon";
-import {webSocket} from "../index";
+import {webSocket} from "../../index";
 import TextField from "@material-ui/core/TextField";
-import {newTimer} from "../redux/actions";
+import {newTimer} from "../../redux/actions";
 
 export const ATimer = ({time} :{time : String}) => {
     const handleStart = () => {

@@ -54,7 +54,7 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails);
 
 const AdminScreen = () => {
-    const [expanded, setExpanded] = React.useState<string | false>('panel0');
+    const [expanded, setExpanded] = React.useState<string | false>('panel6');
 
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
@@ -64,7 +64,7 @@ const AdminScreen = () => {
         <div>
             <ExpansionPanel square expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
                 <ExpansionPanelSummary aria-controls="panel0d-content" id="panel0d-header">
-                    <Typography>R0PreShow</Typography>
+                    <Typography>R0 Introductie</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R0PreShow></R0PreShow>
@@ -72,7 +72,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>R1Toeval</Typography>
+                    <Typography>R1 Da's toevallig</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R1Toeval></R1Toeval>
@@ -80,7 +80,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>R2Faal</Typography>
+                    <Typography>R2 Faalangst</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R2Faal></R2Faal>
@@ -88,7 +88,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>R3Som</Typography>
+                    <Typography>R3 Sommetjes</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R3Som></R3Som>
@@ -96,7 +96,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <ExpansionPanelSummary aria-controls="panel4d-content" id="panel4d-header">
-                    <Typography>R4Google</Typography>
+                    <Typography>R4 Fake News</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R4Google></R4Google>
@@ -104,7 +104,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
                 <ExpansionPanelSummary aria-controls="panel5d-content" id="panel5d-header">
-                    <Typography>R5Finale</Typography>
+                    <Typography>R5 Gevleugelde woorden (citaat vereist)</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R5Finale></R5Finale>
@@ -112,7 +112,7 @@ const AdminScreen = () => {
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
                 <ExpansionPanelSummary aria-controls="panel6d-content" id="panel6d-header">
-                    <Typography>R6Speech</Typography>
+                    <Typography>R6 Tien woorden Speech</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <R6Speech></R6Speech>
