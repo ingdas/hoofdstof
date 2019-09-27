@@ -4,8 +4,20 @@ import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {webSocket} from "../index";
+import {multipleChoiceScreen, textInputScreen} from "../redux/actions";
+import {TextInputType} from "../redux/states";
 
 export const R4Google = () => {
+    const vraagOntspanning = () => {
+        webSocket.send(JSON.stringify(textInputScreen("Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)))
+    };
+    const stelVraag0 = () => {
+        webSocket.send(JSON.stringify(multipleChoiceScreen("Welke stelling klopt?", ["A", "B"])))
+    };
+    const stelVraag1 = () => {
+        webSocket.send(JSON.stringify(multipleChoiceScreen("Welke stelling klopt?", ["A", "B"])))
+    };
     return (<div>
         <WachtBtn/>
 
@@ -17,9 +29,9 @@ export const R4Google = () => {
         >
             <Button
                 color="primary"
-                //onClick={handleStart}
+                onClick={vraagOntspanning}
             >
-                Vraag Plek
+                Vraag Ontspanning
             </Button>
 
         </ButtonGroup>
@@ -35,12 +47,12 @@ export const R4Google = () => {
             style={{marginTop : "20px", marginBottom : "20px"}}
         >
             <Button
-                //onClick={handleStop}
+                onClick={stelVraag0}
             >
                 Stel Onware Vraag
             </Button>
             <Button
-                //onClick={handleStop}
+                onClick={stelVraag1}
             >
                 Stel Ware Vraag
             </Button>

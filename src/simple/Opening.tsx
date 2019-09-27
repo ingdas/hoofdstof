@@ -13,6 +13,7 @@ import {Answer} from "../question/AnswerC";
 
 interface Props {
     professionList : Array<string>
+    finish : () => void
 }
 
 // Inspired by blueprintjs
@@ -73,7 +74,7 @@ function StyledRadio(props: RadioProps) {
         />
     );
 }
-const OpeningC = ({professionList}: Props) => {
+const OpeningC = ({professionList, finish}: Props) => {
     console.log("Rendering Opening");
     return (
         <div>
@@ -100,6 +101,7 @@ const OpeningC = ({professionList}: Props) => {
                     style={{"margin": "20px"}}
                     variant="contained"
                     color="primary"
+                    onClick={finish}
                 >
                     Start
                     <Icon>send</Icon>
@@ -120,7 +122,7 @@ function mapDispatchToProps(dispatch: any) {
             // @ts-ignore
             dispatch(handleTextUpdate(evt.target.value))
         },
-        finishLogin: () => {
+        finish: () => {
             dispatch(waitScreen())
         }
     };

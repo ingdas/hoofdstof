@@ -50,6 +50,7 @@ const App = ({windowName}: Props) => {
             break;
         case WindowName.Opening:
             appWindow = <Opening/>;
+            break;
         case WindowName.Ping:
             appWindow = <Ping/>;
 

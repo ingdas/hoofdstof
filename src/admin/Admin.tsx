@@ -54,7 +54,7 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails);
 
 const AdminScreen = () => {
-    const [expanded, setExpanded] = React.useState<string | false>('panel6');
+    const [expanded, setExpanded] = React.useState<string | false>('panel0');
 
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);

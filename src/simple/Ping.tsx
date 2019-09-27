@@ -10,12 +10,11 @@ interface Props {
 
 const PingC = ({notification}: Props) => {
     return (
-        <Paper>{notification}</Paper>
+        <Paper style={{fontSize : "64px"}}>{notification}</Paper>
     )
 };
 
 export function mapStateToProps(state: AppState): Props {
-    console.log("THIS IS PING");
     const {notification} = state.window as PingState;
     console.log(notification);
     return {notification}

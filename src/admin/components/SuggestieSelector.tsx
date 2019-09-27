@@ -7,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
+import {webSocket} from "../../index";
+import {pingScreen} from "../../redux/actions";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,6 +39,10 @@ const rows = [
 export default function SuggestieSelector() {
     const classes = useStyles();
 
+    const goPing = (suggestie : string) => () =>{
+        webSocket.send(JSON.stringify(pingScreen(suggestie)));
+    };
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -51,7 +57,7 @@ export default function SuggestieSelector() {
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.name}>
-                                <TableCell><Button>Verzend</Button></TableCell>
+                                <TableCell><Button onClick={goPing(row.name)}>Verzend</Button></TableCell>
                                 <TableCell>{row.stemmen}</TableCell>
                                 <TableCell component="th" scope="row">
                                     {row.name}

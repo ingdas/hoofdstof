@@ -5,8 +5,19 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {webSocket} from "../index";
+import {textInputScreen} from "../redux/actions";
+import {TextInputType} from "../redux/states";
 
 export const R3Som = () => {
+
+    const vraagSom = () => {
+        webSocket.send(JSON.stringify(textInputScreen("Geef ons de som", TextInputType.Number)))
+    };
+    const vraagPlek = () => {
+        webSocket.send(JSON.stringify(textInputScreen("Geef ons een plaats zonder wetenschap", TextInputType.Text)))
+    };
+
     return (<div>
         <WachtBtn/>
 
@@ -14,38 +25,29 @@ export const R3Som = () => {
             color="secondary"
             size="large"
             aria-label="large outlined secondary button group"
-            style={{marginTop : "20px", marginBottom : "20px"}}
+            style={{marginTop: "20px", marginBottom: "20px"}}
         >
             <Button
                 color="primary"
-                //onClick={handleStart}
+                onClick={vraagPlek}
             >
                 Vraag Plek
             </Button>
 
         </ButtonGroup>
         <br></br>
-        <SuggestieSelector />
+        <SuggestieSelector/>
         <ATimer time="50"/>
 
-        <TextField
-            // className={clsx(classes.margin, classes.textField)}
-            //style={{width = "100px"}}
-            multiline
-            variant="outlined"
-            label="Kennisvraag en antwoorden"
-            // onChange={handleChange('weightRange')}
-            value={"Wat is geel?\nEen rode roos\nEen blauwe roos\nEen paarse roos\nEen verwarde tomaat"}
-        ></TextField>
 
         <ButtonGroup
             color="secondary"
             size="large"
             aria-label="large outlined secondary button group"
-            style={{marginTop : "20px", marginBottom : "20px"}}
+            style={{marginTop: "20px", marginBottom: "20px"}}
         >
             <Button
-                //onClick={handleStop}
+                onClick={vraagSom}
             >
                 Vraag Som
             </Button>

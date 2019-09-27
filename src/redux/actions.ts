@@ -1,4 +1,4 @@
-import {WindowState, WindowName} from "./states";
+import {WindowState, WindowName, TextInputType} from "./states";
 import {ThunkAction} from "redux-thunk";
 import {Action} from "redux";
 
@@ -70,8 +70,12 @@ export function chartQuestion(question: string, answers: string[]): BuilderActio
     return {type: ActionType.NewScreen, window: WindowName.ChartQuestion, payload: {question, answers}}
 }
 
-export function answerQuestion(question: string, answers: string[]): BuilderAction {
+export function multipleChoiceScreen(question: string, answers: string[]): BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.AnswerQuestion, payload: {question, answers}}
+}
+
+export function textInputScreen(question : string, type : TextInputType){
+    return {type: ActionType.NewScreen, window: WindowName.TextInput, payload: {question, type}}
 }
 
 export function newTimer(totalTime: number, timeLeft: number): TimerAction {
@@ -80,4 +84,12 @@ export function newTimer(totalTime: number, timeLeft: number): TimerAction {
 
 export function adminScreen() : BuilderAction {
     return {type: ActionType.NewScreen, window: WindowName.Admin, payload: {}}
+}
+
+export function openingScreen(professionList : Array<string>) : BuilderAction {
+    return {type: ActionType.NewScreen, window: WindowName.Opening, payload: {professionList}}
+}
+
+export function pingScreen(notification : string) : BuilderAction{
+    return {type: ActionType.NewScreen, window: WindowName.Ping, payload: {notification}}
 }

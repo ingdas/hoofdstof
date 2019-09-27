@@ -4,8 +4,17 @@ import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {webSocket} from "../index";
+import {multipleChoiceScreen} from "../redux/actions";
+import {domeinen} from "../Config";
 
 export const R5Finale = () => {
+    const startQuiz = () => {
+        let kandidaten = domeinen[0].concurrenten;
+        kandidaten.push(domeinen[0].wetenschapper);
+        webSocket.send(JSON.stringify(multipleChoiceScreen("Welke wetenschapper zoeken we?", kandidaten)))
+    };
+
     return (<div>
             <WachtBtn/>
             <br></br>
@@ -17,7 +26,7 @@ export const R5Finale = () => {
                 style={{marginTop : "20px", marginBottom : "20px"}}
             >
                 <Button
-                    //onClick={handleStop}
+                    onClick={startQuiz}
                 >
                     Start Quiz
                 </Button>

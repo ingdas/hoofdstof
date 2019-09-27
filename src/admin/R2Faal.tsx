@@ -5,8 +5,22 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {webSocket} from "../index";
+import {multipleChoiceScreen, textInputScreen} from "../redux/actions";
+import {TextInputType} from "../redux/states";
+import {domeinen} from "../Config";
+import {start} from "repl";
 
 export const R2Faal = () => {
+
+    const vraagEmotie = () => {
+        webSocket.send(JSON.stringify(textInputScreen("Geef ons een emotie", TextInputType.Text)))
+    };
+
+    const startQuiz = () => {
+        webSocket.send(JSON.stringify(multipleChoiceScreen(domeinen[0].faalVraag, domeinen[0].faalAntwoorden)))
+    };
+
     return (<div>
         <WachtBtn/>
 
@@ -18,7 +32,7 @@ export const R2Faal = () => {
         >
             <Button
                 color="primary"
-                //onClick={handleStart}
+                onClick={vraagEmotie}
             >
                 Vraag Emoties
             </Button>
@@ -28,15 +42,6 @@ export const R2Faal = () => {
         <SuggestieSelector />
         <ATimer time="50"/>
 
-        <TextField
-            // className={clsx(classes.margin, classes.textField)}
-            //style={{width = "100px"}}
-            multiline
-            variant="outlined"
-            label="Kennisvraag en antwoorden"
-            // onChange={handleChange('weightRange')}
-            value={"Wat is geel?\nEen rode roos\nEen blauwe roos\nEen paarse roos\nEen verwarde tomaat"}
-        ></TextField>
 
         <ButtonGroup
             color="secondary"
@@ -44,11 +49,7 @@ export const R2Faal = () => {
             aria-label="large outlined secondary button group"
             style={{marginTop : "20px", marginBottom : "20px"}}
         >
-            <Button
-                //onClick={handleStop}
-            >
-                Start Quiz
-            </Button>
+            <Button onClick={startQuiz}>Start Quiz</Button>
             <TextField
                 // className={clsx(classes.margin, classes.textField)}
                 //style={{width = "100px"}}
