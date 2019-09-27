@@ -2,13 +2,12 @@ import React from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {webSocket} from "../index";
 import {multipleChoiceScreen, textInputScreen} from "../redux/actions";
 import {TextInputType} from "../redux/states";
-import {domeinen} from "../Config";
+import {faalAntwoorden, faalVraag} from "../Config";
 
 export const R2Faal = () => {
 
@@ -17,7 +16,7 @@ export const R2Faal = () => {
     };
 
     const startQuiz = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen(domeinen[0].faalVraag, domeinen[0].faalAntwoorden)))
+        webSocket.send(JSON.stringify(multipleChoiceScreen(faalVraag, faalAntwoorden)))
     };
 
     return (<div>
@@ -27,7 +26,7 @@ export const R2Faal = () => {
             color="secondary"
             size="large"
             aria-label="large outlined secondary button group"
-            style={{marginTop : "20px", marginBottom : "20px"}}
+            style={{marginTop: "20px", marginBottom: "20px"}}
         >
             <Button
                 color="primary"
@@ -38,7 +37,7 @@ export const R2Faal = () => {
 
         </ButtonGroup>
         <br></br>
-        <SuggestieSelector />
+        <SuggestieSelector/>
         <ATimer time="50"/>
 
 
@@ -46,17 +45,9 @@ export const R2Faal = () => {
             color="secondary"
             size="large"
             aria-label="large outlined secondary button group"
-            style={{marginTop : "20px", marginBottom : "20px"}}
+            style={{marginTop: "20px", marginBottom: "20px"}}
         >
             <Button onClick={startQuiz}>Start Quiz</Button>
-            <TextField
-                // className={clsx(classes.margin, classes.textField)}
-                //style={{width = "100px"}}
-                variant="outlined"
-                label="Juiste Antwoord"
-                // onChange={handleChange('weightRange')}
-                value={"1"}
-            ></TextField>
             <Button
                 //onClick={handleStart}
             >

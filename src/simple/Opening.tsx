@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {OpeningState} from "../redux/states";
 import {connect} from "react-redux";
 import {waitScreen} from "../redux/actions";
@@ -8,11 +8,12 @@ import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
+import {changeListener} from "../util";
 
 
 interface Props {
-    professionList : Array<string>
-    finish : () => void
+    professionList: Array<string>
+    finish: () => void
 }
 
 // Inspired by blueprintjs
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
         '&:hover': {
             backgroundColor: 'transparent',
         },
-        paddingLeft : "20px"
+        paddingLeft: "20px"
     },
     icon: {
         borderRadius: '50%',
@@ -67,45 +68,57 @@ function StyledRadio(props: RadioProps) {
             className={classes.root}
             disableRipple
             color="default"
-            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-            icon={<span className={classes.icon} />}
+            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)}/>}
+            icon={<span className={classes.icon}/>}
             {...props}
         />
     );
 }
+
 const OpeningC = ({professionList, finish}: Props) => {
 
+    let [geslacht, setGeslacht] = useState("");
+    let [vakgebied, setVakgebied] = useState("");
+    let [naam, setNaam] = useState("");
+
+    const finishForm = () => {
+        //TODO: dispatch login information to server
+        finish();
+    };
 
     return (
         <div>
-            <div style={{"backgroundColor" : "white"}}>
+            <div style={{"backgroundColor": "white"}}>
                 <div className="qTitle">Is de professor een man of een vrouw?</div>
                 <FormControl component="fieldset">
-                    <RadioGroup aria-label="gender" name="customized-radios">
-                        <FormControlLabel value="vrouw" control={<StyledRadio />} label="Vrouw" />
-                        <FormControlLabel value="man" control={<StyledRadio />} label="Man" />
+                    <RadioGroup aria-label="gender" name="customized-radios" value={geslacht} onChange={changeListener(setGeslacht)}>
+                        <FormControlLabel value="vrouw" control={<StyledRadio/>} label="Vrouw"/>
+                        <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
                 </FormControl>
                 <div className="qTitle">Wat is het vakgebied van de professor?</div>
-                <RadioGroup aria-label="beroep" name="customized-radios">
-                {professionList.map((v, index) => <FormControlLabel value={v} control={<StyledRadio />} label={v} />)}
+                <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
+                            name="customized-radios">
+                    {professionList.map((v, index) => <FormControlLabel value={v} control={<StyledRadio/>} label={v}/>)}
                 </RadioGroup>
                 <div className="qTitle">Wat is de naam van de professor?</div>
-                <div style={{"padding" : "10px", "backgroundColor": "white"}}>
+                <div style={{"padding": "10px", "backgroundColor": "white"}}>
                     <TextField
-                        style={ {} }
+                        style={{}}
                         label="Naam"
+                        value={naam}
+                        onChange={changeListener(setNaam)}
                     />
                 </div>
-                <Button
+                {(geslacht !== "" && vakgebied !== "" && naam !== "") && <Button
                     style={{"margin": "20px"}}
                     variant="contained"
                     color="primary"
-                    onClick={finish}
+                    onClick={finishForm}
                 >
                     Start
                     <Icon>send</Icon>
-                </Button>
+                </Button>}
             </div>
         </div>)
 };

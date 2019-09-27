@@ -3,3 +3,9 @@ export function vibrate(arg: Array<number>) {
         window.navigator.vibrate(arg);
     }
 }
+
+export function changeListener(setter : (newValue : string) => void){
+    return (event : React.ChangeEvent<HTMLInputElement>) => {
+        setter((event.target as HTMLInputElement).value)
+    }
+}
