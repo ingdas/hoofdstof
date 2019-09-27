@@ -7,8 +7,6 @@ export enum ActionType {
     NewScreen = "NewScreen",
     //Used for sending the answer
     HandleAnswer = "HandleAnswer",
-    //Used for textfield updates
-    HandleUpdate = "HandleUpdate",
     //Used for setting the timer
     NewTimer = "NewTimer",
     ClearLogin = "ClearLogin"
@@ -51,11 +49,6 @@ export function handleAnswer(answer: number) {
 export function handleTextInput(answer: string) {
     const action: HandleTextInput = {type: ActionType.HandleAnswer, answer};
     return dispatchAndEmit(action)
-}
-
-export function handleTextUpdate(answer: string) {
-    const action: HandleTextInput = {type: ActionType.HandleUpdate, answer};
-    return action
 }
 
 export function waitScreen(): BuilderAction {

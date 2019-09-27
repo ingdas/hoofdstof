@@ -1,7 +1,7 @@
-import React, {FormEvent, MouseEventHandler} from "react";
+import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
-import {handleTextInput, handleTextUpdate} from "../redux/actions";
+import {handleTextInput} from "../redux/actions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/appstate";
 import {TextField} from "@material-ui/core";
@@ -13,23 +13,23 @@ interface Props {
     type: TextInputType
     question: string,
     onClick: ((answer: string) => MouseEventHandler)
-    answer: string
-    acceptChange: ((answer: string) => void)
     done : boolean
 }
 
-const TextInputC = ({question, onClick, acceptChange, answer, type, done}: Props) => {
+const TextInputC = ({question, onClick, type, done}: Props) => {
+
+    let [answer, setAnswer] = useState("");
 
     const onChange = function (evt: FormEvent) {
         // @ts-ignore
-        const value: string = evt.target.value
+        const value: string = evt.target.value;
         if (type === TextInputType.Number) {
             const re = /^[0-9\b]+$/;
             if (value === '' || re.test(value)) {
-                acceptChange(value)
+                setAnswer(value)
             }
         } else {
-            acceptChange(value)
+            setAnswer(value)
         }
     };
     return (
@@ -65,9 +65,6 @@ function mapDispatchToProps(dispatch: any) {
         onClick: (answer: string) => () => {
             dispatch(handleTextInput(answer));
             vibrate([100]);
-        },
-        acceptChange: (str: string) => {
-            dispatch(handleTextUpdate(str))
         }
     };
 }

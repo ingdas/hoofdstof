@@ -1,14 +1,13 @@
-import React, {FormEvent, FormEventHandler} from "react";
-import {LoginState, OpeningState} from "../redux/states";
+import React from "react";
+import {OpeningState} from "../redux/states";
 import {connect} from "react-redux";
-import {handleTextUpdate, waitScreen} from "../redux/actions";
+import {waitScreen} from "../redux/actions";
 import {AppState} from "../redux/appstate";
-import {FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
-import {Answer} from "../question/AnswerC";
 
 
 interface Props {
@@ -75,7 +74,8 @@ function StyledRadio(props: RadioProps) {
     );
 }
 const OpeningC = ({professionList, finish}: Props) => {
-    console.log("Rendering Opening");
+
+
     return (
         <div>
             <div style={{"backgroundColor" : "white"}}>
@@ -118,10 +118,6 @@ function mapStateToProps(state: AppState) {
 function mapDispatchToProps(dispatch: any) {
     // noinspection JSUnusedGlobalSymbols
     return {
-        onChange: (evt: FormEvent) => {
-            // @ts-ignore
-            dispatch(handleTextUpdate(evt.target.value))
-        },
         finish: () => {
             dispatch(waitScreen())
         }

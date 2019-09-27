@@ -134,14 +134,10 @@ export class TextInputState extends WindowState {
 
     reduce(action: Action): WindowState {
         switch (action.type) {
-            case ActionType.HandleUpdate:
-                const {answer} = action as HandleTextInput;
-                return new TextInputState(this.question, answer, this.done, this.type);
             case ActionType.HandleAnswer:
                 return new TextInputState(this.question, this.answer, true, this.type);
             case ActionType.NewTimer:
                 if((action as TimerAction).timeLeft === 0 && !this.done){
-                    console.log("Last minute send of ", this.answer)
                     webSocket.send(JSON.stringify({type: ActionType.HandleAnswer, answer : this.answer}));
                     return new TextInputState(this.question, this.answer, true, this.type);
                 }else{
@@ -190,9 +186,6 @@ export class LoginState extends WindowState {
 
     reduce(action: Action): WindowState {
         switch (action.type) {
-            case ActionType.HandleUpdate:
-                const {answer} = action as HandleTextInput;
-                return new LoginState(this.doLogin, answer);
             default:
                 return this
         }

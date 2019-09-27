@@ -11,7 +11,6 @@ const App = ({timeLeft, totalTime}: TimerState) => {
     if(timeLeft < 0){
         return <div></div>
     }
-    const percentage = timeLeft* 1.0 / totalTime;
     return (
         <div style={{
             height: "100px",

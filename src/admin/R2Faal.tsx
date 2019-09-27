@@ -9,7 +9,6 @@ import {webSocket} from "../index";
 import {multipleChoiceScreen, textInputScreen} from "../redux/actions";
 import {TextInputType} from "../redux/states";
 import {domeinen} from "../Config";
-import {start} from "repl";
 
 export const R2Faal = () => {
 
