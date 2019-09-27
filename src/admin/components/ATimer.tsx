@@ -1,5 +1,5 @@
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import {ButtonGroup} from '@material-ui/core';
 import Icon from "@material-ui/core/Icon";
@@ -8,8 +8,11 @@ import TextField from "@material-ui/core/TextField";
 import {newTimer} from "../../redux/actions";
 
 export const ATimer = ({time} :{time : String}) => {
+
+    let [seconds, setSeconds] = useState(time);
+
     const handleStart = () => {
-        webSocket.send(JSON.stringify(newTimer(+time,+time)));
+        webSocket.send(JSON.stringify(newTimer(+seconds,+seconds)));
     };
     const handleStop = () => {
         webSocket.send(JSON.stringify(newTimer(-1,-1)));
@@ -27,8 +30,10 @@ export const ATimer = ({time} :{time : String}) => {
                     //style={{width = "100px"}}
                     variant="outlined"
                     label="Time"
-                    value={time}
-                    // onChange={handleChange('weightRange')}
+                    value={seconds}
+                    onChange={(event) => {
+                        setSeconds(event.target.value)
+                    }}
                 ></TextField>
             <Button
                 color="primary"
