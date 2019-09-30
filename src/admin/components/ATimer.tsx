@@ -1,23 +1,22 @@
 import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import {ButtonGroup} from '@material-ui/core';
-import {webSocket} from "../../index";
 import TextField from "@material-ui/core/TextField";
-import {newTimer} from "../../redux/actions";
+import {NewTimer} from "../action/sendAction";
 
-export const ATimer = ({time} :{time : String}) => {
+export const ATimer = ({time}: { time: String }) => {
 
     let [seconds, setSeconds] = useState(time);
 
     const handleStart = () => {
-        webSocket.send(JSON.stringify(newTimer(+seconds,+seconds)));
+        NewTimer(+seconds)
     };
     const handleStop = () => {
-        webSocket.send(JSON.stringify(newTimer(-1,-1)));
+        NewTimer(-1)
     };
 
     return (
-        <div style={{marginTop : "20px", marginBottom : "20px"}}>
+        <div style={{marginTop: "20px", marginBottom: "20px"}}>
             <ButtonGroup
                 color="secondary"
                 size="large"
@@ -33,18 +32,18 @@ export const ATimer = ({time} :{time : String}) => {
                         setSeconds(event.target.value)
                     }}
                 ></TextField>
-            <Button
-                color="primary"
-                onClick={handleStart}
-            >
-                Start
-            </Button>
-            <Button
-                color="primary"
-                onClick={handleStop}
-            >
-                Stop
-            </Button>
+                <Button
+                    color="primary"
+                    onClick={handleStart}
+                >
+                    Start
+                </Button>
+                <Button
+                    color="primary"
+                    onClick={handleStop}
+                >
+                    Stop
+                </Button>
             </ButtonGroup>
         </div>
     )

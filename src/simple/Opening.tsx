@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import {OpeningState} from "../redux/states";
+import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
-import {waitScreen} from "../redux/actions";
-import {AppState} from "../redux/appstate";
+import {waitScreen} from "../redux/playerActions";
 import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
 import {changeListener} from "../util";
+import {AppState} from "../redux/interfaces/appState";
+import {OpeningQuestion} from "../redux/interfaces/question";
 
 
 interface Props {
@@ -91,7 +92,8 @@ const OpeningC = ({professionList, finish}: Props) => {
             <div style={{"backgroundColor": "white"}}>
                 <div className="qTitle">Is de professor een man of een vrouw?</div>
                 <FormControl component="fieldset">
-                    <RadioGroup aria-label="gender" name="customized-radios" value={geslacht} onChange={changeListener(setGeslacht)}>
+                    <RadioGroup aria-label="gender" name="customized-radios" value={geslacht}
+                                onChange={changeListener(setGeslacht)}>
                         <FormControlLabel value="vrouw" control={<StyledRadio/>} label="Vrouw"/>
                         <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
@@ -124,8 +126,8 @@ const OpeningC = ({professionList, finish}: Props) => {
 };
 
 function mapStateToProps(state: AppState) {
-    const {professionList} = state.window as OpeningState;
-    return {professionList}
+    const questionInfo = ((state.playerState as PlayerPosingQuestion).question as OpeningQuestion);
+    return {professionList: questionInfo.professionList}
 }
 
 function mapDispatchToProps(dispatch: any) {

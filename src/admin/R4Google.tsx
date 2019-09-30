@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {webSocket} from "../index";
-import {multipleChoiceScreen, textInputScreen} from "../redux/actions";
-import {TextInputType} from "../redux/states";
+import {multipleChoiceScreen, textInputScreen} from "../redux/playerActions";
+import {TextInputType} from "../redux/interfaces/question";
 
 export const R4Google = () => {
     const vraagOntspanning = () => {

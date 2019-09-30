@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
 import {webSocket} from "../../index";
-import {pingScreen} from "../../redux/actions";
+import {pingScreen} from "../../redux/playerActions";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

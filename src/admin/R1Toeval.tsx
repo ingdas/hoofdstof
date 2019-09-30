@@ -6,7 +6,7 @@ import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import {webSocket} from "../index";
 import {uitvindingen} from "../Config";
-import {multipleChoiceScreen} from "../redux/actions";
+import {multipleChoiceScreen} from "../redux/playerActions";
 
 export const R1Toeval = () => {
     const vraagUitvinding = () => {

@@ -5,7 +5,7 @@ import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {webSocket} from "../index";
-import {multipleChoiceScreen} from "../redux/actions";
+import {multipleChoiceScreen} from "../redux/playerActions";
 import {domeinen} from "../Config";
 
 export const R5Finale = () => {

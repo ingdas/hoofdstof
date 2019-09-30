@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {LoginState} from "../redux/states";
 import {connect} from "react-redux";
-import {waitScreen} from "../redux/actions";
-import {AppState} from "../redux/appstate";
+import {waitScreen} from "../redux/playerActions";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
+import {AppState} from "../redux/interfaces/appState";
+import {LoginState} from "../redux/interfaces/playerState";
 
 
 interface Props {
@@ -25,7 +25,9 @@ const LoginC = ({doLogin, finishLogin}: Props) => {
                         style={{}}
                         label="Naam"
                         value={userName}
-                        onChange={(event)=>{setName(event.target.value)}}
+                        onChange={(event) => {
+                            setName(event.target.value)
+                        }}
                     />
                 </div>
                 {userName.length > 0 && <Button
@@ -45,8 +47,8 @@ const LoginC = ({doLogin, finishLogin}: Props) => {
 };
 
 function mapStateToProps(state: AppState) {
-    const {doLogin, name} = state.window as LoginState;
-    return {name, doLogin}
+    const playerState = state.playerState as LoginState;
+    return {doLogin : playerState.onLogin}
 }
 
 function mapDispatchToProps(dispatch: any) {

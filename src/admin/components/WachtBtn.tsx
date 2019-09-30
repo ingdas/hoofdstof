@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import {webSocket} from "../../index";
-import {waitScreen} from "../../redux/actions";
+import {waitScreen} from "../../redux/playerActions";
 
 export const WachtBtn = () => {
     const handleClick = () => {

@@ -1,19 +1,20 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
-import {TextInputState, TextInputType} from "../redux/states";
 import {connect} from "react-redux";
-import {handleTextInput} from "../redux/actions";
+import {handleTextInput} from "../redux/playerActions";
 import {vibrate} from "../util";
-import {AppState} from "../redux/appstate";
+import {AppState} from "../redux/interfaces/appState";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import "./TextInput.css"
+import {OpenQuestion, TextInputType} from "../redux/interfaces/question";
+import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 
 interface Props {
     type: TextInputType
     question: string,
     onClick: ((answer: string) => MouseEventHandler)
-    done : boolean
+    done: boolean
 }
 
 const TextInputC = ({question, onClick, type, done}: Props) => {
@@ -33,15 +34,16 @@ const TextInputC = ({question, onClick, type, done}: Props) => {
         }
     };
     return (
-        <div style={{"backgroundColor" : "white"}}>
+        <div style={{"backgroundColor": "white"}}>
             <div className="qTitle">{question}</div>
-            <div style={{"padding" : "10px", "backgroundColor": "white"}}>
-            <TextField
-                style={ {} }
-                label="Antwoord"
-                value={answer}
-                onChange={done ? (() => {}) : onChange}
-            />
+            <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                <TextField
+                    style={{}}
+                    label="Antwoord"
+                    value={answer}
+                    onChange={done ? (() => {
+                    }) : onChange}
+                />
             </div>
             {!done && <Button
                 style={{"margin": "20px"}}
@@ -56,8 +58,13 @@ const TextInputC = ({question, onClick, type, done}: Props) => {
 };
 
 function mapStateToProps(state: AppState) {
-    const {question, answer, type, done} = state.window as TextInputState;
-    return {question, answer, type, done}
+    const questionInfo = ((state.playerState as PlayerPosingQuestion).question as OpenQuestion);
+    const currentAnswer = state.player.answers.get(questionInfo.id);
+    return {
+        question: questionInfo.question,
+        type: questionInfo.type,
+        done: currentAnswer !== undefined
+    }
 }
 
 function mapDispatchToProps(dispatch: any) {

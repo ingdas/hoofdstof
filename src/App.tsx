@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import {WindowName} from "./redux/states";
 import {Question} from "./question/QuestionC";
 import {WaitScreen} from "./simple/WaitScreen";
 import {connect} from "react-redux";
@@ -9,12 +8,14 @@ import WordCloud from "./text/WordCloud";
 import TextInput from "./text/TextInput";
 import ChartQuestion from "./question/ChartQuestion";
 import Login from "./simple/Login";
-import {AppState} from "./redux/appstate";
+
 import 'react-circular-progressbar/dist/styles.css';
 import ProgressReporter from "./progress/ProgressReporter";
 import Opening from "./simple/Opening";
 import {Ping} from "./simple/Ping";
 import AdminScreen from "./admin/Admin";
+import {WindowName} from "./redux/interfaces/windowName";
+import {AppState} from "./redux/interfaces/appState";
 
 interface Props {
     windowName: WindowName
@@ -65,8 +66,8 @@ const App = ({windowName}: Props) => {
 
 };
 
-export function mapStateToProps({window}: AppState): Props {
-    return {windowName: window.windowName}
+export function mapStateToProps(appState: AppState): Props {
+    return {windowName: appState.playerState.windowName}
 }
 
 export default connect(mapStateToProps)(App)

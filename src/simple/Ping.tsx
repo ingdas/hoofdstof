@@ -1,8 +1,8 @@
 import React from "react";
 import {Paper} from "@material-ui/core";
-import {PingState} from "../redux/states";
 import {connect} from "react-redux";
-import {AppState} from "../redux/appstate";
+import {AppState} from "../redux/interfaces/appState";
+import {PingHint} from "../redux/interfaces/playerState";
 
 interface Props {
     notification: string,
@@ -15,7 +15,7 @@ const PingC = ({notification}: Props) => {
 };
 
 export function mapStateToProps(state: AppState): Props {
-    const {notification} = state.window as PingState;
+    const {notification} = state.playerState as PingHint;
     console.log(notification);
     return {notification}
 }

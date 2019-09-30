@@ -3,15 +3,17 @@ import Typography from "@material-ui/core/Typography";
 import "./AnswerC.css"
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import {AnswerQuestionState} from "../redux/states";
 import {connect} from "react-redux";
-import {handleAnswer} from "../redux/actions";
+import {handleAnswer} from "../redux/playerActions";
 import {vibrate} from "../util";
-import {AppState} from "../redux/appstate";
+import {AppState} from "../redux/interfaces/appState";
+import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
+import {Answer, MultipleChoiceQuestion} from "../redux/interfaces/question";
+
 
 interface AnswerProps {
     selected: boolean;
-    value: string;
+    answer: Answer;
     onClick: MouseEventHandler;
     active: boolean;
 }
@@ -33,7 +35,7 @@ class AnswerC extends React.Component<AnswerProps> {
                 <Paper onClick={this.props.active ? this.props.onClick : () => {
                 }} className="card" style={{backgroundColor: this.getColor()}}>
                     <Typography variant="h5" component="h2">
-                        {this.props.value}
+                        {this.props.answer.text}
                     </Typography>
                 </Paper>
             </Grid>
@@ -46,12 +48,14 @@ interface OwnProps {
     index: number
 }
 
-function mapStateToProps(state: AppState, ownProps: OwnProps): { value: string, selected: boolean, active: boolean } {
-    const windowState = state.window as AnswerQuestionState
-    const value = windowState.answers.get(ownProps.index, "ERROR: Invalid Index");
-    const selected = windowState.selected === ownProps.index;
-    const active = windowState.selected < 0;
-    return {value, selected, active}
+function mapStateToProps(state: AppState, ownProps: OwnProps): { answer: Answer, selected: boolean, active: boolean } {
+    const questionInfo = ((state.playerState as PlayerPosingQuestion).question as MultipleChoiceQuestion);
+    const playerAnswer = state.player.answers.get(questionInfo.id);
+
+    const answer = questionInfo.answers[ownProps.index] as Answer;
+    const selected = playerAnswer === ownProps.index;
+    const active = playerAnswer=== undefined;
+    return {answer, selected, active}
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: MouseEventHandler } {
@@ -63,4 +67,4 @@ function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: Mouse
     };
 }
 
-export const Answer = connect(mapStateToProps, mapDispatchToProps)(AnswerC);
+export const MultipleChoiceAnswer = connect(mapStateToProps, mapDispatchToProps)(AnswerC);

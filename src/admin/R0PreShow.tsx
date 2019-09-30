@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import {ButtonGroup} from "@material-ui/core";
 import {WachtBtn} from "./components/WachtBtn";
 import {webSocket} from "../index";
-import {openingScreen} from "../redux/actions";
+import {openingScreen} from "../redux/playerActions";
 import {domeinen} from "../Config";
 
 export const R0PreShow = () => {

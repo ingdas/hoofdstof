@@ -1,10 +1,10 @@
 import React from 'react';
-import {TimerState} from "../redux/states";
-import {AppState} from "../redux/appstate";
+import {TimerState} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import './ProgressReporter.css';
+import {AppState} from "../redux/interfaces/appState";
 
 const App = ({timeLeft, totalTime}: TimerState) => {
 
@@ -43,9 +43,8 @@ const App = ({timeLeft, totalTime}: TimerState) => {
         </div>);
 };
 
-export function mapStateToProps({time}: AppState): TimerState {
-    const {timeLeft, totalTime, timeOutmarker} = time;
-    return {timeLeft, totalTime, timeOutmarker}
+export function mapStateToProps(appState: AppState): TimerState {
+    return appState.playerState.timerState;
 }
 
 export default connect(mapStateToProps)(App)

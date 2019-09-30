@@ -6,8 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {webSocket} from "../index";
-import {textInputScreen} from "../redux/actions";
-import {TextInputType} from "../redux/states";
+import {textInputScreen} from "../redux/playerActions";
+import {TextInputType} from "../redux/interfaces/question";
 
 export const R3Som = () => {
 

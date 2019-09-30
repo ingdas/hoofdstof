@@ -1,9 +1,8 @@
 import React from "react";
-import {ChartQuestionState} from "../redux/states";
 import {connect} from "react-redux";
 import {List, Map} from "immutable";
 import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
-import {AppState} from "../redux/appstate";
+import {AppState} from "../redux/interfaces/appState";
 
 interface Props {
     question: string
@@ -40,6 +39,7 @@ const ChartQuestion = ({question, answers, count}: Props) => (
 );
 
 export function mapStateToProps(state: AppState): Props {
+    // @ts-ignore
     const {question, answers, count} = state.window as ChartQuestionState;
     return {question, answers, count}
 }
