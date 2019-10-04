@@ -7,14 +7,14 @@ import {Player} from "./interfaces/player";
 import {LoginState, PlayerState} from "./interfaces/playerState";
 
 export enum ActionType {
+    AnswerOpenQuestion = "AnswerOpenQuestion",
     //Used for new screens
     NewState = "NewState",
-    //Used for sending the answer
-    HandleAnswer = "HandleAnswer",
     //Used for setting the timer
     NewTimer = "NewTimer",
     ClearId = "ClearId",
-    NewId = "NewId"
+    NewId = "NewId",
+    AnswerMultipleChoiceQuestion = "AnswerMultipleChoiceQuestion"
 }
 
 export interface Action {
@@ -46,20 +46,20 @@ function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebS
     }
 }
 
-export function handleAnswer(answer: number) {
-    const action: HandleAnswerAction = {type: ActionType.HandleAnswer, answer};
+export function answerMultipleChoice(questionId : string, answer: number) {
+    const action = {type: "AnswerMultipleChoiceQuestion", questionId, answer};
     return dispatchAndEmit(action)
 }
 
-export function handleTextInput(answer: string) {
-    const action: HandleTextInput = {type: ActionType.HandleAnswer, answer};
+export function answerOpen(questionId : string, answer: string) {
+    const action = {type: "AnswerOpenQuestion", questionId, answer};
     return dispatchAndEmit(action)
 }
 
 export function waitScreen(): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: new Map<number, object>()},
+        player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.WaitScreen,
             timerState: {totalTime: -1, timeLeft: -1}
@@ -70,7 +70,7 @@ export function waitScreen(): BuilderAction {
 export function loginScreen(onLogin: (naam: string) => void): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: new Map<number, object>()},
+        player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.Login,
             timerState: {totalTime: -1, timeLeft: -1},
@@ -84,11 +84,6 @@ export function chartQuestion(question: string, answers: string[]): BuilderActio
     return {type: ActionType.NewState, window: WindowName.ChartQuestion, payload: {question, answers}}
 }
 
-export function multipleChoiceScreen(question: string, answers: string[]): BuilderAction {
-    // @ts-ignore
-    return {type: ActionType.NewState, window: WindowName.AnswerQuestion, payload: {question, answers}}
-}
-
 export function textInputScreen(question: string, type: TextInputType) {
     return {type: ActionType.NewState, window: WindowName.TextInput, payload: {question, type}}
 }
@@ -100,7 +95,7 @@ export function newTimer(totalTime: number, timeLeft: number): TimerAction {
 export function adminScreen(): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: new Map<number, object>()},
+        player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.Admin,
             timerState: {totalTime: -1, timeLeft: -1},

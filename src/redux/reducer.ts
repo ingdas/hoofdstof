@@ -5,7 +5,7 @@ import {WindowName} from "./interfaces/windowName";
 import {AppState} from "./interfaces/appState";
 
 export const initialState = {
-    player: {name: "UNKNOWN", answers: new Map<number, object>()},
+    player: {name: "UNKNOWN", answers: {}},
     playerState: {
         windowName: WindowName.WaitScreen,
         timerState: {totalTime: -1, timeLeft: -1}
@@ -21,10 +21,23 @@ export function reducer(state: AppState = initialState, action: Action): AppStat
         location.reload();
     } else if (action.type === ActionType.NewId) {
         // @ts-ignore
-        window.localStorage[LOGINIDKEY] = action.id
+        window.localStorage[LOGINIDKEY] = action.id;
         return state
     } else if (action.type === ActionType.NewState) {
         return action as unknown as AppState
+    } else if (action.type === ActionType.AnswerMultipleChoiceQuestion
+            || action.type === ActionType.AnswerOpenQuestion) {
+        const myAction = action as unknown as { questionId: string, answer: string | number };
+        return {
+            ...state,
+            player: {
+                ...state.player,
+                answers: {
+                    ...state.player.answers,
+                    [myAction.questionId]: myAction.answer
+                }
+            }
+        }
     }
 
     console.log("Unknown Action Type: " + action.type);

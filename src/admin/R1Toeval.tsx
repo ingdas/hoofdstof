@@ -4,16 +4,15 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
-import {webSocket} from "../index";
 import {uitvindingen} from "../Config";
-import {multipleChoiceScreen} from "../redux/playerActions";
+import {multipleChoiceQuestion} from "./action/sendAction";
 
 export const R1Toeval = () => {
     const vraagUitvinding = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen("Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)))
+        multipleChoiceQuestion("R1Uitvinding","Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
     };
     const quizVraag = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen("Hoe is de uitvinding echt uitgevonden?", ["Manier 1", "Manier 2"])))
+        multipleChoiceQuestion("R1Quizvraag","Hoe is de uitvinding echt uitgevonden?", ["Manier 1", "Manier 2"])
     };
 
     return (<div>

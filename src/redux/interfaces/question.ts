@@ -9,13 +9,14 @@ export interface Answer {
 }
 
 export interface Question {
-    id: number
+    id: string
 }
 
 export interface MultipleChoiceQuestion extends Question {
     question: string
-    answers: Array<Answer>
-    isObjective: boolean
+    correctAnswer?: number
+    answers: Array<string>
+    images?: Array<string>
 }
 
 export interface OpeningQuestion extends Question {
@@ -24,6 +25,5 @@ export interface OpeningQuestion extends Question {
 
 export interface OpenQuestion extends Question {
     question: string
-    isObjective: boolean
-    type : TextInputType
+    textInputType : TextInputType
 }

@@ -15,7 +15,7 @@ export const R0PreShow = () => {
     };
 
     const handleLogout = () => {
-        webSocket.send(JSON.stringify({type: "ClearLogin"}));
+        webSocket.send(JSON.stringify({type: "ClearId"}));
     };
 
     return (<div>

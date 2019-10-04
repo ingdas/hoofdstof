@@ -18,10 +18,11 @@ export const faalAntwoorden: Array<string> = [
     "B. Het vliegtuig stortte neer met een soldaat en een van de broers erin. ",
     "C. Het vliegtuig was veel te groot voor de landingsbaan en kon daardoor niet opstijgen.",
     "D. Het leger nam het vliegtuig direct in beslag als mogelijk wapen.   "
-    ];
+];
 
-export const faalVraag : string = "De gebroeders Wright zijn bekend geworden met de uitvinding van het vliegtuig. Na hun uitvinding in 1902, bouwden ze een nieuw vliegtuig voor twee personen om te verkopen aan het Amerikaanse leger. Wat gebeurde er bij hun eerste demonstratievlucht?";
+export const faalVraag: string = "De gebroeders Wright zijn bekend geworden met de uitvinding van het vliegtuig. Na hun uitvinding in 1902, bouwden ze een nieuw vliegtuig voor twee personen om te verkopen aan het Amerikaanse leger. Wat gebeurde er bij hun eerste demonstratievlucht?";
 
+export const faalJuistAntwoord: number = 1;
 
 
 export const domeinen: Array<Domein> = [

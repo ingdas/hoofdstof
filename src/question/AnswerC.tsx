@@ -4,66 +4,62 @@ import "./AnswerC.css"
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {connect} from "react-redux";
-import {handleAnswer} from "../redux/playerActions";
+import {answerMultipleChoice} from "../redux/playerActions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/interfaces/appState";
 import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
-import {Answer, MultipleChoiceQuestion} from "../redux/interfaces/question";
+import {MultipleChoiceQuestion} from "../redux/interfaces/question";
 
 
 interface AnswerProps {
+    questionId: string
     selected: boolean;
-    answer: Answer;
-    onClick: MouseEventHandler;
+    answer: string;
     active: boolean;
+    dispatch: any
+    index: number
 }
 
-class AnswerC extends React.Component<AnswerProps> {
-
-    getColor(): string {
-        if (this.props.selected) {
-            return "lightblue"
-        } else {
-            return "white"
+const AnswerC = ({questionId, selected, answer, active, index, dispatch}: AnswerProps) => {
+    console.log({questionId, selected, answer, active, index, dispatch});
+    const onClick = (() => {
+        if (active) {
+            vibrate([100]);
+            dispatch(answerMultipleChoice(questionId, index));
         }
-    }
+    }) as MouseEventHandler;
+    const color = selected ? "lightblue" : "white";
+    console.log(color);
 
-    render() {
-
-        return (
-            <Grid item xs={6}>
-                <Paper onClick={this.props.active ? this.props.onClick : () => {
-                }} className="card" style={{backgroundColor: this.getColor()}}>
-                    <Typography variant="h5" component="h2">
-                        {this.props.answer.text}
-                    </Typography>
-                </Paper>
-            </Grid>
-        );
-
-    }
-}
+    return (
+        <Grid item xs={6}>
+            <Paper onClick={onClick} className="card" style={{backgroundColor: color}}>
+                <Typography variant="h5" component="h2">
+                    {answer}
+                </Typography>
+            </Paper>
+        </Grid>
+    );
+};
 
 interface OwnProps {
     index: number
 }
 
-function mapStateToProps(state: AppState, ownProps: OwnProps): { answer: Answer, selected: boolean, active: boolean } {
+function mapStateToProps(state: AppState, ownProps: OwnProps): { answer: string, selected: boolean, active: boolean, questionId: string } {
     const questionInfo = ((state.playerState as PlayerPosingQuestion).question as MultipleChoiceQuestion);
-    const playerAnswer = state.player.answers.get(questionInfo.id);
+    const playerAnswer = state.player.answers[questionInfo.id];
 
-    const answer = questionInfo.answers[ownProps.index] as Answer;
+    const answer = questionInfo.answers[ownProps.index] as string;
     const selected = playerAnswer === ownProps.index;
-    const active = playerAnswer=== undefined;
-    return {answer, selected, active}
+    const active = playerAnswer === undefined;
+    return {answer, selected, active, questionId: questionInfo.id}
 }
 
-function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { onClick: MouseEventHandler } {
+function mapDispatchToProps(dispatch: any, ownProps: OwnProps): { dispatch: any } {
     return {
-        onClick: (evt) => {
-            vibrate([100]);
-            dispatch(handleAnswer(ownProps.index));
-        }
+        dispatch,
+        ...ownProps
     };
 }
 

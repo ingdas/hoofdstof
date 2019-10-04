@@ -1,6 +1,6 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
-import {handleTextInput} from "../redux/playerActions";
+import {answerOpen} from "../redux/playerActions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/interfaces/appState";
 import {TextField} from "@material-ui/core";
@@ -12,14 +12,20 @@ import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 
 interface Props {
     type: TextInputType
-    question: string,
-    onClick: ((answer: string) => MouseEventHandler)
+    question: string
     done: boolean
+    dispatch: any
+    questionId: string
+    initialAnswer : string
 }
 
-const TextInputC = ({question, onClick, type, done}: Props) => {
+const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}: Props) => {
 
-    let [answer, setAnswer] = useState("");
+    let [answer, setAnswer] = useState(initialAnswer);
+
+    const onClick = (() => {
+        dispatch(answerOpen(questionId, answer))
+    }) as MouseEventHandler;
 
     const onChange = function (evt: FormEvent) {
         // @ts-ignore
@@ -49,7 +55,7 @@ const TextInputC = ({question, onClick, type, done}: Props) => {
                 style={{"margin": "20px"}}
                 variant="contained"
                 color="primary"
-                onClick={onClick(answer)}
+                onClick={onClick}
             >
                 Send
                 <Icon>send</Icon>
@@ -59,20 +65,19 @@ const TextInputC = ({question, onClick, type, done}: Props) => {
 
 function mapStateToProps(state: AppState) {
     const questionInfo = ((state.playerState as PlayerPosingQuestion).question as OpenQuestion);
-    const currentAnswer = state.player.answers.get(questionInfo.id);
+    const currentAnswer = state.player.answers[questionInfo.id];
     return {
         question: questionInfo.question,
-        type: questionInfo.type,
-        done: currentAnswer !== undefined
+        type: questionInfo.textInputType,
+        done: currentAnswer !== undefined,
+        questionId: questionInfo.id,
+        initialAnswer : currentAnswer || ""
     }
 }
 
 function mapDispatchToProps(dispatch: any) {
     return {
-        onClick: (answer: string) => () => {
-            dispatch(handleTextInput(answer));
-            vibrate([100]);
-        }
+        dispatch
     };
 }
 

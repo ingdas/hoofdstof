@@ -9,7 +9,7 @@ import {AppState} from "../redux/interfaces/appState";
 
 interface Props {
     question: string,
-    answers: Array<Answer>
+    answers: Array<string>
 }
 
 const QuestionC = ({question, answers}: Props) => {

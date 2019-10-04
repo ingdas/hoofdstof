@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {webSocket} from "../index";
-import {multipleChoiceScreen, textInputScreen} from "../redux/playerActions";
+import {textInputScreen} from "../redux/playerActions";
 import {TextInputType} from "../redux/interfaces/question";
 
 export const R4Google = () => {
@@ -13,10 +13,10 @@ export const R4Google = () => {
         webSocket.send(JSON.stringify(textInputScreen("Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)))
     };
     const stelVraag0 = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen("Welke stelling klopt?", ["A", "B"])))
+        //webSocket.send(JSON.stringify(multipleChoiceQuestion("Welke stelling klopt?", ["A", "B"])))
     };
     const stelVraag1 = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen("Welke stelling klopt?", ["A", "B"])))
+        //webSocket.send(JSON.stringify(multipleChoiceQuestion("Welke stelling klopt?", ["A", "B"])))
     };
     return (<div>
         <WachtBtn/>

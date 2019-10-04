@@ -4,19 +4,18 @@ import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {webSocket} from "../index";
-import {multipleChoiceScreen, textInputScreen} from "../redux/playerActions";
-import {faalAntwoorden, faalVraag} from "../Config";
 import {TextInputType} from "../redux/interfaces/question";
+import {multipleChoiceQuestion, openQuestion} from "./action/sendAction";
+import {faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
 
 export const R2Faal = () => {
 
     const vraagEmotie = () => {
-        webSocket.send(JSON.stringify(textInputScreen("Geef ons een emotie", TextInputType.Text)))
+        openQuestion("R2Emotie", "Geef ons een emotie", TextInputType.Text)
     };
 
     const startQuiz = () => {
-        webSocket.send(JSON.stringify(multipleChoiceScreen(faalVraag, faalAntwoorden)))
+        multipleChoiceQuestion("R2Quiz", faalVraag, faalAntwoorden, faalJuistAntwoord)
     };
 
     return (<div>

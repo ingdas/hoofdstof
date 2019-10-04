@@ -1,4 +1,4 @@
 export interface Player {
     name: string
-    answers: Map<number, any>
+    answers: Record<string,any>
 }
