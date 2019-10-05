@@ -3,14 +3,14 @@ import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
-import SuggestieSelector from "./components/SuggestieSelector";
 import {TextInputType} from "../redux/interfaces/question";
-import {multipleChoiceQuestion, openQuestion} from "./action/sendAction";
-import {faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
+import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
+import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
 import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
+import SuggestieSelector from "./components/SuggestieSelector";
 
-const R2FaalC = () => {
+const R2FaalC = ({domain}: { domain?: number }) => {
 
     const vraagEmotie = () => {
         openQuestion("R2Emotie", "Geef ons een emotie", TextInputType.Text)
@@ -18,6 +18,12 @@ const R2FaalC = () => {
 
     const startQuiz = () => {
         multipleChoiceQuestion("R2Quiz", faalVraag, faalAntwoorden, faalJuistAntwoord)
+    };
+
+    const zendHint = () => {
+        if (domain !== undefined) {
+            showHint(domeinen[domain].hints[1], ["R2Quiz"], [faalJuistAntwoord])
+        }
     };
 
     return (<div>
@@ -38,7 +44,7 @@ const R2FaalC = () => {
 
         </ButtonGroup>
         <br></br>
-        <SuggestieSelector/>
+        <SuggestieSelector questionId="R2Emotie"/>
         <ATimer time="50"/>
 
 
@@ -56,11 +62,13 @@ const R2FaalC = () => {
             </Button>
 
             <Button
-                //onClick={handleStop}
+                onClick={zendHint}
             >
                 Zend Hint
             </Button>
         </ButtonGroup>
+        <SuggestieSelector questionId="R2Quiz"/>
+
         <br></br>
         <ATimer time="30"/>
     </div>)

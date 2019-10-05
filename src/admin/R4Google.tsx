@@ -57,7 +57,7 @@ export const R4GoogleC = ({domain}: AdminState) => {
 
         </ButtonGroup>
         <br></br>
-        <SuggestieSelector/>
+        <SuggestieSelector questionId="R4Ontspanning"/>
         <ATimer time="50"/>
 
 

@@ -19,7 +19,7 @@ export const R5FinaleC = () => {
     return (<div>
             <WachtBtn/>
             <br></br>
-            <SuggestieSelector/>
+            <SuggestieSelector questionId="R0Zin"/>
             <ButtonGroup
                 color="secondary"
                 size="large"

@@ -1,4 +1,5 @@
 export interface Player {
     name: string
-    answers: Record<string,any>
+    id: string
+    answers: Record<string, any>
 }

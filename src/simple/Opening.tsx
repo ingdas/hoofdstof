@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
-import {waitScreen} from "../redux/playerActions";
+import {answerOpen, waitScreen} from "../redux/playerActions";
 import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
@@ -14,8 +14,8 @@ import {OpeningQuestion} from "../redux/interfaces/question";
 
 interface Props {
     professions: Array<string>
-    speechQuestions : Array<string>
-    finish: () => void
+    speechQuestion: string
+    dispatch: any
 }
 
 // Inspired by blueprintjs
@@ -77,15 +77,23 @@ function StyledRadio(props: RadioProps) {
     );
 }
 
-const OpeningC = ({professions, finish}: Props) => {
+const OpeningC = ({professions, speechQuestion, dispatch}: Props) => {
 
     let [geslacht, setGeslacht] = useState("");
     let [vakgebied, setVakgebied] = useState("");
     let [naam, setNaam] = useState("");
+    let [eigenschap, setEigenschap] = useState("");
+    let [zin, setZin] = useState("");
+    let [woord, setWoord] = useState("");
 
     const finishForm = () => {
-        //TODO: dispatch login information to server
-        finish();
+        dispatch(answerOpen("R0Geslacht", geslacht));
+        dispatch(answerOpen("R0Vakgebied", vakgebied));
+        dispatch(answerOpen("R0Naam", naam));
+        dispatch(answerOpen("R0Eigenschap", eigenschap));
+        dispatch(answerOpen("R0Zin", zin));
+        dispatch(answerOpen("R0Woord", woord));
+        dispatch(waitScreen());
     };
 
     return (
@@ -102,7 +110,8 @@ const OpeningC = ({professions, finish}: Props) => {
                 <div className="qTitle">Wat is het vakgebied van de professor?</div>
                 <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
-                    {professions.map((v, index) => <FormControlLabel value={v} control={<StyledRadio/>} label={v}/>)}
+                    {professions.map((v, index) => <FormControlLabel key={index} value={v} control={<StyledRadio/>}
+                                                                     label={v}/>)}
                 </RadioGroup>
                 <div className="qTitle">Wat is de naam van de professor?</div>
                 <div style={{"padding": "10px", "backgroundColor": "white"}}>
@@ -111,6 +120,33 @@ const OpeningC = ({professions, finish}: Props) => {
                         label="Naam"
                         value={naam}
                         onChange={changeListener(setNaam)}
+                    />
+                </div>
+                <div className="qTitle">Wat is een speciale eigenschap van de professor?</div>
+                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                    <TextField
+                        style={{}}
+                        label="Eigenschap"
+                        value={eigenschap}
+                        onChange={changeListener(setEigenschap)}
+                    />
+                </div>
+                <div className="qTitle">Wat is een zin die de professor wel eens zou kunnen zeggen?</div>
+                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                    <TextField
+                        style={{}}
+                        label="Zin"
+                        value={zin}
+                        onChange={changeListener(setZin)}
+                    />
+                </div>
+                <div className="qTitle">{speechQuestion}</div>
+                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                    <TextField
+                        style={{}}
+                        label="Woord"
+                        value={woord}
+                        onChange={changeListener(setWoord)}
                     />
                 </div>
                 {(geslacht !== "" && vakgebied !== "" && naam !== "") && <Button
@@ -127,17 +163,15 @@ const OpeningC = ({professions, finish}: Props) => {
 };
 
 function mapStateToProps(state: AppState) {
-    const questionInfo = ((state.playerState as PlayerPosingQuestion).question as OpeningQuestion);
-    return questionInfo
+    const {speechQuestions, professions} = ((state.playerState as PlayerPosingQuestion).question as OpeningQuestion);
+    const playerId = Math.abs(Number(state.player.id.slice(0, 10)));
+    const speechQuestion = speechQuestions[playerId % speechQuestions.length];
+    console.log(playerId, speechQuestions, speechQuestion, playerId % speechQuestions.length);
+    return {professions, speechQuestion}
 }
 
 function mapDispatchToProps(dispatch: any) {
-    // noinspection JSUnusedGlobalSymbols
-    return {
-        finish: () => {
-            dispatch(waitScreen())
-        }
-    };
+    return {dispatch};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpeningC);

@@ -1,14 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import {domeinen, uitvindingen} from "../Config";
 import {multipleChoiceQuestion, showHint} from "./action/sendAction";
-import {changeListener} from "../util";
 import {connect} from "react-redux";
 import {AdminState} from "../redux/interfaces/adminState";
+import SuggestieSelector from "./components/SuggestieSelector";
 
 export const R1ToevalC = ({domain}: { domain?: number }) => {
     const vraagUitvinding = () => {
@@ -47,6 +46,8 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                     Toon resultaat
                 </Button>
             </ButtonGroup>
+            <SuggestieSelector questionId="R1Uitvinding"/>
+
             <br></br>
             <ATimer time="30"/>
             <ButtonGroup
@@ -76,6 +77,7 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                     Hint Juiste Antwoord 2
                 </Button>
             </ButtonGroup>
+        <SuggestieSelector questionId="R1Quizvraag"/>
             <br></br>
             <ATimer time="30"/>
         </div>

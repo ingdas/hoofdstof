@@ -59,7 +59,7 @@ export function answerOpen(questionId: string, answer: string) {
 export function waitScreen(): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: {}},
+        player: {name: "UNKNOWN", answers: {}, id: ""},
         playerState: {
             windowName: WindowName.WaitScreen,
             timerState: {totalTime: -1, timeLeft: -1, startTime: 0}
@@ -70,7 +70,7 @@ export function waitScreen(): BuilderAction {
 export function loginScreen(onLogin: (naam: string) => void): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: {}},
+        player: {name: "UNKNOWN", answers: {}, id: ""},
         playerState: {
             windowName: WindowName.Login,
             timerState: {totalTime: -1, timeLeft: -1, startTime: 0},
@@ -95,7 +95,7 @@ export function newTimer(totalTime: number, timeLeft: number): TimerAction {
 export function adminScreen(): BuilderAction {
     return {
         type: ActionType.NewState,
-        player: {name: "UNKNOWN", answers: {}},
+        player: {name: "UNKNOWN", answers: {}, id: ""},
         playerState: {
             windowName: WindowName.Admin,
             timerState: {totalTime: -1, timeLeft: -1, startTime: 0},

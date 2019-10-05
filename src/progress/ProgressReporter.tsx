@@ -7,7 +7,6 @@ import './ProgressReporter.css';
 import {AppState} from "../redux/interfaces/appState";
 
 const App = ({timeLeft, totalTime, startTime}: TimerState) => {
-    console.log("AppInit", timeLeft, totalTime, startTime);
     const [seconds, setSeconds] = useState(timeLeft);
     const [started, setStarted] = useState(0);
 

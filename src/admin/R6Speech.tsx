@@ -8,7 +8,7 @@ export const R6SpeechC = () => {
     return (<div>
             <WachtBtn/>
             <br></br>
-            <SuggestieSelector/>
+            <SuggestieSelector questionId="R0Woord"/>
         </div>
     )
 };

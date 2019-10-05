@@ -5,7 +5,7 @@ import {WindowName} from "./interfaces/windowName";
 import {AppState} from "./interfaces/appState";
 
 export const initialPlayerState = {
-    player: {name: "UNKNOWN", answers: {}},
+    player: {name: "UNKNOWN", answers: {}, id: ""},
     playerState: {
         windowName: WindowName.WaitScreen,
         timerState: {totalTime: -1, timeLeft: -1, startTime: 0}

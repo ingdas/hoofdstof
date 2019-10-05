@@ -46,7 +46,7 @@ const R3SomC = (adminState: AdminState) => {
 
         </ButtonGroup>
         <br></br>
-        <SuggestieSelector/>
+        <SuggestieSelector questionId="R3Plek"/>
         <ATimer time="50"/>
 
 

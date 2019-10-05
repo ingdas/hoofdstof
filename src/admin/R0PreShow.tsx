@@ -9,6 +9,7 @@ import {domeinen, speechQuestions} from "../Config";
 import {openingScreen} from "./action/sendAction";
 import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
+import SuggestieSelector from "./components/SuggestieSelector";
 
 const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
     const handleOpening = () => {
@@ -55,6 +56,15 @@ const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
             </ButtonGroup>
 
             <br/>
+
+            <SuggestieSelector questionId="R0Geslacht"/>
+            <SuggestieSelector questionId="R0Vakgebied"/>
+            <SuggestieSelector questionId="R0Naam"/>
+            <SuggestieSelector questionId="R0Eigenschap"/>
+            <SuggestieSelector questionId="R0Zin"/>
+            <SuggestieSelector questionId="R0Woord"/>
+
+
             <ButtonGroup>
                 {domeinen.map((domein, index) => {
                     return <Button color={getColor(index)} onClick={setDomain(index)}>{domein.naam}</Button>
