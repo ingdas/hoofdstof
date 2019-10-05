@@ -4,6 +4,7 @@ import {Question} from "./question";
 export interface TimerState {
     timeLeft: number;
     totalTime: number;
+    startTime : number;
 }
 
 export interface PlayerState {

@@ -8,7 +8,7 @@ export const initialPlayerState = {
     player: {name: "UNKNOWN", answers: {}},
     playerState: {
         windowName: WindowName.WaitScreen,
-        timerState: {totalTime: -1, timeLeft: -1}
+        timerState: {totalTime: -1, timeLeft: -1, startTime: 0}
     }
 };
 

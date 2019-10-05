@@ -7,13 +7,13 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
-import {R4GoogleC} from "./R4Google";
+import {multipleChoiceQuestion} from "./action/sendAction";
 
 export const R5FinaleC = () => {
     const startQuiz = () => {
-        let kandidaten = domeinen[0].concurrenten;
+        let kandidaten = domeinen[0].concurrenten.slice();
         kandidaten.push(domeinen[0].wetenschapper);
-        //webSocket.send(JSON.stringify(multipleChoiceQuestion("Welke wetenschapper zoeken we?", kandidaten)))
+        multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, 3)
     };
 
     return (<div>

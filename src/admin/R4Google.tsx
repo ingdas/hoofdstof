@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {webSocket} from "../index";
-import {answerMultipleChoice, textInputScreen} from "../redux/playerActions";
 import {TextInputType} from "../redux/interfaces/question";
 import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
-import {multipleChoiceQuestion, showHint} from "./action/sendAction";
+import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 
 export const R4GoogleC = ({domain}: AdminState) => {
@@ -20,7 +18,7 @@ export const R4GoogleC = ({domain}: AdminState) => {
 
 
     const vraagOntspanning = () => {
-        webSocket.send(JSON.stringify(textInputScreen("Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)))
+        openQuestion("R4Ontspanning", "Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)
     };
     const stelVraag0 = () => {
         const questionId = `R4GoogleN${currentId++}`;

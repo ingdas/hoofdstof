@@ -46,12 +46,12 @@ function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebS
     }
 }
 
-export function answerMultipleChoice(questionId : string, answer: number) {
+export function answerMultipleChoice(questionId: string, answer: number) {
     const action = {type: "AnswerMultipleChoiceQuestion", questionId, answer};
     return dispatchAndEmit(action)
 }
 
-export function answerOpen(questionId : string, answer: string) {
+export function answerOpen(questionId: string, answer: string) {
     const action = {type: "AnswerOpenQuestion", questionId, answer};
     return dispatchAndEmit(action)
 }
@@ -62,7 +62,7 @@ export function waitScreen(): BuilderAction {
         player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.WaitScreen,
-            timerState: {totalTime: -1, timeLeft: -1}
+            timerState: {totalTime: -1, timeLeft: -1, startTime: 0}
         }
     };
 }
@@ -73,7 +73,7 @@ export function loginScreen(onLogin: (naam: string) => void): BuilderAction {
         player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.Login,
-            timerState: {totalTime: -1, timeLeft: -1},
+            timerState: {totalTime: -1, timeLeft: -1, startTime: 0},
             onLogin
         } as LoginState
     };
@@ -98,7 +98,7 @@ export function adminScreen(): BuilderAction {
         player: {name: "UNKNOWN", answers: {}},
         playerState: {
             windowName: WindowName.Admin,
-            timerState: {totalTime: -1, timeLeft: -1},
+            timerState: {totalTime: -1, timeLeft: -1, startTime: 0},
         }
     };
 }

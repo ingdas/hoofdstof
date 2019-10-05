@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TimerState} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
@@ -6,9 +6,26 @@ import 'react-circular-progressbar/dist/styles.css';
 import './ProgressReporter.css';
 import {AppState} from "../redux/interfaces/appState";
 
-const App = ({timeLeft, totalTime}: TimerState) => {
+const App = ({timeLeft, totalTime, startTime}: TimerState) => {
+    console.log("AppInit", timeLeft, totalTime, startTime);
+    const [seconds, setSeconds] = useState(timeLeft);
+    const [started, setStarted] = useState(0);
 
-    if(timeLeft < 0){
+    useEffect(() => {
+        let interval: any = null;
+        if (started !== startTime) {
+            setSeconds(timeLeft);
+            setStarted(startTime);
+        }
+        if (seconds >= 0) {
+            interval = setInterval(() => {
+                setSeconds(seconds - 1);
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [timeLeft, seconds, started, startTime]);
+
+    if (seconds < 0) {
         return <div></div>
     }
     return (
@@ -21,9 +38,9 @@ const App = ({timeLeft, totalTime}: TimerState) => {
             margin: "10px"
         }}>
             <CircularProgressbar
-                value={totalTime-timeLeft}
+                value={totalTime - seconds}
                 maxValue={totalTime}
-                text={timeLeft.toString()}
+                text={seconds.toString()}
                 background
                 backgroundPadding={6}
                 styles={buildStyles({
