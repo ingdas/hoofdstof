@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import {connect} from "react-redux";
 import {MultipleChoiceAnswer} from "./AnswerC";
 import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
-import {Answer, MultipleChoiceQuestion} from "../redux/interfaces/question";
+import {MultipleChoiceQuestion} from "../redux/interfaces/question";
 import {AppState} from "../redux/interfaces/appState";
 
 interface Props {

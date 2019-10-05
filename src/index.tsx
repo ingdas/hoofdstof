@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import App from './App'
-import {initialState, reducer} from "./redux/reducer";
+import {initialPlayerState, playerReducer} from "./redux/playerReducer";
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
@@ -41,14 +41,36 @@ function getURL() {
 }
 
 export const webSocket = new ReconnectingWebSocket(getURL());
-export const store = createStore(reducer, initialState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})));
+export const store = AppLocation === Loc.ADMIN
+    ? createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
+    : createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})));
+
 
 webSocket.onmessage = (evt) => {
     const data = JSON.parse(evt.data);
-    console.log(data)
+    console.log(data);
     store.dispatch(data);
 };
 
+webSocket.onopen = (evt) => {
+    if (AppLocation === Loc.BEAMER) {
+
+    } else if (AppLocation === Loc.PLAYER) {
+        if (getLoginId() != null && getName() != null) {
+            const id = getLoginId();
+            const name = getName();
+            webSocket.send(JSON.stringify({type: "Login", id, name}));
+        } else {
+            const onLogin = function (name: string) {
+                window.localStorage[USERNAMEKEY] = name;
+                webSocket.send(JSON.stringify({type: "Register", name}));
+            };
+            store.dispatch(loginScreen(onLogin));
+        }
+    } else if (AppLocation === Loc.ADMIN) {
+        store.dispatch(adminScreen());
+    }
+};
 
 function getLoginId(): string | null {
     let loginId = window.localStorage[LOGINIDKEY];
@@ -64,24 +86,6 @@ function getName(): string | null {
         return null
     }
     return window.localStorage[USERNAMEKEY]
-}
-
-if (AppLocation === Loc.BEAMER) {
-
-} else if (AppLocation === Loc.PLAYER) {
-    if (getLoginId() != null && getName() != null) {
-        const id = getLoginId();
-        const name = getName();
-        webSocket.send(JSON.stringify({type: "Login", id, name}));
-    } else {
-        const onLogin = function (name: string) {
-            window.localStorage[USERNAMEKEY] = name;
-            webSocket.send(JSON.stringify({type: "Register", name}));
-        };
-        store.dispatch(loginScreen(onLogin));
-    }
-} else if (AppLocation === Loc.ADMIN) {
-    store.dispatch(adminScreen());
 }
 
 

@@ -13,6 +13,13 @@ export const uitvindingen: Array<string> = [
     "Velcro"
 ];
 
+export const speechQuestions: Array<string> = [
+    "Een voorwerp",
+    "Een uitspraak",
+    "Een sprookjesfiguur",
+    "Een vak op school"
+];
+
 export const faalAntwoorden: Array<string> = [
     "A. De gebroeders Wright hadden niet gedacht aan wind tegen en konden daardoor niet opstijgen.",
     "B. Het vliegtuig stortte neer met een soldaat en een van de broers erin. ",

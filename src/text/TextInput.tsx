@@ -1,7 +1,6 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
 import {answerOpen} from "../redux/playerActions";
-import {vibrate} from "../util";
 import {AppState} from "../redux/interfaces/appState";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";

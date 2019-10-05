@@ -1,12 +1,19 @@
-import {MultipleChoiceQuestionAction, NewTimerAction, OpenQuestionAction, SendAction} from "./interfaces";
+import {
+    MultipleChoiceQuestionAction,
+    NewTimerAction,
+    OpeningQuestionAction,
+    OpenQuestionAction,
+    SendAction,
+    ShowHintAction
+} from "./interfaces";
 import {webSocket} from "../../index";
-import {MultipleChoiceQuestion, TextInputType} from "../../redux/interfaces/question";
+import {TextInputType} from "../../redux/interfaces/question";
 
-export function WaitScreenPlayer() {
+export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})
 }
 
-export function WaitScreenDisplay() {
+export function waitScreenDisplay() {
     send({type: "WaitScreenDisplay"})
 }
 
@@ -23,6 +30,17 @@ export function multipleChoiceQuestion(id: string, question: string, answers: st
 
 export function openQuestion(id: string, question: string, textInputType: TextInputType) {
     send({type: "OpenQuestion", openQuestion: {id, question, textInputType}} as OpenQuestionAction)
+}
+
+export function openingScreen(professions: Array<string>, speechQuestions: Array<string>) {
+    send({
+        type: "OpeningQuestion",
+        openingQuestion: {id: "R0Opening", professions, speechQuestions}
+    } as OpeningQuestionAction)
+}
+
+export function showHint(hint: string, questionId: string, rightAnswer: number | string) {
+    send({type: "ShowHint", hint: {hint, questionId, rightAnswer}} as ShowHintAction)
 }
 
 function send(obj: SendAction) {

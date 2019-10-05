@@ -13,7 +13,8 @@ import {OpeningQuestion} from "../redux/interfaces/question";
 
 
 interface Props {
-    professionList: Array<string>
+    professions: Array<string>
+    speechQuestions : Array<string>
     finish: () => void
 }
 
@@ -76,7 +77,7 @@ function StyledRadio(props: RadioProps) {
     );
 }
 
-const OpeningC = ({professionList, finish}: Props) => {
+const OpeningC = ({professions, finish}: Props) => {
 
     let [geslacht, setGeslacht] = useState("");
     let [vakgebied, setVakgebied] = useState("");
@@ -101,7 +102,7 @@ const OpeningC = ({professionList, finish}: Props) => {
                 <div className="qTitle">Wat is het vakgebied van de professor?</div>
                 <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
-                    {professionList.map((v, index) => <FormControlLabel value={v} control={<StyledRadio/>} label={v}/>)}
+                    {professions.map((v, index) => <FormControlLabel value={v} control={<StyledRadio/>} label={v}/>)}
                 </RadioGroup>
                 <div className="qTitle">Wat is de naam van de professor?</div>
                 <div style={{"padding": "10px", "backgroundColor": "white"}}>
@@ -127,7 +128,7 @@ const OpeningC = ({professionList, finish}: Props) => {
 
 function mapStateToProps(state: AppState) {
     const questionInfo = ((state.playerState as PlayerPosingQuestion).question as OpeningQuestion);
-    return {professionList: questionInfo.professionList}
+    return questionInfo
 }
 
 function mapDispatchToProps(dispatch: any) {

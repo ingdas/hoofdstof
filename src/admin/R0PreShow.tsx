@@ -4,14 +4,14 @@ import Button from "@material-ui/core/Button";
 import {ButtonGroup} from "@material-ui/core";
 import {WachtBtn} from "./components/WachtBtn";
 import {webSocket} from "../index";
-import {openingScreen} from "../redux/playerActions";
-import {domeinen} from "../Config";
+
+import {domeinen, speechQuestions} from "../Config";
+import {openingScreen} from "./action/sendAction";
 
 export const R0PreShow = () => {
     const handleOpening = () => {
         const namen = domeinen.map((it) => it.naam);
-        const action = openingScreen(namen);
-        webSocket.send(JSON.stringify(action))
+        openingScreen(namen, speechQuestions);
     };
 
     const handleLogout = () => {

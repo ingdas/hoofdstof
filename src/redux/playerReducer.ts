@@ -4,7 +4,7 @@ import {LOGINIDKEY, USERNAMEKEY} from "../index";
 import {WindowName} from "./interfaces/windowName";
 import {AppState} from "./interfaces/appState";
 
-export const initialState = {
+export const initialPlayerState = {
     player: {name: "UNKNOWN", answers: {}},
     playerState: {
         windowName: WindowName.WaitScreen,
@@ -12,7 +12,7 @@ export const initialState = {
     }
 };
 
-export function reducer(state: AppState = initialState, action: Action): AppState {
+export function playerReducer(state: AppState = initialPlayerState, action: Action): AppState {
     console.log(state, action);
     if (action.type === ActionType.ClearId) {
         delete window.localStorage[LOGINIDKEY];

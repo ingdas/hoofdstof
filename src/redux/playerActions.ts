@@ -103,11 +103,6 @@ export function adminScreen(): BuilderAction {
     };
 }
 
-export function openingScreen(professionList: Array<string>): BuilderAction {
-    // @ts-ignore
-    return {type: ActionType.NewState, window: WindowName.Opening, payload: {professionList}}
-}
-
 export function pingScreen(notification: string): BuilderAction {
     // @ts-ignore
     return {type: ActionType.NewState, window: WindowName.Ping, payload: {notification}}

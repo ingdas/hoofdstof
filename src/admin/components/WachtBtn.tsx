@@ -1,18 +1,27 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {webSocket} from "../../index";
-import {waitScreen} from "../../redux/playerActions";
+import {waitScreenDisplay, waitScreenPlayer} from "../action/sendAction";
 
 export const WachtBtn = () => {
     const handleClick = () => {
-        webSocket.send(JSON.stringify(waitScreen()));
+        waitScreenPlayer()
+    };
+    const handleClickD = () => {
+        waitScreenDisplay()
     };
 
     return (
-        <Button
-            color="primary"
-            onClick={handleClick}
-        >Wachtscherm
-        </Button>
+        <div>
+            <Button
+                color="primary"
+                onClick={handleClick}
+            >Wacht Speler
+            </Button>
+            <Button
+                color="primary"
+                onClick={handleClickD}
+            >Wacht Display
+            </Button>
+        </div>
     )
 };

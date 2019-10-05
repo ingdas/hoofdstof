@@ -20,7 +20,8 @@ export interface MultipleChoiceQuestion extends Question {
 }
 
 export interface OpeningQuestion extends Question {
-    professionList: Array<string>
+    professions: Array<string>
+    speechQuestions: Array<string>
 }
 
 export interface OpenQuestion extends Question {

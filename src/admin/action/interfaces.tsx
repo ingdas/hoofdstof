@@ -1,4 +1,4 @@
-import {MultipleChoiceQuestion, OpenQuestion} from "../../redux/interfaces/question";
+import {MultipleChoiceQuestion, OpeningQuestion, OpenQuestion} from "../../redux/interfaces/question";
 
 export interface SendAction {
     type: string
@@ -14,4 +14,16 @@ export interface MultipleChoiceQuestionAction extends SendAction {
 
 export interface OpenQuestionAction extends SendAction {
     openQuestion: OpenQuestion
+}
+
+export interface OpeningQuestionAction extends SendAction {
+    openingQuestion: OpeningQuestion
+}
+
+export interface ShowHintAction extends SendAction {
+    hint: {
+        hint: string,
+        questionId: string
+        rightAnswer: number | string
+    }
 }
