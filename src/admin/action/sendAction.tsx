@@ -39,8 +39,8 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
     } as OpeningQuestionAction)
 }
 
-export function showHint(hint: string, questionId: string, rightAnswer: number | string) {
-    send({type: "ShowHint", hint: {hint, questionId, rightAnswer}} as ShowHintAction)
+export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<number | string>) {
+    send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }
 
 function send(obj: SendAction) {

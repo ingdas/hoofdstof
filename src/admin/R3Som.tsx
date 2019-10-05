@@ -1,21 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {webSocket} from "../index";
-import {textInputScreen} from "../redux/playerActions";
 import {TextInputType} from "../redux/interfaces/question";
+import {AdminState} from "../redux/interfaces/adminState";
+import {connect} from "react-redux";
+import {openQuestion, showHint} from "./action/sendAction";
+import {domeinen} from "../Config";
+import {changeListener} from "../util";
 
-export const R3Som = () => {
+const R3SomC = (adminState: AdminState) => {
+    const [echteSom, setEchteSom] = useState("0");
 
     const vraagSom = () => {
-        webSocket.send(JSON.stringify(textInputScreen("Geef ons de som", TextInputType.Number)))
+        openQuestion("R3Som", "Geef ons de som", TextInputType.Number)
     };
     const vraagPlek = () => {
-        webSocket.send(JSON.stringify(textInputScreen("Geef ons een plaats zonder wetenschap", TextInputType.Text)))
+        openQuestion("R3Plek", "Geef ons een plaats zonder wetenschap", TextInputType.Text)
+    };
+    const zendHint = () => {
+        const domain = adminState.domain;
+        if (domain !== undefined) {
+            showHint(domeinen[domain].hints[2], ["R3Som"], [String(Number(echteSom))])
+        }
     };
 
     return (<div>
@@ -56,8 +66,8 @@ export const R3Som = () => {
                 //style={{width = "100px"}}
                 variant="outlined"
                 label="Juiste Antwoord"
-                // onChange={handleChange('weightRange')}
-                value={"1648"}
+                onChange={changeListener(setEchteSom)}
+                value={echteSom}
             ></TextField>
             <Button
                 //onClick={handleStart}
@@ -66,7 +76,7 @@ export const R3Som = () => {
             </Button>
 
             <Button
-                //onClick={handleStop}
+                onClick={zendHint}
             >
                 Zend Hint
             </Button>
@@ -75,3 +85,14 @@ export const R3Som = () => {
         <ATimer time="30"/>
     </div>)
 };
+
+
+function mapStateToProps(state: AdminState): AdminState {
+    return state
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {};
+}
+
+export const R3Som = connect(mapStateToProps, mapDispatchToProps)(R3SomC);

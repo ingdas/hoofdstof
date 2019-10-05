@@ -1,4 +1,5 @@
 import {MultipleChoiceQuestion, OpeningQuestion, OpenQuestion} from "../../redux/interfaces/question";
+import {PlayerHint} from "../../redux/interfaces/playerState";
 
 export interface SendAction {
     type: string
@@ -21,9 +22,5 @@ export interface OpeningQuestionAction extends SendAction {
 }
 
 export interface ShowHintAction extends SendAction {
-    hint: {
-        hint: string,
-        questionId: string
-        rightAnswer: number | string
-    }
+    hint: PlayerHint
 }

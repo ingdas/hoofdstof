@@ -1,14 +1,21 @@
 import {Action} from "redux";
-import {ActionType} from "./playerActions";
-import {AdminState} from "./interfaces/adminState";
+import {AdminActionType, AdminState, NewAdminStateAction} from "./interfaces/adminState";
 
 export const initialAdminState = {
     answers: {}
 } as AdminState;
 
-export function playerReducer(state: AdminState = initialAdminState, action: Action): AdminState {
-    if (action.type === ActionType.NewState) {
-        return action as unknown as AdminState
+export function adminReducer(state: AdminState = initialAdminState, action: any): AdminState {
+    switch (action.type) {
+        case AdminActionType.NewAdminState: {
+            return (action as unknown as NewAdminStateAction).adminState
+        }
+        case AdminActionType.SelectDomain : {
+            return {
+                ...state,
+                domain: (action as { domain: number }).domain
+            }
+        }
     }
     return state;
 }

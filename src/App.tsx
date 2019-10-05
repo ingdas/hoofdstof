@@ -13,9 +13,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import ProgressReporter from "./progress/ProgressReporter";
 import Opening from "./simple/Opening";
 import {Ping} from "./simple/Ping";
-import AdminScreen from "./admin/Admin";
 import {WindowName} from "./redux/interfaces/windowName";
 import {AppState} from "./redux/interfaces/appState";
+import {AppLocation, Loc} from "./index";
+import AdminScreen from "./admin/Admin";
 
 interface Props {
     windowName: WindowName
@@ -25,6 +26,9 @@ const App = ({windowName}: Props) => {
     const bumperStyle = {
         height: "50px"
     };
+    if (AppLocation === Loc.ADMIN) {
+        return <AdminScreen/>
+    }
 
     let appWindow;
     switch (windowName) {
@@ -46,9 +50,6 @@ const App = ({windowName}: Props) => {
         case WindowName.Login:
             appWindow = <Login/>;
             break;
-        case WindowName.Admin:
-            appWindow = <AdminScreen/>;
-            break;
         case WindowName.Opening:
             appWindow = <Opening/>;
             break;
@@ -67,6 +68,9 @@ const App = ({windowName}: Props) => {
 };
 
 export function mapStateToProps(appState: AppState): Props {
+    if (AppLocation === Loc.ADMIN) {
+        return {windowName: WindowName.Admin}
+    }
     return {windowName: appState.playerState.windowName}
 }
 

@@ -18,10 +18,12 @@ export interface PlayerPosingQuestion extends PlayerState {
 export interface PlayerWaiting extends PlayerState {
 }
 
-export interface PingHint extends PlayerState {
-    notification : string
+export interface PlayerHint extends PlayerState {
+    hint: string
+    questionIds: Array<string>
+    rightAnswers: Array<number | string>
 }
 
 export interface LoginState extends PlayerState {
-    onLogin : (name : string) => void
+    onLogin: (name: string) => void
 }

@@ -4,22 +4,23 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
-import {uitvindingen} from "../Config";
+import {domeinen, uitvindingen} from "../Config";
 import {multipleChoiceQuestion, showHint} from "./action/sendAction";
 import {changeListener} from "../util";
+import {connect} from "react-redux";
+import {AdminState} from "../redux/interfaces/adminState";
 
-export const R1Toeval = () => {
-    const [antwoord, setAntwoord]= useState("1");
-
-
+export const R1ToevalC = ({domain}: { domain?: number }) => {
     const vraagUitvinding = () => {
-        multipleChoiceQuestion("R1Uitvinding","Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
+        multipleChoiceQuestion("R1Uitvinding", "Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
     };
     const quizVraag = () => {
-        multipleChoiceQuestion("R1Quizvraag","Hoe is de uitvinding echt uitgevonden?", ["Manier 1", "Manier 2"])
+        multipleChoiceQuestion("R1Quizvraag", "Hoe is de uitvinding echt uitgevonden?", ["Manier 1", "Manier 2"])
     };
-    const zendHint = () => {
-        showHint("TODO", "R1Quizvraag", Number(antwoord))
+    const zendHint = (antwoord: number) => () => {
+        if (domain !== undefined) {
+            showHint(domeinen[domain].hints[0], ["R1Quizvraag"], [antwoord])
+        }
     };
 
 
@@ -59,24 +60,20 @@ export const R1Toeval = () => {
                 >
                     Start Quiz
                 </Button>
-                <TextField
-                    // className={clsx(classes.margin, classes.textField)}
-                    //style={{width = "100px"}}
-                    variant="outlined"
-                    label="Juiste Antwoord"
-                    onChange={changeListener(setAntwoord)}
-                    value={antwoord}
-                ></TextField>
                 <Button
                     //onClick={handleStart}
                 >
                     Toon Resultaat
                 </Button>
-
                 <Button
-                    onClick={zendHint}
+                    onClick={zendHint(0)}
                 >
-                    Zend Hint
+                    Hint Juiste Antwoord 1
+                </Button>
+                <Button
+                    onClick={zendHint(1)}
+                >
+                    Hint Juiste Antwoord 2
                 </Button>
             </ButtonGroup>
             <br></br>
@@ -84,3 +81,14 @@ export const R1Toeval = () => {
         </div>
     )
 };
+
+
+function mapStateToProps(state: AdminState): { domain?: number } {
+    return state
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {};
+}
+
+export const R1Toeval = connect(mapStateToProps, mapDispatchToProps)(R1ToevalC);

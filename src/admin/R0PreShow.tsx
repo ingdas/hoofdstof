@@ -7,8 +7,10 @@ import {webSocket} from "../index";
 
 import {domeinen, speechQuestions} from "../Config";
 import {openingScreen} from "./action/sendAction";
+import {AdminState} from "../redux/interfaces/adminState";
+import {connect} from "react-redux";
 
-export const R0PreShow = () => {
+const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
     const handleOpening = () => {
         const namen = domeinen.map((it) => it.naam);
         openingScreen(namen, speechQuestions);
@@ -16,6 +18,16 @@ export const R0PreShow = () => {
 
     const handleLogout = () => {
         webSocket.send(JSON.stringify({type: "ClearId"}));
+    };
+
+    const setDomain = (index: number) => () => {
+        const action = {type: "SelectDomain", domain: index};
+        webSocket.send(JSON.stringify(action));
+        dispatch(action);
+    };
+
+    const getColor = (index: number) => {
+        return index === domain ? "primary" : "default";
     };
 
     return (<div>
@@ -42,7 +54,25 @@ export const R0PreShow = () => {
                 </Button>
             </ButtonGroup>
 
+            <br/>
+            <ButtonGroup>
+                {domeinen.map((domein, index) => {
+                    return <Button color={getColor(index)} onClick={setDomain(index)}>{domein.naam}</Button>
+                })}
+            </ButtonGroup>
+
             <ATimer time="60"/>
         </div>
     )
 };
+
+
+function mapStateToProps(state: AdminState): { domain?: number } {
+    return state
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {dispatch};
+}
+
+export const R0PreShow = connect(mapStateToProps, mapDispatchToProps)(R0PreShowC);

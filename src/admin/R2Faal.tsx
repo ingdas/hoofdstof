@@ -7,8 +7,10 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {TextInputType} from "../redux/interfaces/question";
 import {multipleChoiceQuestion, openQuestion} from "./action/sendAction";
 import {faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
+import {AdminState} from "../redux/interfaces/adminState";
+import {connect} from "react-redux";
 
-export const R2Faal = () => {
+const R2FaalC = () => {
 
     const vraagEmotie = () => {
         openQuestion("R2Emotie", "Geef ons een emotie", TextInputType.Text)
@@ -63,3 +65,14 @@ export const R2Faal = () => {
         <ATimer time="30"/>
     </div>)
 };
+
+
+function mapStateToProps(state: AdminState): { domain?: number } {
+    return state
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {};
+}
+
+export const R2Faal = connect(mapStateToProps, mapDispatchToProps)(R2FaalC);

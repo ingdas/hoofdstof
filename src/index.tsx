@@ -8,6 +8,7 @@ import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import {adminScreen, loginScreen} from "./redux/playerActions";
+import {adminReducer, initialAdminState} from "./redux/adminReducer";
 
 export const LOGINIDKEY = "loginID";
 export const USERNAMEKEY = "username";
@@ -42,7 +43,7 @@ function getURL() {
 
 export const webSocket = new ReconnectingWebSocket(getURL());
 export const store = AppLocation === Loc.ADMIN
-    ? createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
+    ? createStore(adminReducer, initialAdminState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
     : createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})));
 
 

@@ -5,8 +5,11 @@ import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
+import {AdminState} from "../redux/interfaces/adminState";
+import {connect} from "react-redux";
+import {R4GoogleC} from "./R4Google";
 
-export const R5Finale = () => {
+export const R5FinaleC = () => {
     const startQuiz = () => {
         let kandidaten = domeinen[0].concurrenten;
         kandidaten.push(domeinen[0].wetenschapper);
@@ -39,3 +42,13 @@ export const R5Finale = () => {
         </div>
     )
 };
+
+function mapStateToProps(state: AdminState): AdminState {
+    return state
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {};
+}
+
+export const R5Finale = connect(mapStateToProps, mapDispatchToProps)(R5FinaleC);
