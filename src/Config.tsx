@@ -1,7 +1,13 @@
+import Curie from './img/Curie.jpg'
+import Newton from './img/Newton.jpg'
+import Hawking from './img/Hawking.jpg'
+import Franklin from './img/Franklin.jpg'
+
 export interface Domein {
     naam: string
     wetenschapper: string
     concurrenten: Array<string>
+    afbeeldingen: Array<string>
     hints: Array<string>
 }
 
@@ -37,17 +43,20 @@ export const domeinen: Array<Domein> = [
         naam: "Fysica",
         wetenschapper: "Sir Isaac Newton",
         concurrenten: ["Stephen Hawking", "Marie Curie", "Benjamin Franklin"],
+        afbeeldingen: [Hawking, Curie, Franklin, Newton],
         hints: ["man", "lang haar", "1687", "krullen"]
     },
     {
         naam: "Impro",
         wetenschapper: "Patti Styles",
+        afbeeldingen: [Hawking, Curie, Franklin, Newton],
         concurrenten: ["Johnstone", "De lange van Whose Line", "Sinterklaas van den Broeck"],
         hints: ["vrouw", "Zus van Harry", "Australie", "Krabby"],
     },
     {
         naam: "Hoofdstof",
         wetenschapper: "De beamer",
+        afbeeldingen: [Hawking, Curie, Franklin, Newton],
         concurrenten: ["Ben Verhoeven", "Charlotte Demetsenaere", "Ingmar Dasseville"],
         hints: ["klein", "licht", "doet soms beep beep", "lights up your day"],
     }

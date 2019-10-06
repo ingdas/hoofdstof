@@ -16,7 +16,7 @@ export const R5FinaleC = (adminState: AdminState) => {
         if (isDefined(domain)) {
             let kandidaten = domeinen[domain].concurrenten.slice();
             kandidaten.push(domeinen[domain].wetenschapper);
-            multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten)
+            multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, domeinen[domain].afbeeldingen)
         }
     };
 

@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import {connect} from "react-redux";
 import {PlayerPosingQuestion} from "../../interfaces/playerState";
 import {answerQuestion} from "../../playerActions";
-import {vibrate} from "../../../util";
+import {isDefined, vibrate} from "../../../util";
 import {AppState} from "../../interfaces/appState";
 import {MultipleChoiceQuestion} from "../../interfaces/question";
 
@@ -16,11 +16,12 @@ interface AnswerProps {
     selected: boolean;
     answer: string;
     active: boolean;
-    dispatch: any
-    index: number
+    dispatch: any;
+    index: number;
+    image?: string;
 }
 
-const AnswerC = ({questionId, selected, answer, active, index, dispatch}: AnswerProps) => {
+const AnswerC = ({questionId, selected, answer, active, index, dispatch, image}: AnswerProps) => {
     console.log({questionId, selected, answer, active, index, dispatch});
     const onClick = (() => {
         if (active) {
@@ -37,6 +38,9 @@ const AnswerC = ({questionId, selected, answer, active, index, dispatch}: Answer
                 <Typography variant="h5" component="h2">
                     {answer}
                 </Typography>
+                {isDefined(image) &&
+                <img alt={answer} src={image} style={{width: "100px"}}/>
+                }
             </Paper>
         </Grid>
     );
@@ -44,6 +48,7 @@ const AnswerC = ({questionId, selected, answer, active, index, dispatch}: Answer
 
 interface OwnProps {
     index: number
+    image?: string
 }
 
 function mapStateToProps(state: AppState, ownProps: OwnProps): { answer: string, selected: boolean, active: boolean, questionId: string } {

@@ -11,13 +11,14 @@ import {MultipleChoiceQuestion} from "../../interfaces/question";
 interface Props {
     question: string,
     answers: Array<string>
+    images?: Array<string>
 }
 
-const QuestionC = ({question, answers}: Props) => {
+const QuestionC = ({question, answers, images}: Props) => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} className="qTitle">{question}</Grid>
-            {answers.map((v, index) => <MultipleChoiceAnswer key={index} index={index}/>)}
+            {answers.map((v, index) => <MultipleChoiceAnswer key={index} index={index} image={images && images[index]}/>)}
         </Grid>)
 };
 

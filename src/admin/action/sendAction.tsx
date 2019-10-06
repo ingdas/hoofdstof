@@ -23,10 +23,10 @@ export function NewTimer(newTime: number) {
     send({type: "NewTimer", time: newTime} as NewTimerAction)
 }
 
-export function multipleChoiceQuestion(id: string, question: string, answers: string[]) {
+export function multipleChoiceQuestion(id: string, question: string, answers: string[], images?: string[]) {
     send({
         type: "MultipleChoiceQuestion",
-        multipleChoiceQuestion: {id, question, answers}
+        multipleChoiceQuestion: {id, question, answers, images}
     } as MultipleChoiceQuestionAction)
 }
 

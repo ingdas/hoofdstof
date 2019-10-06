@@ -4,14 +4,23 @@ import {waitScreenDisplay, waitScreenPlayer} from "../action/sendAction";
 
 export const WachtBtn = () => {
     const handleClick = () => {
-        waitScreenPlayer()
+        waitScreenPlayer();
     };
     const handleClickD = () => {
-        waitScreenDisplay()
+        waitScreenDisplay();
+    };
+    const handleClickA = () => {
+        waitScreenPlayer();
+        waitScreenDisplay();
     };
 
     return (
         <div>
+            <Button
+                color="primary"
+                onClick={handleClickA}
+            >Wacht All
+            </Button>
             <Button
                 color="primary"
                 onClick={handleClick}
