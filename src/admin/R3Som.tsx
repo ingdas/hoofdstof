@@ -5,12 +5,12 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {TextInputType} from "../redux/interfaces/question";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {changeListener, isDefined} from "../util";
+import {TextInputType} from "../player/interfaces/question";
 
 const R3SomC = (adminState: AdminState) => {
     const [echteSom, setEchteSom] = useState("0");

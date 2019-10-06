@@ -1,15 +1,15 @@
 import React, {useState} from "react";
-import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
-import {answerQuestion, waitScreen} from "../redux/playerActions";
 import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
-import {changeListener} from "../util";
-import {AppState} from "../redux/interfaces/appState";
-import {OpeningQuestion} from "../redux/interfaces/question";
+import {changeListener} from "../../util";
+import {answerQuestion, waitScreen} from "../playerActions";
+import {AppState} from "../interfaces/appState";
+import {OpeningQuestion} from "../interfaces/question";
+import {PlayerPosingQuestion} from "../interfaces/playerState";
 
 
 interface Props {

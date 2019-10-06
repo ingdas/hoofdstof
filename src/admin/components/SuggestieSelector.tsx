@@ -8,9 +8,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
 import {webSocket} from "../../index";
-import {pingScreen} from "../../redux/playerActions";
-import {AdminState} from "../../redux/interfaces/adminState";
+import {AdminState} from "../redux/adminState";
 import {connect} from "react-redux";
+import {pingScreen} from "../../player/playerActions";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

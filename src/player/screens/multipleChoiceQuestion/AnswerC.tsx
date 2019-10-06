@@ -4,11 +4,11 @@ import "./AnswerC.css"
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {connect} from "react-redux";
-import {answerQuestion} from "../redux/playerActions";
-import {vibrate} from "../util";
-import {AppState} from "../redux/interfaces/appState";
-import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
-import {MultipleChoiceQuestion} from "../redux/interfaces/question";
+import {PlayerPosingQuestion} from "../../interfaces/playerState";
+import {answerQuestion} from "../../playerActions";
+import {vibrate} from "../../../util";
+import {AppState} from "../../interfaces/appState";
+import {MultipleChoiceQuestion} from "../../interfaces/question";
 
 
 interface AnswerProps {

@@ -7,7 +7,7 @@ import {webSocket} from "../index";
 
 import {domeinen, speechQuestions} from "../Config";
 import {openingScreen} from "./action/sendAction";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import SuggestieSelector from "./components/SuggestieSelector";
 

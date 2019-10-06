@@ -3,13 +3,13 @@ import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
-import {TextInputType} from "../redux/interfaces/question";
 import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {isDefined} from "../util";
+import {TextInputType} from "../player/interfaces/question";
 
 const R2FaalC = ({domain}: { domain?: number }) => {
 

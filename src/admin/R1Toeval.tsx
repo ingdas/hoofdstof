@@ -6,7 +6,7 @@ import {WachtBtn} from "./components/WachtBtn";
 import {domeinen, uitvindingen} from "../Config";
 import {multipleChoiceQuestion, showHint} from "./action/sendAction";
 import {connect} from "react-redux";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {isDefined} from "../util";
 

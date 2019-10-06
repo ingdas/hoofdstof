@@ -1,8 +1,8 @@
 import React from "react";
-import Background from '../img/logo.png';
+import Background from '../../img/logo.png';
 
 
-export const WaitScreen = (_: {}) => {
+export const DisplayWaitScreen = (_: {}) => {
     const logobg = {
         backgroundImage: `url(${Background})`,
         backgroundRepeat: 'no-repeat',

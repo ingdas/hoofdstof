@@ -1,8 +1,9 @@
 import React from "react";
 import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
-import {AppState} from "../redux/interfaces/appState";
-import {PlayerHint} from "../redux/interfaces/playerState";
+import {PlayerHint} from "../interfaces/playerState";
+import {AppState} from "../interfaces/appState";
+
 
 interface Props {
     hint: string

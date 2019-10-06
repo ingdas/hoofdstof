@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {List, Map} from "immutable";
 import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
-import {AppState} from "../redux/interfaces/appState";
+import {AppState} from "../../player/interfaces/appState";
 
 interface Props {
     question: string

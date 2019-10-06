@@ -3,9 +3,10 @@ import "./QuestionC.css"
 import {Grid} from "@material-ui/core";
 import {connect} from "react-redux";
 import {MultipleChoiceAnswer} from "./AnswerC";
-import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
-import {MultipleChoiceQuestion} from "../redux/interfaces/question";
-import {AppState} from "../redux/interfaces/appState";
+import {AppState} from "../../interfaces/appState";
+import {PlayerPosingQuestion} from "../../interfaces/playerState";
+import {MultipleChoiceQuestion} from "../../interfaces/question";
+
 
 interface Props {
     question: string,

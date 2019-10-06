@@ -3,12 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import App from './App'
-import {initialPlayerState, playerReducer} from "./redux/playerReducer";
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
-import {adminScreen, loginScreen} from "./redux/playerActions";
-import {adminReducer, initialAdminState} from "./redux/adminReducer";
+import {adminReducer, initialAdminState} from "./admin/redux/adminReducer";
+import {initialPlayerState, playerReducer} from "./player/playerReducer";
+import {adminScreen, loginScreen} from "./player/playerActions";
 
 export const LOGINIDKEY = "loginID";
 export const USERNAMEKEY = "username";

@@ -1,13 +1,13 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
-import {answerQuestion} from "../redux/playerActions";
-import {AppState} from "../redux/interfaces/appState";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import "./TextInput.css"
-import {OpenQuestion, TextInputType} from "../redux/interfaces/question";
-import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
+import "./OpenQuestionComponent.css"
+import {answerQuestion} from "../../playerActions";
+import {OpenQuestion, TextInputType} from "../../interfaces/question";
+import {AppState} from "../../interfaces/appState";
+import {PlayerPosingQuestion} from "../../interfaces/playerState";
 
 interface Props {
     type: TextInputType

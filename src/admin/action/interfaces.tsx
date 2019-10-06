@@ -1,5 +1,6 @@
-import {MultipleChoiceQuestion, OpeningQuestion, OpenQuestion} from "../../redux/interfaces/question";
-import {PlayerHint} from "../../redux/interfaces/playerState";
+import {MultipleChoiceQuestion, OpeningQuestion, OpenQuestion} from "../../player/interfaces/question";
+import {PlayerHint} from "../../player/interfaces/playerState";
+
 
 export interface SendAction {
     type: string

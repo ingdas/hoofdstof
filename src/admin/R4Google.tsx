@@ -4,12 +4,12 @@ import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {TextInputType} from "../redux/interfaces/question";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
+import {TextInputType} from "../player/interfaces/question";
 
 export const R4GoogleC = ({domain}: AdminState) => {
 

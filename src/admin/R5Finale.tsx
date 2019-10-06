@@ -5,7 +5,7 @@ import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
-import {AdminState} from "../redux/interfaces/adminState";
+import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {multipleChoiceQuestion} from "./action/sendAction";
 

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {waitScreen} from "../redux/playerActions";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import {AppState} from "../redux/interfaces/appState";
-import {LoginState} from "../redux/interfaces/playerState";
+import {AppState} from "../interfaces/appState";
+import {LoginState} from "../interfaces/playerState";
+import {waitScreen} from "../playerActions";
 
 
 interface Props {

@@ -1,4 +1,4 @@
-import {AdminActionType, AdminState, NewAdminStateAction} from "./interfaces/adminState";
+import {AdminActionType, AdminState, NewAdminStateAction} from "./adminState";
 
 export const initialAdminState = {
     answers: {},

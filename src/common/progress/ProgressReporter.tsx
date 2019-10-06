@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {TimerState} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import './ProgressReporter.css';
-import {AppState} from "../redux/interfaces/appState";
+import {AppState} from "../../player/interfaces/appState";
+import {TimerState} from "../timerState";
 
 const App = ({timeLeft, totalTime, startTime}: TimerState) => {
     const [seconds, setSeconds] = useState(timeLeft);

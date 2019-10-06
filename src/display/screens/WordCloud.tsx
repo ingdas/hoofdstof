@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {Map} from "immutable";
 import ReactWordcloud from 'react-wordcloud';
-import {AppState} from "../redux/interfaces/appState";
+import {AppState} from "../../player/interfaces/appState";
 
 interface Props {
     question: string

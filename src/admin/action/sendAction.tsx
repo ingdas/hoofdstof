@@ -7,7 +7,7 @@ import {
     ShowHintAction
 } from "./interfaces";
 import {webSocket} from "../../index";
-import {TextInputType} from "../../redux/interfaces/question";
+import {TextInputType} from "../../player/interfaces/question";
 
 export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})

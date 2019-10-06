@@ -1,22 +1,22 @@
 import React from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import {Question} from "./question/QuestionC";
-import {WaitScreen} from "./simple/WaitScreen";
+import {WaitScreen} from "./player/screens/WaitScreen";
 import {connect} from "react-redux";
-import WordCloud from "./text/WordCloud";
-import TextInput from "./text/TextInput";
-import ChartQuestion from "./question/ChartQuestion";
-import Login from "./simple/Login";
+import WordCloud from "./display/screens/WordCloud";
+import TextInput from "./player/screens/openQuestion/OpenQuestionComponent";
+import ChartQuestion from "./display/screens/ChartQuestion";
+import Login from "./player/screens/Login";
 
 import 'react-circular-progressbar/dist/styles.css';
-import ProgressReporter from "./progress/ProgressReporter";
-import Opening from "./simple/Opening";
-import {ShowHint} from "./simple/ShowHint";
-import {WindowName} from "./redux/interfaces/windowName";
-import {AppState} from "./redux/interfaces/appState";
+import ProgressReporter from "./common/progress/ProgressReporter";
+import Opening from "./player/screens/Opening";
+import {ShowHint} from "./player/screens/ShowHint";
 import {AppLocation, Loc} from "./index";
 import AdminScreen from "./admin/Admin";
+import {WindowName} from "./player/interfaces/windowName";
+import {Question} from "./player/screens/multipleChoiceQuestion/QuestionC";
+import {AppState} from "./player/interfaces/appState";
 
 interface Props {
     windowName: WindowName

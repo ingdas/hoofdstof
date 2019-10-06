@@ -1,11 +1,7 @@
 import {WindowName} from "./windowName";
 import {Question} from "./question";
+import {TimerState} from "../../common/timerState";
 
-export interface TimerState {
-    timeLeft: number;
-    totalTime: number;
-    startTime : number;
-}
 
 export interface PlayerState {
     timerState: TimerState;
