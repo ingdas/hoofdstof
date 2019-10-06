@@ -10,6 +10,6 @@ export interface NewAdminStateAction {
 
 export interface AdminState {
     domain?: number
-    answers: Record<string, Record<string | number, number>>
-    firstOne: Record<string, Record<string | number, string>>
+    answers: Record<string, Record<string, number>>
+    firstOne: Record<string, Record<string, string>>
 }

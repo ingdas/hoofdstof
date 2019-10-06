@@ -4,7 +4,7 @@ import "./AnswerC.css"
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {connect} from "react-redux";
-import {answerMultipleChoice} from "../redux/playerActions";
+import {answerQuestion} from "../redux/playerActions";
 import {vibrate} from "../util";
 import {AppState} from "../redux/interfaces/appState";
 import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
@@ -25,7 +25,7 @@ const AnswerC = ({questionId, selected, answer, active, index, dispatch}: Answer
     const onClick = (() => {
         if (active) {
             vibrate([100]);
-            dispatch(answerMultipleChoice(questionId, index));
+            dispatch(answerQuestion(questionId, answer));
         }
     }) as MouseEventHandler;
     const color = selected ? "lightblue" : "white";
@@ -51,7 +51,7 @@ function mapStateToProps(state: AppState, ownProps: OwnProps): { answer: string,
     const playerAnswer = state.player.answers[questionInfo.id];
 
     const answer = questionInfo.answers[ownProps.index] as string;
-    const selected = playerAnswer === ownProps.index;
+    const selected = playerAnswer === answer;
     const active = playerAnswer === undefined;
     return {answer, selected, active, questionId: questionInfo.id}
 }

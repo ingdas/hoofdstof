@@ -10,11 +10,11 @@ export interface Answer {
 
 export interface Question {
     id: string
+    isObjective : boolean
 }
 
 export interface MultipleChoiceQuestion extends Question {
     question: string
-    correctAnswer?: number
     answers: Array<string>
     images?: Array<string>
 }

@@ -13,7 +13,7 @@ export const R5FinaleC = () => {
     const startQuiz = () => {
         let kandidaten = domeinen[0].concurrenten.slice();
         kandidaten.push(domeinen[0].wetenschapper);
-        multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, 3)
+        multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten)
     };
 
     return (<div>

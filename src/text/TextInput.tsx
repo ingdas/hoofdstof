@@ -1,6 +1,6 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
-import {answerOpen} from "../redux/playerActions";
+import {answerQuestion} from "../redux/playerActions";
 import {AppState} from "../redux/interfaces/appState";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -23,7 +23,7 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
     let [answer, setAnswer] = useState(initialAnswer);
 
     const onClick = (() => {
-        dispatch(answerOpen(questionId, answer))
+        dispatch(answerQuestion(questionId, answer))
     }) as MouseEventHandler;
 
     const onChange = function (evt: FormEvent) {

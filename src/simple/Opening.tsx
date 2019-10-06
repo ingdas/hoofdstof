@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {PlayerPosingQuestion} from "../redux/interfaces/playerState";
 import {connect} from "react-redux";
-import {answerOpen, waitScreen} from "../redux/playerActions";
+import {answerQuestion, waitScreen} from "../redux/playerActions";
 import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
@@ -87,12 +87,12 @@ const OpeningC = ({professions, speechQuestion, dispatch}: Props) => {
     let [woord, setWoord] = useState("");
 
     const finishForm = () => {
-        dispatch(answerOpen("R0Geslacht", geslacht));
-        dispatch(answerOpen("R0Vakgebied", vakgebied));
-        dispatch(answerOpen("R0Naam", naam));
-        dispatch(answerOpen("R0Eigenschap", eigenschap));
-        dispatch(answerOpen("R0Zin", zin));
-        dispatch(answerOpen("R0Woord", woord));
+        dispatch(answerQuestion("R0Geslacht", geslacht));
+        dispatch(answerQuestion("R0Vakgebied", vakgebied));
+        dispatch(answerQuestion("R0Naam", naam));
+        dispatch(answerQuestion("R0Eigenschap", eigenschap));
+        dispatch(answerQuestion("R0Zin", zin));
+        dispatch(answerQuestion("R0Woord", woord));
         dispatch(waitScreen());
     };
 

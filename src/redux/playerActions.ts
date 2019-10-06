@@ -7,14 +7,13 @@ import {Player} from "./interfaces/player";
 import {LoginState, PlayerState} from "./interfaces/playerState";
 
 export enum ActionType {
-    AnswerOpenQuestion = "AnswerOpenQuestion",
     //Used for new screens
     NewState = "NewState",
     //Used for setting the timer
     NewTimer = "NewTimer",
     ClearId = "ClearId",
     NewId = "NewId",
-    AnswerMultipleChoiceQuestion = "AnswerMultipleChoiceQuestion"
+    AnswerQuestion = "AnswerQuestion"
 }
 
 export interface Action {
@@ -46,13 +45,8 @@ function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebS
     }
 }
 
-export function answerMultipleChoice(questionId: string, answer: number) {
-    const action = {type: "AnswerMultipleChoiceQuestion", questionId, answer};
-    return dispatchAndEmit(action)
-}
-
-export function answerOpen(questionId: string, answer: string) {
-    const action = {type: "AnswerOpenQuestion", questionId, answer};
+export function answerQuestion(questionId: string, answer: string) {
+    const action = {type: "AnswerQuestion", questionId, answer};
     return dispatchAndEmit(action)
 }
 

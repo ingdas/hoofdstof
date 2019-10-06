@@ -10,7 +10,7 @@ import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
 import {openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
-import {changeListener} from "../util";
+import {changeListener, isDefined} from "../util";
 
 const R3SomC = (adminState: AdminState) => {
     const [echteSom, setEchteSom] = useState("0");
@@ -23,7 +23,7 @@ const R3SomC = (adminState: AdminState) => {
     };
     const zendHint = () => {
         const domain = adminState.domain;
-        if (domain !== undefined) {
+        if (isDefined(domain)) {
             showHint(domeinen[domain].hints[2], ["R3Som"], [String(Number(echteSom))])
         }
     };

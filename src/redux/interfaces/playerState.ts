@@ -22,7 +22,7 @@ export interface PlayerWaiting extends PlayerState {
 export interface PlayerHint extends PlayerState {
     hint: string
     questionIds: Array<string>
-    rightAnswers: Array<number | string>
+    rightAnswers: Array<string>
 }
 
 export interface LoginState extends PlayerState {

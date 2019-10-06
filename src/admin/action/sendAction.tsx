@@ -21,10 +21,10 @@ export function NewTimer(newTime: number) {
     send({type: "NewTimer", time: newTime} as NewTimerAction)
 }
 
-export function multipleChoiceQuestion(id: string, question: string, answers: string[], correctAnswer?: number) {
+export function multipleChoiceQuestion(id: string, question: string, answers: string[]) {
     send({
         type: "MultipleChoiceQuestion",
-        multipleChoiceQuestion: {id, question, correctAnswer, answers}
+        multipleChoiceQuestion: {id, question, answers}
     } as MultipleChoiceQuestionAction)
 }
 
@@ -39,7 +39,7 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
     } as OpeningQuestionAction)
 }
 
-export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<number | string>) {
+export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<string>) {
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }
 

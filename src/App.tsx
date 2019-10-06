@@ -12,7 +12,7 @@ import Login from "./simple/Login";
 import 'react-circular-progressbar/dist/styles.css';
 import ProgressReporter from "./progress/ProgressReporter";
 import Opening from "./simple/Opening";
-import {Ping} from "./simple/Ping";
+import {ShowHint} from "./simple/ShowHint";
 import {WindowName} from "./redux/interfaces/windowName";
 import {AppState} from "./redux/interfaces/appState";
 import {AppLocation, Loc} from "./index";
@@ -54,7 +54,7 @@ const App = ({windowName}: Props) => {
             appWindow = <Opening/>;
             break;
         case WindowName.Ping:
-            appWindow = <Ping/>;
+            appWindow = <ShowHint/>;
 
     }
 

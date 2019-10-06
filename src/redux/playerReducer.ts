@@ -25,9 +25,8 @@ export function playerReducer(state: AppState = initialPlayerState, action: Acti
         return state
     } else if (action.type === ActionType.NewState) {
         return action as unknown as AppState
-    } else if (action.type === ActionType.AnswerMultipleChoiceQuestion
-            || action.type === ActionType.AnswerOpenQuestion) {
-        const myAction = action as unknown as { questionId: string, answer: string | number };
+    } else if (action.type === ActionType.AnswerQuestion) {
+        const myAction = action as unknown as { questionId: string, answer: string };
         return {
             ...state,
             player: {

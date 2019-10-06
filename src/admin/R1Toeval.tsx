@@ -8,17 +8,19 @@ import {multipleChoiceQuestion, showHint} from "./action/sendAction";
 import {connect} from "react-redux";
 import {AdminState} from "../redux/interfaces/adminState";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {isDefined} from "../util";
 
 export const R1ToevalC = ({domain}: { domain?: number }) => {
+    const antwoorden = ["Manier 1", "Manier 2"]
     const vraagUitvinding = () => {
         multipleChoiceQuestion("R1Uitvinding", "Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
     };
     const quizVraag = () => {
-        multipleChoiceQuestion("R1Quizvraag", "Hoe is de uitvinding echt uitgevonden?", ["Manier 1", "Manier 2"])
+        multipleChoiceQuestion("R1Quizvraag", "Hoe is de uitvinding echt uitgevonden?", antwoorden)
     };
     const zendHint = (antwoord: number) => () => {
-        if (domain !== undefined) {
-            showHint(domeinen[domain].hints[0], ["R1Quizvraag"], [antwoord])
+        if (isDefined(domain)) {
+            showHint(domeinen[domain].hints[0], ["R1Quizvraag"], [antwoorden[antwoord]])
         }
     };
 
@@ -77,7 +79,7 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                     Hint Juiste Antwoord 2
                 </Button>
             </ButtonGroup>
-        <SuggestieSelector questionId="R1Quizvraag"/>
+            <SuggestieSelector questionId="R1Quizvraag"/>
             <br></br>
             <ATimer time="30"/>
         </div>

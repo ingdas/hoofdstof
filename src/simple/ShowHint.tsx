@@ -9,7 +9,7 @@ interface Props {
     isRight: boolean
 }
 
-const PingC = ({hint, isRight}: Props) => {
+const ShowHintC = ({hint, isRight}: Props) => {
     if (isRight) {
         return (
             <Paper style={{fontSize: "64px"}}>Onthoud deze hint voor de finale: {hint}</Paper>
@@ -20,15 +20,25 @@ const PingC = ({hint, isRight}: Props) => {
 };
 
 export function mapStateToProps(state: AppState): Props {
+
+    function isNumeric(value: string) {
+        return /^-{0,1}\d+$/.test(value);
+    }
+
     const hint = (state.playerState as unknown as { hint: PlayerHint }).hint;
 
     let rightquestions = 0;
 
     for (let i = 0; i < hint.questionIds.length; i++) {
         const playerAnswer = state.player.answers[hint.questionIds[i]];
-        console.log(hint, playerAnswer);
-        if (playerAnswer === hint.rightAnswers[i]) {
+        const rightAnswer = hint.rightAnswers[i];
+        if (playerAnswer === rightAnswer) {
             rightquestions++
+        } else if (isNumeric(playerAnswer) && isNumeric(rightAnswer)) {
+            if (Number(rightAnswer) * 0.95 <= Number(playerAnswer) &&
+                Number(playerAnswer) <= Number(rightAnswer) * 1.05) {
+                rightquestions++
+            }
         }
     }
 
@@ -45,4 +55,4 @@ export function mapDispatchToProps(dispatch: any) {
     return {}
 }
 
-export const Ping = connect(mapStateToProps, mapDispatchToProps)(PingC);
+export const ShowHint = connect(mapStateToProps, mapDispatchToProps)(ShowHintC);

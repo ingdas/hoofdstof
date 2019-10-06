@@ -9,6 +9,7 @@ import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config"
 import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
 import SuggestieSelector from "./components/SuggestieSelector";
+import {isDefined} from "../util";
 
 const R2FaalC = ({domain}: { domain?: number }) => {
 
@@ -17,12 +18,12 @@ const R2FaalC = ({domain}: { domain?: number }) => {
     };
 
     const startQuiz = () => {
-        multipleChoiceQuestion("R2Quiz", faalVraag, faalAntwoorden, faalJuistAntwoord)
+        multipleChoiceQuestion("R2Quiz", faalVraag, faalAntwoorden)
     };
 
     const zendHint = () => {
-        if (domain !== undefined) {
-            showHint(domeinen[domain].hints[1], ["R2Quiz"], [faalJuistAntwoord])
+        if (isDefined(domain)) {
+            showHint(domeinen[domain].hints[1], ["R2Quiz"], [faalAntwoorden[faalJuistAntwoord]])
         }
     };
 

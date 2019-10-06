@@ -9,32 +9,33 @@ import {AdminState} from "../redux/interfaces/adminState";
 import {connect} from "react-redux";
 import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
+import {isDefined} from "../util";
 
 export const R4GoogleC = ({domain}: AdminState) => {
 
     let currentId = 1;
     let questions: Array<string> = [];
-    let answers: Array<number> = [];
+    let answers: Array<string> = [];
 
-
+    const answerOptions = ["De eerste", "De tweede"];
     const vraagOntspanning = () => {
         openQuestion("R4Ontspanning", "Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)
     };
     const stelVraag0 = () => {
         const questionId = `R4GoogleN${currentId++}`;
         questions.push(questionId);
-        answers.push(0);
-        multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", ["De eerste", "De tweede"], 0);
+        answers.push(answerOptions[0]);
+        multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
     const stelVraag1 = () => {
         const questionId = `R4GoogleN${currentId++}`;
         questions.push(questionId);
-        answers.push(1);
-        multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", ["De eerste", "De tweede"], 1);
+        answers.push(answerOptions[1]);
+        multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
 
     const zendHint = () => {
-        if (domain !== undefined && domain !== null) {
+        if (isDefined(domain)) {
             showHint(domeinen[domain].hints[3], questions, answers)
         }
     };
