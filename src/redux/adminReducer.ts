@@ -1,7 +1,8 @@
 import {AdminActionType, AdminState, NewAdminStateAction} from "./interfaces/adminState";
 
 export const initialAdminState = {
-    answers: {}
+    answers: {},
+    firstOne: {}
 } as AdminState;
 
 export function adminReducer(state: AdminState = initialAdminState, action: any): AdminState {
@@ -24,6 +25,13 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
                     [action.questionId]: {
                         ...state.answers[action.questionId],
                         [action.answer]: ((state.answers[action.questionId] || {})[action.answer] || 0) + 1
+                    }
+                },
+                firstOne : {
+                    ...state.firstOne,
+                    [action.questionId]: {
+                        ...state.firstOne[action.questionId],
+                        [action.answer]: (state.firstOne[action.questionId] || {})[action.answer] || action.name
                     }
                 }
             }

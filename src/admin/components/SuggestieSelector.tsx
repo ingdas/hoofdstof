@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function createData(name: string, stemmen: number) {
-    return {name, stemmen};
+function createData(name: string, stemmen: number, eerste: string) {
+    return {name, stemmen, eerste};
 }
 
 function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, questionId: string }) {
@@ -43,11 +43,13 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
     let rows = [];
 
     const answerCollection = adminState.answers[questionId] || {};
+    const firstOneCollection = adminState.firstOne[questionId] || {};
     for (const k of Object.keys(answerCollection)) {
         const v = answerCollection[k];
-        rows.push(createData(k, v));
+        const f = firstOneCollection[k];
+        rows.push(createData(k, v, f));
     }
-    rows.sort((a,b) => b.stemmen-a.stemmen);
+    rows.sort((a, b) => b.stemmen - a.stemmen);
 
     return (
         <div className={classes.root}>
@@ -58,6 +60,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                             <TableCell>{questionId}</TableCell>
                             <TableCell>Suggestie</TableCell>
                             <TableCell>Stemmen</TableCell>
+                            <TableCell>Eerste</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -68,6 +71,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                                     {row.name}
                                 </TableCell>
                                 <TableCell>{row.stemmen}</TableCell>
+                                <TableCell>{row.eerste}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
