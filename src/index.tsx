@@ -2,13 +2,16 @@ import * as serviceWorker from './serviceWorker';
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import App from './App'
+import App from './player/PlayerRoot'
 import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import {adminReducer, initialAdminState} from "./admin/redux/adminReducer";
 import {initialPlayerState, playerReducer} from "./player/playerReducer";
-import {adminScreen, loginScreen} from "./player/playerActions";
+import {loginScreen} from "./player/playerActions";
+import {displayReducer, initialDisplayState} from "./display/redux/displayReducer";
+import AdminScreen from "./admin/Admin";
+import DisplayRoot from "./display/DisplayRoot";
 
 export const LOGINIDKEY = "loginID";
 export const USERNAMEKEY = "username";
@@ -42,9 +45,10 @@ function getURL() {
 }
 
 export const webSocket = new ReconnectingWebSocket(getURL());
-export const store = AppLocation === Loc.ADMIN
-    ? createStore(adminReducer, initialAdminState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
-    : createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})));
+export const store =
+    AppLocation === Loc.ADMIN ? createStore(adminReducer, initialAdminState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
+        : (AppLocation === Loc.PLAYER ? createStore(playerReducer, initialPlayerState, applyMiddleware(thunk.withExtraArgument({ws: webSocket})))
+        : createStore(displayReducer, initialDisplayState, applyMiddleware(thunk.withExtraArgument({ws: webSocket}))));
 
 
 webSocket.onmessage = (evt) => {
@@ -68,8 +72,6 @@ webSocket.onopen = (evt) => {
             };
             store.dispatch(loginScreen(onLogin));
         }
-    } else if (AppLocation === Loc.ADMIN) {
-        store.dispatch(adminScreen());
     }
 };
 
@@ -89,14 +91,31 @@ function getName(): string | null {
     return window.localStorage[USERNAMEKEY]
 }
 
-
 const rootElement = document.getElementById('root');
-ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    rootElement
-);
+if(AppLocation === Loc.PLAYER){
+    ReactDOM.render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        rootElement
+    );
+}else if(AppLocation === Loc.ADMIN){
+    ReactDOM.render(
+        <Provider store={store}>
+            <AdminScreen/>
+        </Provider>,
+        rootElement
+    );
+}else if(AppLocation === Loc.BEAMER){
+    ReactDOM.render(
+        <Provider store={store}>
+            <DisplayRoot/>
+        </Provider>,
+        rootElement
+    );
+}
+
+
 
 
 // If you want your app to work offline and load faster, you can change

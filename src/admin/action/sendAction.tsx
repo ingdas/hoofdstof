@@ -1,4 +1,5 @@
 import {
+    ChartQuestionAction,
     MultipleChoiceQuestionAction,
     NewTimerAction,
     OpeningQuestionAction,
@@ -8,6 +9,7 @@ import {
 } from "./interfaces";
 import {webSocket} from "../../index";
 import {TextInputType} from "../../player/interfaces/question";
+import {ActionType, PingScreenAction} from "../../player/playerActions";
 
 export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})
@@ -41,6 +43,14 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
 
 export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<string>) {
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
+}
+
+export function chartQuestion(questionId : string){
+    send({type: "ChartQuestion", questionId} as ChartQuestionAction)
+}
+
+export function pingScreen(suggestion: string, source: string) {
+    send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction)
 }
 
 function send(obj: SendAction) {

@@ -1,35 +1,30 @@
 import React from 'react';
-import './App.css';
+import './PlayerRoot.css';
 import {Container} from "@material-ui/core";
-import {WaitScreen} from "./player/screens/WaitScreen";
 import {connect} from "react-redux";
-import WordCloud from "./display/screens/WordCloud";
-import TextInput from "./player/screens/openQuestion/OpenQuestionComponent";
-import ChartQuestion from "./display/screens/ChartQuestion";
-import Login from "./player/screens/Login";
 
 import 'react-circular-progressbar/dist/styles.css';
-import ProgressReporter from "./common/progress/ProgressReporter";
-import Opening from "./player/screens/Opening";
-import {ShowHint} from "./player/screens/ShowHint";
-import {AppLocation, Loc} from "./index";
-import AdminScreen from "./admin/Admin";
-import {WindowName} from "./player/interfaces/windowName";
-import {Question} from "./player/screens/multipleChoiceQuestion/QuestionC";
-import {AppState} from "./player/interfaces/appState";
+import {WindowName} from "./interfaces/windowName";
+import ChartQuestion from "../display/screens/ChartQuestion";
+import Opening from "./screens/Opening";
+import {ShowHint} from "./screens/ShowHint";
+import WordCloud from "../display/screens/WordCloud";
+import {Question} from "./screens/multipleChoiceQuestion/QuestionC";
+import Login from "./screens/Login";
+import {AppState} from "./interfaces/appState";
+import {WaitScreen} from "./screens/WaitScreen";
+import OpenQuestionComponent from "./screens/openQuestion/OpenQuestionComponent";
+import PlayerTimer from "./screens/PlayerTimer";
+
 
 interface Props {
     windowName: WindowName
 }
 
-const App = ({windowName}: Props) => {
+const PlayerRoot = ({windowName}: Props) => {
     const bumperStyle = {
         height: "50px"
     };
-    if (AppLocation === Loc.ADMIN) {
-        return <AdminScreen/>
-    }
-
     let appWindow;
     switch (windowName) {
         case WindowName.AnswerQuestion:
@@ -39,7 +34,7 @@ const App = ({windowName}: Props) => {
             appWindow = <ChartQuestion/>;
             break;
         case WindowName.TextInput:
-            appWindow = <TextInput/>;
+            appWindow = <OpenQuestionComponent/>;
             break;
         case WindowName.WordCloud:
             appWindow = <WordCloud/>;
@@ -55,23 +50,19 @@ const App = ({windowName}: Props) => {
             break;
         case WindowName.Ping:
             appWindow = <ShowHint/>;
-
     }
 
     return (<Container className="fullHeight" maxWidth="md">
         <div style={bumperStyle}>
         </div>
-        <ProgressReporter/>
+        <PlayerTimer/>
         {appWindow}
     </Container>);
 
 };
 
 export function mapStateToProps(appState: AppState): Props {
-    if (AppLocation === Loc.ADMIN) {
-        return {windowName: WindowName.Admin}
-    }
     return {windowName: appState.playerState.windowName}
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(PlayerRoot)

@@ -7,13 +7,21 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {multipleChoiceQuestion} from "./action/sendAction";
+import {chartQuestion, multipleChoiceQuestion} from "./action/sendAction";
+import {isDefined} from "../util";
 
-export const R5FinaleC = () => {
+export const R5FinaleC = (adminState: AdminState) => {
     const startQuiz = () => {
-        let kandidaten = domeinen[0].concurrenten.slice();
-        kandidaten.push(domeinen[0].wetenschapper);
-        multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten)
+        const domain = adminState.domain;
+        if (isDefined(domain)) {
+            let kandidaten = domeinen[domain].concurrenten.slice();
+            kandidaten.push(domeinen[domain].wetenschapper);
+            multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten)
+        }
+    };
+
+    const toonResultaat = () => {
+        chartQuestion("R5Finale");
     };
 
     return (<div>
@@ -24,7 +32,7 @@ export const R5FinaleC = () => {
                 color="secondary"
                 size="large"
                 aria-label="large outlined secondary button group"
-                style={{marginTop : "20px", marginBottom : "20px"}}
+                style={{marginTop: "20px", marginBottom: "20px"}}
             >
                 <Button
                     onClick={startQuiz}
@@ -32,7 +40,7 @@ export const R5FinaleC = () => {
                     Start Quiz
                 </Button>
                 <Button
-                    //onClick={handleStart}
+                    onClick={toonResultaat}
                 >
                     Toon Resultaat
                 </Button>

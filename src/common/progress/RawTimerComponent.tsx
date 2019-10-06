@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {connect} from "react-redux";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
-import './ProgressReporter.css';
-import {AppState} from "../../player/interfaces/appState";
+import './RawTimerComponent.css';
 import {TimerState} from "../timerState";
+import {isDefined} from "../../util";
 
-const App = ({timeLeft, totalTime, startTime}: TimerState) => {
+export default ({timeLeft, totalTime, startTime}: TimerState) => {
     const [seconds, setSeconds] = useState(timeLeft);
     const [started, setStarted] = useState(0);
 
@@ -24,7 +23,7 @@ const App = ({timeLeft, totalTime, startTime}: TimerState) => {
         return () => clearInterval(interval);
     }, [timeLeft, seconds, started, startTime]);
 
-    if (seconds < 0) {
+    if (!isDefined(seconds) || seconds < 0) {
         return <div></div>
     }
     return (
@@ -39,7 +38,7 @@ const App = ({timeLeft, totalTime, startTime}: TimerState) => {
             <CircularProgressbar
                 value={totalTime - seconds}
                 maxValue={totalTime}
-                text={seconds.toString()}
+                text={""+seconds}
                 background
                 backgroundPadding={6}
                 styles={buildStyles({
@@ -58,9 +57,3 @@ const App = ({timeLeft, totalTime, startTime}: TimerState) => {
             />
         </div>);
 };
-
-export function mapStateToProps(appState: AppState): TimerState {
-    return appState.playerState.timerState;
-}
-
-export default connect(mapStateToProps)(App)

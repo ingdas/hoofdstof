@@ -3,7 +3,7 @@ import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
-import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
+import {chartQuestion, multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
@@ -25,6 +25,10 @@ const R2FaalC = ({domain}: { domain?: number }) => {
         if (isDefined(domain)) {
             showHint(domeinen[domain].hints[1], ["R2Quiz"], [faalAntwoorden[faalJuistAntwoord]])
         }
+    };
+
+    const toonResultaat = () => {
+        chartQuestion("R2Quiz");
     };
 
     return (<div>
@@ -57,7 +61,7 @@ const R2FaalC = ({domain}: { domain?: number }) => {
         >
             <Button onClick={startQuiz}>Start Quiz</Button>
             <Button
-                //onClick={handleStart}
+                onClick={toonResultaat}
             >
                 Toon Resultaat
             </Button>

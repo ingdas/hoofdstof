@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -14,8 +14,8 @@ import {TextInputType} from "../player/interfaces/question";
 export const R4GoogleC = ({domain}: AdminState) => {
 
     let currentId = 1;
-    let questions: Array<string> = [];
-    let answers: Array<string> = [];
+    const [questions, setQuestions] = useState([] as Array<string>);
+    const [answers, setAnswers] = useState([] as Array<string>);
 
     const answerOptions = ["De eerste", "De tweede"];
     const vraagOntspanning = () => {
@@ -23,14 +23,14 @@ export const R4GoogleC = ({domain}: AdminState) => {
     };
     const stelVraag0 = () => {
         const questionId = `R4GoogleN${currentId++}`;
-        questions.push(questionId);
-        answers.push(answerOptions[0]);
+        setQuestions(questions.concat(questionId));
+        setAnswers(answers.concat(answerOptions[0]));
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
     const stelVraag1 = () => {
         const questionId = `R4GoogleN${currentId++}`;
-        questions.push(questionId);
-        answers.push(answerOptions[1]);
+        setQuestions(questions.concat(questionId));
+        setAnswers(answers.concat(answerOptions[1]));
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
 
@@ -77,11 +77,6 @@ export const R4GoogleC = ({domain}: AdminState) => {
                 onClick={stelVraag1}
             >
                 De Tweede Vraag
-            </Button>
-            <Button
-                //onClick={handleStart}
-            >
-                Toon Resultaat
             </Button>
 
             <Button

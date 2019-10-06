@@ -7,7 +7,7 @@ import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {openQuestion, showHint} from "./action/sendAction";
+import {chartQuestion, openQuestion, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {changeListener, isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -26,6 +26,9 @@ const R3SomC = (adminState: AdminState) => {
         if (isDefined(domain)) {
             showHint(domeinen[domain].hints[2], ["R3Som"], [String(Number(echteSom))])
         }
+    };
+    const toonResultaat = () => {
+        chartQuestion("R3Som");
     };
 
     return (<div>
@@ -70,7 +73,7 @@ const R3SomC = (adminState: AdminState) => {
                 value={echteSom}
             ></TextField>
             <Button
-                //onClick={handleStart}
+                onClick={toonResultaat}
             >
                 Toon Resultaat
             </Button>

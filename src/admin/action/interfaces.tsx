@@ -25,3 +25,7 @@ export interface OpeningQuestionAction extends SendAction {
 export interface ShowHintAction extends SendAction {
     hint: PlayerHint
 }
+
+export interface ChartQuestionAction extends SendAction {
+    questionId: string
+}

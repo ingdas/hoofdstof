@@ -7,10 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
-import {webSocket} from "../../index";
 import {AdminState} from "../redux/adminState";
 import {connect} from "react-redux";
-import {pingScreen} from "../../player/playerActions";
+import {pingScreen} from "../action/sendAction";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,8 +35,8 @@ function createData(name: string, stemmen: number, eerste: string) {
 function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, questionId: string }) {
     const classes = useStyles();
 
-    const goPing = (suggestie: string) => () => {
-        webSocket.send(JSON.stringify(pingScreen(suggestie)));
+    const goPing = (suggestie: string, naam: string) => () => {
+        pingScreen(suggestie, naam);
     };
 
     let rows = [];
@@ -66,7 +65,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.name}>
-                                <TableCell><Button onClick={goPing(row.name)}>Verzend</Button></TableCell>
+                                <TableCell><Button onClick={goPing(row.name, row.eerste)}>Verzend</Button></TableCell>
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>

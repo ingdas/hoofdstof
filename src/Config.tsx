@@ -36,19 +36,19 @@ export const domeinen: Array<Domein> = [
     {
         naam: "Fysica",
         wetenschapper: "Sir Isaac Newton",
-        concurrenten: ["Stephen Hawkins", "Marie Curie", "Benjamin Franklin"],
+        concurrenten: ["Stephen Hawking", "Marie Curie", "Benjamin Franklin"],
         hints: ["man", "lang haar", "1687", "krullen"]
     },
     {
-        naam: "Wiskunde",
-        wetenschapper: "Kurt Gödel",
-        concurrenten: ["Stephen Hawkins", "Marie Curie", "Benjamin Franklin"],
-        hints: ["man", "lang haar", "1687", "krullen"],
+        naam: "Impro",
+        wetenschapper: "Patti Styles",
+        concurrenten: ["Johnstone", "De lange van Whose Line", "Sinterklaas van den Broeck"],
+        hints: ["vrouw", "Zus van Harry", "Australie", "Krabby"],
     },
     {
-        naam: "Informatica",
-        wetenschapper: "Alan Turing",
-        concurrenten: ["Stephen Hawkins", "Marie Curie", "Benjamin Franklin"],
-        hints: ["man", "lang haar", "1687", "krullen"],
+        naam: "Hoofdstof",
+        wetenschapper: "De beamer",
+        concurrenten: ["Ben Verhoeven", "Charlotte Demetsenaere", "Ingmar Dasseville"],
+        hints: ["klein", "licht", "doet soms beep beep", "lights up your day"],
     }
 ];

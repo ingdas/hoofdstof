@@ -1,30 +1,29 @@
 import React from "react";
 import {connect} from "react-redux";
-import {List, Map} from "immutable";
 import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
-import {AppState} from "../../player/interfaces/appState";
+import {ChartQuestionState} from "../redux/displayState";
 
 interface Props {
     question: string
-    answers: List<string>
-    count: Map<number, number>
+    answerCount: Record<string, number>
 }
 
-function toData(answers: List<string>, count: Map<number, number>): any[] {
+function toData(count: Record<string, number>): any[] {
     let data: any[] = [];
-    for (let i = 0; i < answers.size; i++) {
-        data.push({name: answers.get(i), stemmen: count.get(i)})
+    for (const name of Object.keys(count)) {
+        const stemmen = count[name];
+        data.push({name, stemmen})
     }
     return data;
 }
 
-const ChartQuestion = ({question, answers, count}: Props) => (
+const ChartQuestion = ({question, answerCount}: Props) => (
     <div className="fullHeight">
         <div className="qTitle">{question}</div>
         <ResponsiveContainer width="80%" height="70%">
             <BarChart
                 layout="vertical"
-                data={toData(answers, count)}
+                data={toData(answerCount)}
                 margin={{
                     top: 5, right: 30, left: 20, bottom: 5,
                 }}
@@ -32,16 +31,14 @@ const ChartQuestion = ({question, answers, count}: Props) => (
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis type="number"/>
                 <YAxis type="category" dataKey="name"/>
-                <Bar dataKey="stemmen" fill="#8884d8" />
+                <Bar dataKey="stemmen" fill="#8884d8"/>
             </BarChart>
         </ResponsiveContainer>
     </div>
 );
 
-export function mapStateToProps(state: AppState): Props {
-    // @ts-ignore
-    const {question, answers, count} = state.window as ChartQuestionState;
-    return {question, answers, count}
+export function mapStateToProps(state: ChartQuestionState): Props {
+    return state
 }
 
 export function mapDispatchToProps(dispatch: any) {

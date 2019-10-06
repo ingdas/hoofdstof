@@ -1,7 +1,7 @@
 
 export enum WindowName {
     Admin = "Admin",
-    ChartQuestion = "Chart",
+    ChartQuestion = "ChartQuestion",
     AnswerQuestion = "Answer",
     WaitScreen = "Wait",
     TextInput = "Text",

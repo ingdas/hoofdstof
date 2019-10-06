@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
-import {changeListener} from "../../util";
+import {changeListener, isDefined} from "../../util";
 import {answerQuestion, waitScreen} from "../playerActions";
 import {AppState} from "../interfaces/appState";
 import {OpeningQuestion} from "../interfaces/question";
@@ -15,6 +15,7 @@ import {PlayerPosingQuestion} from "../interfaces/playerState";
 interface Props {
     professions: Array<string>
     speechQuestion: string
+    alreadyDone : boolean
     dispatch: any
 }
 
@@ -77,7 +78,10 @@ function StyledRadio(props: RadioProps) {
     );
 }
 
-const OpeningC = ({professions, speechQuestion, dispatch}: Props) => {
+const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) => {
+    if(alreadyDone){
+        dispatch(waitScreen());
+    }
 
     let [geslacht, setGeslacht] = useState("");
     let [vakgebied, setVakgebied] = useState("");
@@ -166,8 +170,10 @@ function mapStateToProps(state: AppState) {
     const {speechQuestions, professions} = ((state.playerState as PlayerPosingQuestion).question as OpeningQuestion);
     const playerId = Math.abs(Number(state.player.id.slice(0, 10)));
     const speechQuestion = speechQuestions[playerId % speechQuestions.length];
-    console.log(playerId, speechQuestions, speechQuestion, playerId % speechQuestions.length);
-    return {professions, speechQuestion}
+
+    const alreadyDone = isDefined((state.player.answers["R0Geslacht"]));
+
+    return {professions, speechQuestion, alreadyDone}
 }
 
 function mapDispatchToProps(dispatch: any) {
