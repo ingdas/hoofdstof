@@ -5,6 +5,7 @@ import Franklin from './img/Franklin.jpg'
 
 export interface Domein {
     naam: string
+    quote : string
     wetenschapper: string
     concurrenten: Array<string>
     afbeeldingen: Array<string>
@@ -42,6 +43,7 @@ export const domeinen: Array<Domein> = [
     {
         naam: "Fysica",
         wetenschapper: "Sir Isaac Newton",
+        quote: "Wat naar boven gaat, komt terug naar beneden",
         concurrenten: ["Stephen Hawking", "Marie Curie", "Benjamin Franklin"],
         afbeeldingen: [Hawking, Curie, Franklin, Newton],
         hints: ["man", "lang haar", "1687", "krullen"]
@@ -49,12 +51,14 @@ export const domeinen: Array<Domein> = [
     {
         naam: "Impro",
         wetenschapper: "Patti Styles",
+        quote: "Happy feet!",
         afbeeldingen: [Hawking, Curie, Franklin, Newton],
         concurrenten: ["Johnstone", "De lange van Whose Line", "Sinterklaas van den Broeck"],
         hints: ["vrouw", "Zus van Harry", "Australie", "Krabby"],
     },
     {
         naam: "Hoofdstof",
+        quote: "Beep beep",
         wetenschapper: "De beamer",
         afbeeldingen: [Hawking, Curie, Franklin, Newton],
         concurrenten: ["Ben Verhoeven", "Charlotte Demetsenaere", "Ingmar Dasseville"],

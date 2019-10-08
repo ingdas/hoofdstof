@@ -11,6 +11,7 @@ import DisplayTimer from "./screens/DisplayTimer";
 import {WindowName} from "../player/interfaces/windowName";
 import PingSuggestion from "./screens/PingSuggestion";
 import ChartQuestion from "./screens/ChartQuestion";
+import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuestion";
 
 interface Props {
     windowName: string
@@ -27,6 +28,9 @@ const DisplayRoot = ({windowName}: Props) => {
             break;
         case WindowName.Ping:
             appWindow = <PingSuggestion/>;
+            break;
+        case WindowName.AnswerQuestion:
+            appWindow = <DisplayMultipleChoiceQuestion/>;
             break;
         case WindowName.WaitScreen:
         default: {

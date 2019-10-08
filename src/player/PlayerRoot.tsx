@@ -9,12 +9,12 @@ import ChartQuestion from "../display/screens/ChartQuestion";
 import Opening from "./screens/Opening";
 import {ShowHint} from "./screens/ShowHint";
 import WordCloud from "../display/screens/WordCloud";
-import {Question} from "./screens/multipleChoiceQuestion/QuestionC";
 import Login from "./screens/Login";
 import {AppState} from "./interfaces/appState";
 import {WaitScreen} from "./screens/WaitScreen";
 import OpenQuestionComponent from "./screens/openQuestion/OpenQuestionComponent";
 import PlayerTimer from "./screens/PlayerTimer";
+import PlayerMultipleChoiceQuestion from "./screens/PlayerMultipleChoiceQuestion";
 
 
 interface Props {
@@ -28,7 +28,7 @@ const PlayerRoot = ({windowName}: Props) => {
     let appWindow;
     switch (windowName) {
         case WindowName.AnswerQuestion:
-            appWindow = <Question/>;
+            appWindow = <PlayerMultipleChoiceQuestion/>;
             break;
         case WindowName.ChartQuestion:
             appWindow = <ChartQuestion/>;

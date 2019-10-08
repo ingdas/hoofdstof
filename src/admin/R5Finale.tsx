@@ -7,12 +7,13 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {chartQuestion, multipleChoiceQuestion} from "./action/sendAction";
+import {chartQuestion, multipleChoiceQuestion, pingScreen} from "./action/sendAction";
 import {isDefined} from "../util";
 
 export const R5FinaleC = (adminState: AdminState) => {
+    const domain = adminState.domain;
+
     const startQuiz = () => {
-        const domain = adminState.domain;
         if (isDefined(domain)) {
             let kandidaten = domeinen[domain].concurrenten.slice();
             kandidaten.push(domeinen[domain].wetenschapper);
@@ -24,9 +25,20 @@ export const R5FinaleC = (adminState: AdminState) => {
         chartQuestion("R5Finale");
     };
 
+    const showQuote = () => {
+        if (isDefined(domain)) {
+            pingScreen(domeinen[domain].quote, "???")
+        }
+    };
+
     return (<div>
             <WachtBtn/>
             <br></br>
+            <Button
+                onClick={showQuote}
+            >
+                Originele Quote
+            </Button>
             <SuggestieSelector questionId="R0Zin"/>
             <ButtonGroup
                 color="secondary"
