@@ -6,7 +6,7 @@ import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {multipleChoiceQuestion, openQuestion, showHint} from "./action/sendAction";
+import {multipleChoiceQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -43,6 +43,10 @@ export const R4GoogleC = ({domain}: AdminState) => {
     };
 
     return (<div>
+        <Button
+            color="primary"
+            onClick={() => roundIntro( "Ronde 4: Fake News")}
+        >Ronde Intro</Button>
         <WachtBtn/>
 
         <ButtonGroup

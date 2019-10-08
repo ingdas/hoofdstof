@@ -1,4 +1,3 @@
-
 export enum WindowName {
     ChartQuestion = "ChartQuestion",
     AnswerQuestion = "Answer",
@@ -7,5 +6,6 @@ export enum WindowName {
     WordCloud = "WordCloud",
     Login = "Login",
     Opening = "Opening",
+    RoundIntro = "RoundIntro",
     Ping = "Ping"
 }

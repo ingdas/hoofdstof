@@ -7,7 +7,7 @@ import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {chartQuestion, openQuestion, showHint} from "./action/sendAction";
+import {chartQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {changeListener, isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -32,6 +32,10 @@ const R3SomC = (adminState: AdminState) => {
     };
 
     return (<div>
+        <Button
+            color="primary"
+            onClick={() => roundIntro( "Ronde 3: Sommetjes")}
+        >Ronde Intro</Button>
         <WachtBtn/>
 
         <ButtonGroup

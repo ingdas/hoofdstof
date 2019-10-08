@@ -120,6 +120,6 @@ const AdminScreen = () => {
             </ExpansionPanel>
         </div>
     );
-}
+};
 
 export default AdminScreen

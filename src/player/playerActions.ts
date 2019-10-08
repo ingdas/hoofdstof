@@ -43,6 +43,10 @@ export interface PingScreenAction extends Action {
     source: string
 }
 
+export interface RoundIntroAction extends Action {
+    name: string
+}
+
 function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebSocket }, Action> {
     return (dispatch: any, getState: any, {ws}: { ws: WebSocket }) => {
         ws.send(JSON.stringify(action));

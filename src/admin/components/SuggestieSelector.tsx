@@ -43,9 +43,11 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
 
     const answerCollection = adminState.answers[questionId] || {};
     const firstOneCollection = adminState.firstOne[questionId] || {};
+    let totalVotes = 0;
     for (const k of Object.keys(answerCollection)) {
         const v = answerCollection[k];
         const f = firstOneCollection[k];
+        totalVotes += v;
         rows.push(createData(k, v, f));
     }
     rows.sort((a, b) => b.stemmen - a.stemmen);
@@ -58,7 +60,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                         <TableRow>
                             <TableCell>{questionId}</TableCell>
                             <TableCell>Suggestie</TableCell>
-                            <TableCell>Stemmen</TableCell>
+                            <TableCell>Stemmen ({totalVotes})</TableCell>
                             <TableCell>Eerste</TableCell>
                         </TableRow>
                     </TableHead>

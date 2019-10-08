@@ -15,6 +15,10 @@ export interface DisplayState {
     windowName: string
 }
 
+export interface RoundIntroState extends DisplayState{
+    name : string
+}
+
 export interface DisplayPosingQuestionState extends DisplayState {
     question: Question
 }

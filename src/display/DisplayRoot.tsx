@@ -12,6 +12,7 @@ import {WindowName} from "../player/interfaces/windowName";
 import PingSuggestion from "./screens/PingSuggestion";
 import ChartQuestion from "./screens/ChartQuestion";
 import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuestion";
+import RoundIntro from "./screens/RoundIntro";
 
 interface Props {
     windowName: string
@@ -31,6 +32,9 @@ const DisplayRoot = ({windowName}: Props) => {
             break;
         case WindowName.AnswerQuestion:
             appWindow = <DisplayMultipleChoiceQuestion/>;
+            break;
+        case WindowName.RoundIntro:
+            appWindow = <RoundIntro/>;
             break;
         case WindowName.WaitScreen:
         default: {

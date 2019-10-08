@@ -9,7 +9,7 @@ import {
 } from "./interfaces";
 import {webSocket} from "../../index";
 import {TextInputType} from "../../player/interfaces/question";
-import {ActionType, PingScreenAction} from "../../player/playerActions";
+import {ActionType, PingScreenAction, RoundIntroAction} from "../../player/playerActions";
 
 export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})
@@ -45,12 +45,16 @@ export function showHint(hint: string, questionIds: Array<string>, rightAnswers:
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }
 
-export function chartQuestion(questionId : string){
+export function chartQuestion(questionId: string) {
     send({type: "ChartQuestion", questionId} as ChartQuestionAction)
 }
 
 export function pingScreen(suggestion: string, source: string) {
     send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction)
+}
+
+export function roundIntro(name: string) {
+    send({type: "RoundIntro", name} as RoundIntroAction)
 }
 
 function send(obj: SendAction) {

@@ -7,7 +7,7 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {chartQuestion, multipleChoiceQuestion, pingScreen} from "./action/sendAction";
+import {chartQuestion, multipleChoiceQuestion, pingScreen, roundIntro} from "./action/sendAction";
 import {isDefined} from "../util";
 
 export const R5FinaleC = (adminState: AdminState) => {
@@ -32,6 +32,10 @@ export const R5FinaleC = (adminState: AdminState) => {
     };
 
     return (<div>
+            <Button
+                color="primary"
+                onClick={() => roundIntro( "De Finale")}
+            >Ronde Intro</Button>
             <WachtBtn/>
             <br></br>
             <Button

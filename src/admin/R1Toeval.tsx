@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import {domeinen, uitvindingen} from "../Config";
-import {chartQuestion, multipleChoiceQuestion, showHint} from "./action/sendAction";
+import {chartQuestion, multipleChoiceQuestion, roundIntro, showHint} from "./action/sendAction";
 import {connect} from "react-redux";
 import {AdminState} from "./redux/adminState";
 import SuggestieSelector from "./components/SuggestieSelector";
@@ -32,6 +32,11 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
 
 
     return (<div>
+            <Button
+                color="primary"
+                onClick={() => roundIntro( "Ronde 1: Da's toevallig")}
+            >Ronde Intro</Button>
+
             <WachtBtn/>
 
             <ButtonGroup
