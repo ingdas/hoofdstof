@@ -13,7 +13,7 @@ import {TextInputType} from "../player/interfaces/question";
 
 export const R4GoogleC = ({domain}: AdminState) => {
 
-    let currentId = 1;
+    const [currentId, setCurrentId] = useState(1);
     const [questions, setQuestions] = useState([] as Array<string>);
     const [answers, setAnswers] = useState([] as Array<string>);
 
@@ -22,15 +22,17 @@ export const R4GoogleC = ({domain}: AdminState) => {
         openQuestion("R4Ontspanning", "Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)
     };
     const stelVraag0 = () => {
-        const questionId = `R4GoogleN${currentId++}`;
+        const questionId = `R4GoogleN${currentId}`;
         setQuestions(questions.concat(questionId));
         setAnswers(answers.concat(answerOptions[0]));
+        setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
     const stelVraag1 = () => {
-        const questionId = `R4GoogleN${currentId++}`;
+        const questionId = `R4GoogleN${currentId}`;
         setQuestions(questions.concat(questionId));
         setAnswers(answers.concat(answerOptions[1]));
+        setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
     };
 

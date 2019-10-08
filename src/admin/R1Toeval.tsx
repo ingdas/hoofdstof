@@ -15,6 +15,9 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
     const vraagUitvinding = () => {
         multipleChoiceQuestion("R1Uitvinding", "Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
     };
+    const toonUitvinding = () => {
+        chartQuestion("R1Uitvinding");
+    };
     const quizVraag = () => {
         multipleChoiceQuestion("R1Quizvraag", "Hoe is de uitvinding echt uitgevonden?", antwoorden)
     };
@@ -46,7 +49,7 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
 
                 <Button
                     color="primary"
-                    //onClick={handleStop}
+                    onClick={toonUitvinding}
                 >
                     Toon resultaat
                 </Button>
