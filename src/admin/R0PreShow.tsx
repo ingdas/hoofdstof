@@ -61,8 +61,6 @@ const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
             <SuggestieSelector questionId="R0Vakgebied"/>
             <SuggestieSelector questionId="R0Naam"/>
             <SuggestieSelector questionId="R0Eigenschap"/>
-            <SuggestieSelector questionId="R0Zin"/>
-            <SuggestieSelector questionId="R0Woord"/>
 
 
             <ButtonGroup>

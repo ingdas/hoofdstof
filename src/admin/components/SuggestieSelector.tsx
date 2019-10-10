@@ -60,7 +60,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                         <TableRow>
                             <TableCell>{questionId}</TableCell>
                             <TableCell>Suggestie</TableCell>
-                            <TableCell>Stemmen ({totalVotes})</TableCell>
+                            <TableCell>Stemmen ({totalVotes} / {adminState.connections})</TableCell>
                             <TableCell>Eerste</TableCell>
                         </TableRow>
                     </TableHead>

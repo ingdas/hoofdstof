@@ -88,6 +88,7 @@ const R3SomC = (adminState: AdminState) => {
                 Zend Hint
             </Button>
         </ButtonGroup>
+        <SuggestieSelector questionId="R3Som"/>
         <br></br>
         <ATimer time="30"/>
     </div>)

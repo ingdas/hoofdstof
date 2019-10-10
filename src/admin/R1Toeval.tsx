@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
@@ -8,10 +8,16 @@ import {chartQuestion, multipleChoiceQuestion, roundIntro, showHint} from "./act
 import {connect} from "react-redux";
 import {AdminState} from "./redux/adminState";
 import SuggestieSelector from "./components/SuggestieSelector";
-import {isDefined} from "../util";
+import {changeListener, isDefined} from "../util";
+import TextField from "@material-ui/core/TextField";
 
 export const R1ToevalC = ({domain}: { domain?: number }) => {
-    const antwoorden = ["Manier 1", "Manier 2"];
+
+    const [manier1, setManier1] = useState("Manier 1");
+    const [manier2, setManier2] = useState("Manier 1");
+
+    const antwoorden = [manier1, manier2];
+
     const vraagUitvinding = () => {
         multipleChoiceQuestion("R1Uitvinding", "Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
     };
@@ -79,6 +85,20 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                 >
                     Toon Resultaat
                 </Button>
+                <TextField
+                    // className={clsx(classes.margin, classes.textField)}
+                    //style={{width = "100px"}}
+                    label="Manier 1"
+                    value={manier1}
+                    onChange={changeListener(setManier1)}
+                ></TextField>
+                <TextField
+                    // className={clsx(classes.margin, classes.textField)}
+                    //style={{width = "100px"}}
+                    label="Manier 2"
+                    value={manier2}
+                    onChange={changeListener(setManier2)}
+                ></TextField>
                 <Button
                     onClick={zendHint(0)}
                 >

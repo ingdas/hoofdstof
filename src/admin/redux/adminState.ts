@@ -12,4 +12,5 @@ export interface AdminState {
     domain?: number
     answers: Record<string, Record<string, number>>
     firstOne: Record<string, Record<string, string>>
+    connections: number
 }
