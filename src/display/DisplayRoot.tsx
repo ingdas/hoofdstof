@@ -13,6 +13,7 @@ import PingSuggestion from "./screens/PingSuggestion";
 import ChartQuestion from "./screens/ChartQuestion";
 import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuestion";
 import RoundIntro from "./screens/RoundIntro";
+import {OpeningInfo} from "./screens/OpeningInfo";
 
 interface Props {
     windowName: string
@@ -35,6 +36,9 @@ const DisplayRoot = ({windowName}: Props) => {
             break;
         case WindowName.RoundIntro:
             appWindow = <RoundIntro/>;
+            break;
+        case WindowName.Opening:
+            appWindow = <OpeningInfo/>
             break;
         case WindowName.WaitScreen:
         default: {
