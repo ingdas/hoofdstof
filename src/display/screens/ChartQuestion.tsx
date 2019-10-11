@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
+import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
 import {ChartQuestionState} from "../redux/displayState";
-import {grey} from "@material-ui/core/colors";
 
 interface Props {
     question: string
