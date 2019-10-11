@@ -15,6 +15,7 @@ import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuesti
 import RoundIntro from "./screens/RoundIntro";
 import {OpeningInfo} from "./screens/OpeningInfo";
 import posed, {PoseGroup} from "react-pose";
+import OpenQuestionDisplay from "./screens/OpenQuestion";
 
 interface Props {
     windowName: string
@@ -58,6 +59,9 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
             break;
         case WindowName.Opening:
             appWindow = <OpeningInfo key={pKey}/>;
+            break;
+        case WindowName.TextInput:
+            appWindow = <OpenQuestionDisplay key={pKey}/>
             break;
         case WindowName.WaitScreen:
         default: {

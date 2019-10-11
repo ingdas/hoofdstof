@@ -104,7 +104,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
     return (
         <div>
             <div style={{"backgroundColor": "white"}}>
-                <div className="qTitle">Is de professor een man of een vrouw?</div>
+                <div style={{padding: "20px"}}>Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen.</div>
+                <div className="qTitle">Is onze wetenschapper een man of een vrouw?</div>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" name="customized-radios" value={geslacht}
                                 onChange={changeListener(setGeslacht)}>
@@ -112,13 +113,13 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
                 </FormControl>
-                <div className="qTitle">Wat is het vakgebied van de professor?</div>
+                <div className="qTitle">Wat onderzoekt onze wetenschapper?</div>
                 <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
                     {professions.map((v, index) => <FormControlLabel key={index} value={v} control={<StyledRadio/>}
                                                                      label={v}/>)}
                 </RadioGroup>
-                <div className="qTitle">Wat is de naam van de professor?</div>
+                <div className="qTitle">Hoe heet onze wetenschapper?</div>
                 <div style={{"padding": "10px", "backgroundColor": "white"}}>
                     <TextField
                         style={{}}
@@ -127,7 +128,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setNaam)}
                     />
                 </div>
-                <div className="qTitle">Wat is een speciale eigenschap van de professor?</div>
+                <div className="qTitle">Wat maakt onze professor bijzonder?</div>
                 <div style={{"padding": "10px", "backgroundColor": "white"}}>
                     <TextField
                         style={{}}
@@ -136,7 +137,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setEigenschap)}
                     />
                 </div>
-                <div className="qTitle">Wat is een zin die de professor wel eens zou kunnen zeggen?</div>
+                <div className="qTitle">Een zin die wetenschappelijk klinkt</div>
                 <div style={{"padding": "10px", "backgroundColor": "white"}}>
                     <TextField
                         style={{}}

@@ -10,6 +10,8 @@ import {
 import {webSocket} from "../../index";
 import {TextInputType} from "../../player/interfaces/question";
 import {ActionType, PingScreenAction, RoundIntroAction} from "../../player/playerActions";
+// @ts-ignore
+import Ding from '../../sounds/ding.wav'
 
 export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})
@@ -46,18 +48,27 @@ export function showHint(hint: string, questionIds: Array<string>, rightAnswers:
 }
 
 export function chartQuestion(questionId: string) {
-    send({type: "ChartQuestion", questionId} as ChartQuestionAction)
+    send({type: "ChartQuestion", questionId} as ChartQuestionAction);
     send({type: "WaitScreenPlayer"})
 }
 
 export function pingScreen(suggestion: string, source: string) {
-    send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction)
+    ding();
+    console.log("ding");
+    send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction);
     send({type: "WaitScreenPlayer"})
 }
 
 export function roundIntro(name: string) {
-    send({type: "RoundIntro", name} as RoundIntroAction)
+    send({type: "RoundIntro", name} as RoundIntroAction);
     send({type: "WaitScreenPlayer"})
+}
+
+function ding(){
+    let audio = new Audio();
+    audio.src = Ding;
+    audio.load();
+    audio.play();
 }
 
 function send(obj: SendAction) {

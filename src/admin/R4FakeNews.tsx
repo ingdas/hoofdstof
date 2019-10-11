@@ -11,15 +11,15 @@ import {domeinen} from "../Config";
 import {isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
 
-export const R4GoogleC = ({domain}: AdminState) => {
+export const R4FakeNewsC = ({domain}: AdminState) => {
 
     const [currentId, setCurrentId] = useState(1);
     const [questions, setQuestions] = useState([] as Array<string>);
     const [answers, setAnswers] = useState([] as Array<string>);
 
     const answerOptions = ["De eerste", "De tweede"];
-    const vraagOntspanning = () => {
-        openQuestion("R4Ontspanning", "Wat doet een wetenschapper om te ontspannen?", TextInputType.Text)
+    const vraagJongerentaal = () => {
+        openQuestion("R4Ontspanning", "Welk woord gebruik jij, maar je ouders niet?", TextInputType.Text)
     };
     const stelVraag0 = () => {
         const questionId = `R4GoogleN${currentId}`;
@@ -59,9 +59,9 @@ export const R4GoogleC = ({domain}: AdminState) => {
         >
             <Button
                 color="primary"
-                onClick={vraagOntspanning}
+                onClick={vraagJongerentaal}
             >
-                Vraag Ontspanning
+                Vraag Jongerentaal
             </Button>
 
         </ButtonGroup>
@@ -105,4 +105,4 @@ function mapDispatchToProps(dispatch: any) {
     return {};
 }
 
-export const R4Google = connect(mapStateToProps, mapDispatchToProps)(R4GoogleC);
+export const R4FakeNews = connect(mapStateToProps, mapDispatchToProps)(R4FakeNewsC);

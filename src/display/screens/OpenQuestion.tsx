@@ -1,29 +1,28 @@
 import React from "react";
 import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
-import {DisplayState, PingSuggestionState} from "../redux/displayState";
+import {DisplayPosingQuestionState, DisplayState, PingSuggestionState} from "../redux/displayState";
+import {OpenQuestion} from "../../player/interfaces/question";
 
 
 interface Props {
     value: string
-    name: string
 }
 
-const PingSuggestionC = ({value, name}: Props) => {
+const OpenQuestionDisplay = ({value}: Props) => {
     return (
         <div>
             <Paper style={{padding: "10px", fontSize: "64px"}}>{value}</Paper>
-            <Paper style={{padding: "10px", fontSize: "30px"}}>Bedacht door: {name}</Paper>
         </div>
     )
 };
 
 export function mapStateToProps(state: DisplayState): Props {
-    return (state as PingSuggestionState).suggestion
+    return {value: ((state as DisplayPosingQuestionState).question as OpenQuestion || {}).question || ""}
 }
 
 export function mapDispatchToProps(dispatch: any) {
     return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PingSuggestionC);
+export default connect(mapStateToProps, mapDispatchToProps)(OpenQuestionDisplay);

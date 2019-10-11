@@ -8,8 +8,8 @@ export const DisplayWaitScreen = (_: {}) => {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
         height: 'calc(100% - 100px)',
-        width: '100%'
-
+        width: '100%',
+        margin: '-50px'
     };
-    return <div style={logobg}>Kijk verder naar de show</div>;
+    return <div style={logobg}></div>;
 };

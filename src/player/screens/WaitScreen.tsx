@@ -11,5 +11,5 @@ export const WaitScreen = (_: {}) => {
         width: '100%'
 
     };
-    return <div style={logobg}>Kijk verder naar de show</div>;
+    return <div style={logobg}></div>;
 };

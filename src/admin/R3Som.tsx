@@ -16,10 +16,10 @@ const R3SomC = (adminState: AdminState) => {
     const [echteSom, setEchteSom] = useState("0");
 
     const vraagSom = () => {
-        openQuestion("R3Som", "Geef ons de som", TextInputType.Number)
+        openQuestion("R3Som", "Wat is de som van alle getallen?", TextInputType.Number)
     };
     const vraagPlek = () => {
-        openQuestion("R3Plek", "Geef ons een plaats zonder wetenschap", TextInputType.Text)
+        openQuestion("R3Plek", "Waar kan je nooit aan wetenschap doen?", TextInputType.Text)
     };
     const zendHint = () => {
         const domain = adminState.domain;

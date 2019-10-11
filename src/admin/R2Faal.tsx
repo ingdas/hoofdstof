@@ -14,7 +14,7 @@ import {TextInputType} from "../player/interfaces/question";
 const R2FaalC = ({domain}: { domain?: number }) => {
 
     const vraagEmotie = () => {
-        openQuestion("R2Emotie", "Geef ons een emotie", TextInputType.Text)
+        openQuestion("R2Emotie", "Welke emoties wil je graag zien bij het falen van de wetenschapper?", TextInputType.Text)
     };
 
     const startQuiz = () => {

@@ -6,7 +6,7 @@ import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import {R1Toeval} from "./R1Toeval";
 import {R0PreShow} from "./R0PreShow";
-import {R4Google} from "./R4Google";
+import {R4FakeNews} from "./R4FakeNews";
 import {R2Faal} from "./R2Faal";
 import {R5Finale} from "./R5Finale";
 import {R6Speech} from "./R6Speech";
@@ -99,7 +99,7 @@ const AdminScreen = () => {
                     <Typography>R4 Fake News</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <R4Google></R4Google>
+                    <R4FakeNews></R4FakeNews>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>

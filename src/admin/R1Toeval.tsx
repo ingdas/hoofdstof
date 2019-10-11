@@ -19,13 +19,13 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
     const antwoorden = [manier1, manier2];
 
     const vraagUitvinding = () => {
-        multipleChoiceQuestion("R1Uitvinding", "Van welke uitvinding wil jij weten hoet het uitgevonden is?", uitvindingen)
+        multipleChoiceQuestion("R1Uitvinding", "Wat moet er in dit fragment ontdekt worden?", uitvindingen)
     };
     const toonUitvinding = () => {
         chartQuestion("R1Uitvinding");
     };
     const quizVraag = () => {
-        multipleChoiceQuestion("R1Quizvraag", "Hoe is de uitvinding echt uitgevonden?", antwoorden)
+        multipleChoiceQuestion("R1Quizvraag", "Welk verhaal is waar?", antwoorden)
     };
     const zendHint = (antwoord: number) => () => {
         if (isDefined(domain)) {

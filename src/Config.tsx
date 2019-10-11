@@ -39,9 +39,16 @@ export const uitvindingen: Array<string> = [
 
 export const speechQuestions: Array<string> = [
     "Een voorwerp",
-    "Een uitspraak",
-    "Een sprookjesfiguur",
-    "Een vak op school"
+    "Een vloekwoord",
+    "Een bekend vlogger",
+    "Een liedjestitel",
+    "Een plaats waar je op vakantie gaat",
+    "Een superkracht",
+    "Beroep van je moeder",
+    "Wat zit standaard in je brooddoos?",
+    "Een stripfiguur",
+    "Een emoji",
+    "Drie emojis"
 ];
 
 export const faalAntwoorden: Array<string> = [

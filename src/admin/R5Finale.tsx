@@ -71,6 +71,7 @@ export const R5FinaleC = (adminState: AdminState) => {
                     Toon Resultaat
                 </Button>
             </ButtonGroup>
+            <SuggestieSelector questionId="R5Finale"/>
             <br></br>
             <ATimer time="30"/>
         </div>
