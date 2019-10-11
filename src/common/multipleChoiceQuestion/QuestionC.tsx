@@ -12,14 +12,16 @@ interface Props {
 }
 
 export default ({question, playerAnswer, dispatch}: Props) => {
+    question = question || {};
+    const answers = question.answers || [];
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} className="qTitle">{question.question}</Grid>
-            {question.answers.map((v, index) =>
+            {answers.map((v, index) =>
                 <MultipleChoiceAnswer
                     key={index}
                     questionId={question.id}
-                    answer={question.answers[index]}
+                    answer={answers[index]}
                     playerAnswer={playerAnswer}
                     image={question.images && question.images[index]}
                     dispatch={dispatch}

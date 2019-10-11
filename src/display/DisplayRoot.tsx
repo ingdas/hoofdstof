@@ -14,35 +14,55 @@ import ChartQuestion from "./screens/ChartQuestion";
 import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuestion";
 import RoundIntro from "./screens/RoundIntro";
 import {OpeningInfo} from "./screens/OpeningInfo";
+import posed, {PoseGroup} from "react-pose";
 
 interface Props {
     windowName: string
+    pKey: string
 }
 
-const DisplayRoot = ({windowName}: Props) => {
+
+const Modal = posed.div({
+    enter: {
+        y: 0,
+        opacity: 1,
+        delay: 300,
+        transition: {
+            y: {type: 'spring', stiffness: 100, damping: 5},
+            default: {duration: 300}
+        }
+    },
+    exit: {
+        y: -300,
+        opacity: 0,
+    }
+});
+
+const DisplayRoot = ({windowName, pKey}: Props) => {
     const bumperStyle = {
         height: "50px"
     };
     let appWindow;
     switch (windowName) {
         case WindowName.ChartQuestion:
-            appWindow = <ChartQuestion/>;
+            appWindow = <ChartQuestion key={pKey}/>;
             break;
         case WindowName.Ping:
-            appWindow = <PingSuggestion/>;
+            appWindow = <PingSuggestion key={pKey}/>;
             break;
         case WindowName.AnswerQuestion:
-            appWindow = <DisplayMultipleChoiceQuestion/>;
+            appWindow = <DisplayMultipleChoiceQuestion key={pKey}/>;
             break;
         case WindowName.RoundIntro:
-            appWindow = <RoundIntro/>;
+            appWindow = <RoundIntro key={pKey}/>;
             break;
         case WindowName.Opening:
-            appWindow = <OpeningInfo/>
+            appWindow = <OpeningInfo key={pKey}/>;
             break;
         case WindowName.WaitScreen:
         default: {
-            appWindow = <DisplayWaitScreen/>;
+            pKey = "wait";
+            appWindow = <DisplayWaitScreen key={pKey}/>;
             break;
         }
     }
@@ -51,13 +71,17 @@ const DisplayRoot = ({windowName}: Props) => {
         <div style={bumperStyle}>
         </div>
         <DisplayTimer/>
-        {appWindow}
+        <PoseGroup style={{height: "100%", width: "100%"}}>
+            <Modal style={{height: "100%", width: "100%"}} key={"modal"+pKey}>
+                {appWindow}
+            </Modal>
+        </PoseGroup>
     </Container>);
 
 };
 
 export function mapStateToProps(displayState: DisplayState): Props {
-    return {windowName: displayState.windowName}
+    return {windowName: displayState.windowName, pKey: JSON.stringify({...displayState, timerState: null})}
 }
 
 export default connect(mapStateToProps)(DisplayRoot)

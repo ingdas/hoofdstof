@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
-import {ChartQuestionState} from "../redux/displayState";
+import {ChartQuestionState, DisplayState} from "../redux/displayState";
 
 interface Props {
     question: string
@@ -18,6 +18,8 @@ function toData(count: Record<string, number>): any[] {
 }
 
 const ChartQuestion = ({question, answerCount}: Props) => {
+    question = question || "";
+    answerCount = answerCount || {};
     const data = toData(answerCount);
     data.sort((a,b) => b.stemmen - a.stemmen);
 
@@ -26,8 +28,8 @@ const ChartQuestion = ({question, answerCount}: Props) => {
         return <text x={x+20} y={y+70} fontSize="50" fill="#FFF" textAnchor="left">({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
-    return <div className="fullHeight">
-        <div className="qTitle">{question}</div>
+    return (<div className="fullHeight">
+        <div className="qTitle">{question.toString()}</div>
         <ResponsiveContainer width="100%" height="70%">
             <BarChart
                 layout="vertical"
@@ -41,11 +43,11 @@ const ChartQuestion = ({question, answerCount}: Props) => {
                 <Bar label={CustomBarLabel} dataKey="stemmen" fill="#8884d8"/>
             </BarChart>
         </ResponsiveContainer>
-    </div>
+    </div>)
 };
 
-export function mapStateToProps(state: ChartQuestionState): Props {
-    return state
+export function mapStateToProps(state: DisplayState): Props {
+    return (state as ChartQuestionState);
 }
 
 export function mapDispatchToProps(dispatch: any) {
