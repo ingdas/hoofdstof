@@ -8,16 +8,26 @@ import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {chartQuestion, multipleChoiceQuestion, pingScreen, roundIntro} from "./action/sendAction";
-import {isDefined} from "../util";
+import {isDefined, shuffle} from "../util";
 
 export const R5FinaleC = (adminState: AdminState) => {
     const domain = adminState.domain;
 
     const startQuiz = () => {
         if (isDefined(domain)) {
+
             let kandidaten = domeinen[domain].concurrenten.slice();
             kandidaten.push(domeinen[domain].wetenschapper);
-            multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, domeinen[domain].afbeeldingen)
+            let afbeeldingen = domeinen[domain].afbeeldingen;
+
+            const c = kandidaten.map(function (e, i) {
+                return [e, afbeeldingen[i]];
+            });
+            shuffle(c)
+            kandidaten = c.map((e) => e[0]);
+            afbeeldingen = c.map((e) => e[1]);
+
+            multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, afbeeldingen)
         }
     };
 
@@ -34,7 +44,7 @@ export const R5FinaleC = (adminState: AdminState) => {
     return (<div>
             <Button
                 color="primary"
-                onClick={() => roundIntro( "De Finale")}
+                onClick={() => roundIntro("De Finale")}
             >Ronde Intro</Button>
             <WachtBtn/>
             <br></br>
