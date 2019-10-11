@@ -12,7 +12,6 @@ interface Props {
 }
 
 export default ({question, playerAnswer, dispatch}: Props) => {
-    console.log(question, playerAnswer)
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} className="qTitle">{question.question}</Grid>

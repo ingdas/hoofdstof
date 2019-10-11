@@ -1,7 +1,8 @@
 export enum AdminActionType {
     NewAdminState = "NewAdminState",
     SelectDomain = "SelectDomain",
-    Answer = "Answer"
+    Answer = "Answer",
+    SetConnections = "SetConnections"
 }
 
 export interface NewAdminStateAction {

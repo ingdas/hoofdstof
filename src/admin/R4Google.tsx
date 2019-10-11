@@ -6,7 +6,7 @@ import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {multipleChoiceQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {multipleChoiceQuestion, NewTimer, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -27,6 +27,7 @@ export const R4GoogleC = ({domain}: AdminState) => {
         setAnswers(answers.concat(answerOptions[0]));
         setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
+        NewTimer(20)
     };
     const stelVraag1 = () => {
         const questionId = `R4GoogleN${currentId}`;
@@ -34,6 +35,7 @@ export const R4GoogleC = ({domain}: AdminState) => {
         setAnswers(answers.concat(answerOptions[1]));
         setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
+        NewTimer(20)
     };
 
     const zendHint = () => {
@@ -91,8 +93,6 @@ export const R4GoogleC = ({domain}: AdminState) => {
                 Zend Hint
             </Button>
         </ButtonGroup>
-        <br></br>
-        <ATimer time="15"/>
     </div>)
 };
 

@@ -17,6 +17,12 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
                 domain: (action as { domain: number }).domain
             }
         }
+        case AdminActionType.SetConnections : {
+            return {
+                ...state,
+                connections: (action as {amount : number}).amount
+            }
+        }
         case AdminActionType.Answer : {
             return {
                 ...state,

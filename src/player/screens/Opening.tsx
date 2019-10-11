@@ -15,7 +15,7 @@ import {PlayerPosingQuestion} from "../interfaces/playerState";
 interface Props {
     professions: Array<string>
     speechQuestion: string
-    alreadyDone : boolean
+    alreadyDone: boolean
     dispatch: any
 }
 
@@ -78,7 +78,7 @@ function StyledRadio(props: RadioProps) {
 }
 
 const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) => {
-    if(alreadyDone){
+    if (alreadyDone) {
         dispatch(waitScreen());
     }
 
@@ -98,6 +98,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
         dispatch(answerQuestion("R0Woord", woord));
         dispatch(waitScreen());
     };
+
+    const isDisabled = [geslacht, vakgebied, naam, eigenschap, zin, woord].some(x => x === "");
 
     return (
         <div>
@@ -152,15 +154,16 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setWoord)}
                     />
                 </div>
-                {(geslacht !== "" && vakgebied !== "" && naam !== "") && <Button
+                <Button
                     style={{"margin": "20px"}}
                     variant="contained"
                     color="primary"
                     onClick={finishForm}
+                    disabled={isDisabled}
                 >
                     Start
                     <Icon>send</Icon>
-                </Button>}
+                </Button>
             </div>
         </div>)
 };

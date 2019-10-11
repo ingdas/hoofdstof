@@ -47,14 +47,17 @@ export function showHint(hint: string, questionIds: Array<string>, rightAnswers:
 
 export function chartQuestion(questionId: string) {
     send({type: "ChartQuestion", questionId} as ChartQuestionAction)
+    send({type: "WaitScreenPlayer"})
 }
 
 export function pingScreen(suggestion: string, source: string) {
     send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction)
+    send({type: "WaitScreenPlayer"})
 }
 
 export function roundIntro(name: string) {
     send({type: "RoundIntro", name} as RoundIntroAction)
+    send({type: "WaitScreenPlayer"})
 }
 
 function send(obj: SendAction) {

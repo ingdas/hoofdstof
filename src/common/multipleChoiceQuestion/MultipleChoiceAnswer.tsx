@@ -16,7 +16,6 @@ interface AnswerProps {
 }
 
 export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps) => {
-    console.log("ANSWER")
     const active = !isDefined(playerAnswer);
     const selected = playerAnswer === answer;
 
