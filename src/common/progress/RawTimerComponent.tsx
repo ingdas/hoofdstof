@@ -6,7 +6,6 @@ import {TimerState} from "../timerState";
 import {isDefined} from "../../util";
 
 export default ({timeLeft, totalTime, startTime}: TimerState) => {
-    console.log("Render RawTimer", timeLeft, totalTime, startTime);
     const [seconds, setSeconds] = useState(timeLeft);
     const [started, setStarted] = useState(0);
 
@@ -25,7 +24,6 @@ export default ({timeLeft, totalTime, startTime}: TimerState) => {
     }, [timeLeft, seconds, started, startTime]);
 
     if (!isDefined(seconds) || seconds < 0) {
-        console.log(seconds);
         return <div></div>
     }
     return (

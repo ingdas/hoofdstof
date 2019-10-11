@@ -6,7 +6,6 @@ export const initialAdminState = {
 } as AdminState;
 
 export function adminReducer(state: AdminState = initialAdminState, action: any): AdminState {
-    console.log(state, action);
     switch (action.type) {
         case AdminActionType.NewAdminState: {
             return (action as unknown as NewAdminStateAction).adminState

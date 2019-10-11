@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
 import {ChartQuestionState} from "../redux/displayState";
+import {grey} from "@material-ui/core/colors";
 
 interface Props {
     question: string
@@ -17,25 +18,32 @@ function toData(count: Record<string, number>): any[] {
     return data;
 }
 
-const ChartQuestion = ({question, answerCount}: Props) => (
-    <div className="fullHeight">
+const ChartQuestion = ({question, answerCount}: Props) => {
+    const data = toData(answerCount);
+    data.sort((a,b) => b.stemmen - a.stemmen);
+
+    const CustomBarLabel = (a: any) => {
+        const {index, x, y}: { index: number, x: number, y: number, value: string } = a;
+        return <text x={x+20} y={y+70} fontSize="50" fill="#FFF" textAnchor="left">({data[index]["stemmen"]}) {data[index]["name"]}</text>;
+    };
+
+    return <div className="fullHeight">
         <div className="qTitle">{question}</div>
-        <ResponsiveContainer width="80%" height="70%">
+        <ResponsiveContainer width="100%" height="70%">
             <BarChart
                 layout="vertical"
-                data={toData(answerCount)}
+                data={data}
                 margin={{
-                    top: 5, right: 30, left: 20, bottom: 5,
+                    top: 5, bottom: 5,
                 }}
             >
-                <CartesianGrid strokeDasharray="3 3"/>
-                <XAxis type="number"/>
-                <YAxis type="category" dataKey="name"/>
-                <Bar dataKey="stemmen" fill="#8884d8"/>
+                <XAxis type="number" tick={false}/>
+                <YAxis type="category" tick={false} dataKey="name"/>
+                <Bar label={CustomBarLabel} dataKey="stemmen" fill="#8884d8"/>
             </BarChart>
         </ResponsiveContainer>
     </div>
-);
+};
 
 export function mapStateToProps(state: ChartQuestionState): Props {
     return state

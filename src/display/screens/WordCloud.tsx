@@ -18,7 +18,6 @@ interface WordCloudEntry {
 function toData(count: Map<string, number>): WordCloudEntry[] {
     let data: WordCloudEntry[] = [];
     count.forEach((value, text) => data.push({text, value}));
-    console.log(count, data);
     return data;
 }
 

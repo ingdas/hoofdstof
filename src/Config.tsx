@@ -28,13 +28,13 @@ export const speechQuestions: Array<string> = [
 ];
 
 export const faalAntwoorden: Array<string> = [
-    "A. De gebroeders Wright hadden niet gedacht aan wind tegen en konden daardoor niet opstijgen.",
-    "B. Het vliegtuig stortte neer met een soldaat en een van de broers erin. ",
-    "C. Het vliegtuig was veel te groot voor de landingsbaan en kon daardoor niet opstijgen.",
-    "D. Het leger nam het vliegtuig direct in beslag als mogelijk wapen.   "
+    "A. Tegenwind",
+    "B. Neergestort",
+    "C. Te Groot",
+    "D. In beslag genomen"
 ];
 
-export const faalVraag: string = "De gebroeders Wright zijn bekend geworden met de uitvinding van het vliegtuig. Na hun uitvinding in 1902, bouwden ze een nieuw vliegtuig voor twee personen om te verkopen aan het Amerikaanse leger. Wat gebeurde er bij hun eerste demonstratievlucht?";
+export const faalVraag: string = "Wat faalde er bij de legerdemonstratie van het eerste vliegtuig?";
 
 export const faalJuistAntwoord: number = 1;
 

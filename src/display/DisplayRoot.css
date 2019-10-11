@@ -5,3 +5,7 @@ html {
 html, body, #root, #root>div, .fullHeight {
   height: 100%
 }
+
+svg {
+  overflow: visible;
+}

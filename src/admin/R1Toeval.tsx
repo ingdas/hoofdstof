@@ -14,7 +14,7 @@ import TextField from "@material-ui/core/TextField";
 export const R1ToevalC = ({domain}: { domain?: number }) => {
 
     const [manier1, setManier1] = useState("Manier 1");
-    const [manier2, setManier2] = useState("Manier 1");
+    const [manier2, setManier2] = useState("Manier 2");
 
     const antwoorden = [manier1, manier2];
 

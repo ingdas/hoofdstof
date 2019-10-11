@@ -53,7 +53,6 @@ export const store =
 
 webSocket.onmessage = (evt) => {
     const data = JSON.parse(evt.data);
-    console.log(data);
     store.dispatch(data);
 };
 

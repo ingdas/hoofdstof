@@ -13,7 +13,6 @@ export const initialPlayerState = {
 };
 
 export function playerReducer(state: AppState = initialPlayerState, action: Action): AppState {
-    console.log(state, action);
     if (action.type === ActionType.ClearId) {
         delete window.localStorage[LOGINIDKEY];
         delete window.localStorage[USERNAMEKEY];

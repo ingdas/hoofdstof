@@ -9,7 +9,6 @@ export const initialDisplayState = {
 } as DisplayState;
 
 export function displayReducer(state: DisplayState = initialDisplayState, action: any): DisplayState {
-    console.log(state, action);
     switch (action.type) {
         case DisplayActionType.NewDisplayState: {
             return (action as unknown as NewDisplayStateAction).displayState
