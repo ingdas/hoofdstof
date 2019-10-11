@@ -12,6 +12,15 @@ import {TextInputType} from "../../player/interfaces/question";
 import {ActionType, PingScreenAction, RoundIntroAction} from "../../player/playerActions";
 // @ts-ignore
 import Ding from '../../sounds/ding.wav'
+// @ts-ignore
+import TimerSound from "../../sounds/timer.mp3";
+// @ts-ignore
+import TimeUp from "../../sounds/done.wav";
+
+const TimerAudio = new Audio();
+TimerAudio.src = TimerSound;
+TimerAudio.load();
+let timeEvent: any = null;
 
 export function waitScreenPlayer() {
     send({type: "WaitScreenPlayer"})
@@ -23,6 +32,20 @@ export function waitScreenDisplay() {
 
 export function NewTimer(newTime: number) {
     send({type: "NewTimer", time: newTime} as NewTimerAction)
+    clearTimeout(timeEvent);
+
+    if (newTime > 0) {
+        TimerAudio.play();
+        timeEvent = setTimeout(() => {
+            timeUp();
+            TimerAudio.pause();
+            TimerAudio.currentTime = 0;
+            clearTimeout(timeEvent);
+        }, newTime * 1000);
+    } else {
+        TimerAudio.pause();
+        TimerAudio.currentTime = 0;
+    }
 }
 
 export function multipleChoiceQuestion(id: string, question: string, answers: string[], images?: string[]) {
@@ -64,9 +87,16 @@ export function roundIntro(name: string) {
     send({type: "WaitScreenPlayer"})
 }
 
-function ding(){
+function ding() {
     let audio = new Audio();
     audio.src = Ding;
+    audio.load();
+    audio.play();
+}
+
+function timeUp(){
+    let audio = new Audio();
+    audio.src = TimeUp;
     audio.load();
     audio.play();
 }
