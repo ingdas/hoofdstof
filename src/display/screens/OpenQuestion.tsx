@@ -1,7 +1,7 @@
 import React from "react";
 import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
-import {DisplayPosingQuestionState, DisplayState, PingSuggestionState} from "../redux/displayState";
+import {DisplayPosingQuestionState, DisplayState} from "../redux/displayState";
 import {OpenQuestion} from "../../player/interfaces/question";
 
 

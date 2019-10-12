@@ -50,6 +50,7 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
                                 const color = entry.name === rightAnswer ? "green" : "red";
                                 return <Cell fill={color}/>;
                             }
+                            return "";
                         })
                     }
                 </Bar>

@@ -3,7 +3,7 @@ import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {ATimer} from "./components/ATimer";
-import {chartQuestion, multipleChoiceQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {multipleChoiceQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
