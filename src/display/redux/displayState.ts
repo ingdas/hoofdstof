@@ -29,6 +29,7 @@ export interface DisplayWaitingState extends DisplayState {
 export interface ChartQuestionState extends DisplayState {
     question: string
     answerCount: Record<string, number>
+    rightAnswer? : string
 }
 
 export interface PingSuggestionState extends DisplayState {

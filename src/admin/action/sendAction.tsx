@@ -31,7 +31,7 @@ export function waitScreenDisplay() {
 }
 
 export function NewTimer(newTime: number) {
-    send({type: "NewTimer", time: newTime} as NewTimerAction)
+    send({type: "NewTimer", time: newTime} as NewTimerAction);
     clearTimeout(timeEvent);
 
     if (newTime > 0) {
@@ -41,7 +41,9 @@ export function NewTimer(newTime: number) {
             TimerAudio.pause();
             TimerAudio.currentTime = 0;
             clearTimeout(timeEvent);
-        }, newTime * 1000);
+            waitScreenDisplay();
+            waitScreenPlayer();
+        }, newTime * 1000 + 1000);
     } else {
         TimerAudio.pause();
         TimerAudio.currentTime = 0;
@@ -70,8 +72,8 @@ export function showHint(hint: string, questionIds: Array<string>, rightAnswers:
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }
 
-export function chartQuestion(questionId: string) {
-    send({type: "ChartQuestion", questionId} as ChartQuestionAction);
+export function chartQuestion(questionId: string, rightAnswer? : string) {
+    send({type: "ChartQuestion", questionId, rightAnswer} as ChartQuestionAction);
     send({type: "WaitScreenPlayer"})
 }
 

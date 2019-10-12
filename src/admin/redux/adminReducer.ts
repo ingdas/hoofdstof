@@ -5,10 +5,10 @@ export const initialAdminState = {
     firstOne: {}
 } as AdminState;
 
-function welcome(str : string){
+function welcome(str: string) {
     let audio = new Audio();
     const escaped = escape(str);
-    audio.src = "https://code.responsivevoice.org/getvoice.php?t=Dag%20"+escaped+",%20Welkom%20bij%20hoofdstof&tl=nl&sv=g1&vn=&pitch=0.5&rate=0.5&vol=1&gender=female";
+    audio.src = "https://code.responsivevoice.org/getvoice.php?t=Dag,%20" + escaped + ",%20Welkom%20bij%20hoofdstof&tl=nl&sv=g1&vn=&pitch=0.5&rate=0.5&vol=1&gender=female";
     audio.load();
     audio.play();
 }
@@ -27,7 +27,7 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
         case AdminActionType.SetConnections : {
             return {
                 ...state,
-                connections: (action as {amount : number}).amount
+                connections: (action as { amount: number }).amount
             }
         }
         case AdminActionType.Answer : {
@@ -40,7 +40,7 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
                         [action.answer]: ((state.answers[action.questionId] || {})[action.answer] || 0) + 1
                     }
                 },
-                firstOne : {
+                firstOne: {
                     ...state.firstOne,
                     [action.questionId]: {
                         ...state.firstOne[action.questionId],
@@ -48,6 +48,9 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
                     }
                 }
             }
+        }
+        case "Welcome" : {
+            welcome(action.name)
         }
     }
     return state;

@@ -58,7 +58,8 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                 <Table className={classes.table} size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell><Button onClick={(evt) => chartQuestion(questionId)}>{questionId}</Button></TableCell>
+                            <TableCell><Button
+                                onClick={(evt) => chartQuestion(questionId)}>{questionId}</Button></TableCell>
                             <TableCell>Suggestie</TableCell>
                             <TableCell>Stemmen ({totalVotes} / {adminState.connections})</TableCell>
                             <TableCell>Eerste</TableCell>
@@ -69,7 +70,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                             <TableRow key={row.name}>
                                 <TableCell><Button onClick={goPing(row.name, row.eerste)}>Verzend</Button></TableCell>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    <span onClick={() => chartQuestion(questionId, row.name)}>{row.name}</span>
                                 </TableCell>
                                 <TableCell>{row.stemmen}</TableCell>
                                 <TableCell>{row.eerste}</TableCell>
