@@ -13,7 +13,7 @@ const PingSuggestionC = ({value, name}: Props) => {
     return (
         <div>
             <Paper style={{padding: "10px", fontSize: "64px"}}>{value}</Paper>
-            <Paper style={{padding: "10px", fontSize: "30px"}}>Bedacht door: {name}</Paper>
+            <Paper style={{padding: "10px", fontSize: "30px", textAlign: "right"}}>Bedacht door: {name}</Paper>
         </div>
     )
 };

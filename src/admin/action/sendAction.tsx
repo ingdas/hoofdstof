@@ -97,6 +97,7 @@ function ding() {
 function timeUp(){
     let audio = new Audio();
     audio.src = TimeUp;
+    audio.volume = 0.25;
     audio.load();
     audio.play();
 }

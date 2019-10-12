@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
 import {AdminState} from "../redux/adminState";
 import {connect} from "react-redux";
-import {pingScreen} from "../action/sendAction";
+import {chartQuestion, pingScreen} from "../action/sendAction";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -58,7 +58,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                 <Table className={classes.table} size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>{questionId}</TableCell>
+                            <TableCell><Button onClick={(evt) => chartQuestion(questionId)}>{questionId}</Button></TableCell>
                             <TableCell>Suggestie</TableCell>
                             <TableCell>Stemmen ({totalVotes} / {adminState.connections})</TableCell>
                             <TableCell>Eerste</TableCell>

@@ -27,10 +27,6 @@ const R2FaalC = ({domain}: { domain?: number }) => {
         }
     };
 
-    const toonResultaat = () => {
-        chartQuestion("R2Quiz");
-    };
-
     return (<div>
         <Button
             color="primary"
@@ -64,12 +60,6 @@ const R2FaalC = ({domain}: { domain?: number }) => {
             style={{marginTop: "20px", marginBottom: "20px"}}
         >
             <Button onClick={startQuiz}>Start Quiz</Button>
-            <Button
-                onClick={toonResultaat}
-            >
-                Toon Resultaat
-            </Button>
-
             <Button
                 onClick={zendHint}
             >

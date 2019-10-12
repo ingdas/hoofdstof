@@ -6,7 +6,14 @@ import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {multipleChoiceQuestion, NewTimer, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {
+    multipleChoiceQuestion,
+    NewTimer,
+    openQuestion,
+    roundIntro,
+    showHint,
+    waitScreenDisplay, waitScreenPlayer
+} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -76,6 +83,9 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
             aria-label="large outlined secondary button group"
             style={{marginTop: "20px", marginBottom: "20px"}}
         >
+            <Button onClick={(evt) => {waitScreenDisplay() ; waitScreenPlayer()}}>
+                Wacht
+            </Button>
             <Button
                 onClick={stelVraag0}
             >
@@ -93,6 +103,9 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
                 Zend Hint
             </Button>
         </ButtonGroup>
+        {
+            questions.map((q) => <SuggestieSelector questionId={q}/>)
+        }
     </div>)
 };
 

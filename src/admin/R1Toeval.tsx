@@ -32,10 +32,6 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
             showHint(domeinen[domain].hints[0], ["R1Quizvraag"], [antwoorden[antwoord]])
         }
     };
-    const toonResultaat = () => {
-        chartQuestion("R1Quizvraag");
-    };
-
 
     return (<div>
             <Button
@@ -79,11 +75,6 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                     onClick={quizVraag}
                 >
                     Start Quiz
-                </Button>
-                <Button
-                    onClick={toonResultaat}
-                >
-                    Toon Resultaat
                 </Button>
                 <TextField
                     // className={clsx(classes.margin, classes.textField)}
