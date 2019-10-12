@@ -17,9 +17,7 @@ import TimerSound from "../../sounds/timer.mp3";
 // @ts-ignore
 import TimeUp from "../../sounds/done.wav";
 
-const TimerAudio = new Audio();
-TimerAudio.src = TimerSound;
-TimerAudio.load();
+let TimerAudio: any = null;
 let timeEvent: any = null;
 
 export function waitScreenPlayer() {
@@ -33,6 +31,12 @@ export function waitScreenDisplay() {
 export function NewTimer(newTime: number) {
     send({type: "NewTimer", time: newTime} as NewTimerAction);
     clearTimeout(timeEvent);
+
+    if (TimerAudio == null) {
+        TimerAudio = new Audio();
+        TimerAudio.src = TimerSound;
+        TimerAudio.load();
+    }
 
     if (newTime > 0) {
         TimerAudio.play();
@@ -72,7 +76,7 @@ export function showHint(hint: string, questionIds: Array<string>, rightAnswers:
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }
 
-export function chartQuestion(questionId: string, rightAnswer? : string) {
+export function chartQuestion(questionId: string, rightAnswer?: string) {
     send({type: "ChartQuestion", questionId, rightAnswer} as ChartQuestionAction);
     send({type: "WaitScreenPlayer"})
 }
@@ -96,7 +100,7 @@ function ding() {
     audio.play();
 }
 
-function timeUp(){
+function timeUp() {
     let audio = new Audio();
     audio.src = TimeUp;
     audio.volume = 0.25;
