@@ -23,3 +23,8 @@ svg {
 body {
   height: calc(100% - 50px)
 }
+
+
+.rowEven {
+    background-color: #a8f6a4;
+}

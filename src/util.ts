@@ -28,3 +28,10 @@ export function shuffle(a : Array<any>) {
     }
     return a;
 }
+
+export function isNumeric(value: string | undefined) {
+    if(!isDefined(value)){
+        return false
+    }
+    return /^-{0,1}\d+$/.test(value);
+}

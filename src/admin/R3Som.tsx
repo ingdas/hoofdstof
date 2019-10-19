@@ -14,6 +14,12 @@ import {TextInputType} from "../player/interfaces/question";
 
 const R3SomC = (adminState: AdminState) => {
     const [echteSom, setEchteSom] = useState("0");
+    let hintCount = 0;
+    for (const ans of Object.keys(adminState.answers["R3Som"] || {})) {
+        if (Number(echteSom) * 0.95 <= Number(ans) && Number(ans) <= Number(echteSom) * 1.05) {
+            hintCount += adminState.answers["R3Som"][ans]
+        }
+    }
 
     const vraagSom = () => {
         openQuestion("R3Som", "Wat is de som van alle getallen?", TextInputType.Number)
@@ -34,7 +40,7 @@ const R3SomC = (adminState: AdminState) => {
     return (<div>
         <Button
             color="primary"
-            onClick={() => roundIntro( "Ronde 3: Sommetjes")}
+            onClick={() => roundIntro("Ronde 3: Sommetjes")}
         >Ronde Intro</Button>
         <WachtBtn/>
 
@@ -85,7 +91,7 @@ const R3SomC = (adminState: AdminState) => {
             <Button
                 onClick={zendHint}
             >
-                Zend Hint
+                Zend Hint ({hintCount})
             </Button>
         </ButtonGroup>
         <SuggestieSelector questionId="R3Som"/>

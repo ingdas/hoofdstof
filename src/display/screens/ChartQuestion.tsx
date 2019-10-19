@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis,} from 'recharts';
 import {ChartQuestionState, DisplayState} from "../redux/displayState";
-import {isDefined} from "../../util";
+import {isDefined, isNumeric} from "../../util";
+import {HistogramQuestion} from "./HistogramQuestion";
 
 interface Props {
     question: string
@@ -20,6 +21,10 @@ function toData(count: Record<string, number>): any[] {
 }
 
 const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
+    if(isNumeric(rightAnswer) && isDefined(rightAnswer)){
+        return <HistogramQuestion question={question} answerCount={answerCount} rightAnswer={rightAnswer}/>
+    }
+
     question = question || "";
     answerCount = answerCount || {};
     const data = toData(answerCount);

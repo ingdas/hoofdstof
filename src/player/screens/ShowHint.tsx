@@ -3,6 +3,7 @@ import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
 import {PlayerHint} from "../interfaces/playerState";
 import {AppState} from "../interfaces/appState";
+import {isNumeric} from "../../util";
 
 
 interface Props {
@@ -21,10 +22,6 @@ const ShowHintC = ({hint, isRight}: Props) => {
 };
 
 export function mapStateToProps(state: AppState): Props {
-
-    function isNumeric(value: string) {
-        return /^-{0,1}\d+$/.test(value);
-    }
 
     const hint = (state.playerState as unknown as { hint: PlayerHint }).hint;
 
