@@ -6,6 +6,11 @@ html, body, #root, #root>div, .fullHeight {
   height: 100%
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 svg {
   overflow: visible;
 }

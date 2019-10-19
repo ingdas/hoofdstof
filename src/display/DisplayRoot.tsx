@@ -1,5 +1,4 @@
 import React from 'react';
-import './DisplayRoot.css';
 import {Container} from "@material-ui/core";
 import {connect} from "react-redux";
 
@@ -75,8 +74,8 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
         <div style={bumperStyle}>
         </div>
         <DisplayTimer/>
-        <PoseGroup style={{height: "100%", width: "100%"}}>
-            <Modal style={{height: "100%", width: "100%"}} key={"modal"+pKey}>
+        <PoseGroup>
+            <Modal style={{height: 'calc(100% - 50px)', width: "100%"}} key={"modal"+pKey}>
                 {appWindow}
             </Modal>
         </PoseGroup>

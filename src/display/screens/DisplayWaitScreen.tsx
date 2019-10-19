@@ -7,10 +7,10 @@ export const DisplayWaitScreen = (_: {}) => {
         backgroundImage: `url(${Background})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
-        height: 'calc(100% - 100px)',
+        height: 'calc(100% - 25px)',
         width: '100%',
-        margin: '-50px',
-        marginLeft: '165px'
+        marginTop: '-25px',
+        backgroundPosition: "center",
     };
     return <div style={logobg}></div>;
 };

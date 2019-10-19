@@ -1,5 +1,5 @@
 import React from 'react';
-import './PlayerRoot.css';
+import '../common/Common.css';
 import {Container} from "@material-ui/core";
 import {connect} from "react-redux";
 

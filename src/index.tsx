@@ -12,6 +12,7 @@ import {loginScreen} from "./player/playerActions";
 import {displayReducer, initialDisplayState} from "./display/redux/displayReducer";
 import AdminScreen from "./admin/Admin";
 import DisplayRoot from "./display/DisplayRoot";
+import "./common/Common.css"
 
 export const LOGINIDKEY = "loginID";
 export const USERNAMEKEY = "username";
