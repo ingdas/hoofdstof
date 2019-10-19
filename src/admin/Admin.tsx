@@ -1,125 +1,119 @@
-import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
-import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
-import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import React, {useState} from 'react';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import {R1Toeval} from "./R1Toeval";
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import {R0PreShow} from "./R0PreShow";
+import {R1Toeval} from "./R1Toeval";
 import {R4FakeNews} from "./R4FakeNews";
+import {R6Speech} from "./R6Speech";
 import {R2Faal} from "./R2Faal";
 import {R5Finale} from "./R5Finale";
-import {R6Speech} from "./R6Speech";
 import {R3Som} from "./R3Som";
 
-const ExpansionPanel = withStyles({
-    root: {
-        border: '1px solid rgba(0, 0, 0, .125)',
-        boxShadow: 'none',
-        '&:not(:last-child)': {
-            borderBottom: 0,
-        },
-        '&:before': {
-            display: 'none',
-        },
-        '&$expanded': {
-            margin: 'auto',
-        },
-    },
-    expanded: {},
-})(MuiExpansionPanel);
+const drawerWidth = 240;
 
-const ExpansionPanelSummary = withStyles({
-    root: {
-        backgroundColor: 'rgba(0, 0, 0, .03)',
-        borderBottom: '1px solid rgba(0, 0, 0, .125)',
-        marginBottom: -1,
-        minHeight: 56,
-        '&$expanded': {
-            minHeight: 56,
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            display: 'flex',
         },
-    },
-    content: {
-        '&$expanded': {
-            margin: '12px 0',
+        appBar: {
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginRight: drawerWidth,
+            backgroundColor: "#28b674"
         },
-    },
-    expanded: {},
-})(MuiExpansionPanelSummary);
+        drawer: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+        drawerPaper: {
+            width: drawerWidth,
+        },
+        toolbar: theme.mixins.toolbar,
+        content: {
+            flexGrow: 1,
+            backgroundColor: theme.palette.background.default,
+            padding: theme.spacing(3),
+        },
+    }),
+);
 
-const ExpansionPanelDetails = withStyles(theme => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiExpansionPanelDetails);
+export default function AdminScreen() {
+    const classes = useStyles();
 
-const AdminScreen = () => {
-    const [expanded, setExpanded] = React.useState<string | false>('panel0');
+    const [ronde, setRonde] = useState(0);
+    const [titel, setTitel] = useState("R0 PreShow");
 
-    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
-        setExpanded(newExpanded ? panel : false);
-    };
+    let window = null;
+
+    switch (ronde) {
+        case 0:
+            window = <R0PreShow/>;
+            break;
+        case 1:
+            window = <R1Toeval/>;
+            break;
+        case 2:
+            window = <R2Faal/>;
+            break;
+        case 3:
+            window = <R3Som/>;
+            break;
+        case 4:
+            window = <R4FakeNews/>;
+            break;
+        case 5:
+            window = <R5Finale/>;
+            break;
+        case 6:
+            window = <R6Speech/>;
+            break;
+    }
 
     return (
-        <div>
-            <ExpansionPanel square expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
-                <ExpansionPanelSummary aria-controls="panel0d-content" id="panel0d-header">
-                    <Typography>R0 Introductie</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R0PreShow></R0PreShow>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>R1 Da's toevallig</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R1Toeval></R1Toeval>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>R2 Faalangst</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R2Faal></R2Faal>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>R3 Sommetjes</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R3Som></R3Som>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                <ExpansionPanelSummary aria-controls="panel4d-content" id="panel4d-header">
-                    <Typography>R4 Fake News</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R4FakeNews></R4FakeNews>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
-                <ExpansionPanelSummary aria-controls="panel5d-content" id="panel5d-header">
-                    <Typography>R5 Gevleugelde woorden (citaat vereist)</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R5Finale></R5Finale>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel square expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
-                <ExpansionPanelSummary aria-controls="panel6d-content" id="panel6d-header">
-                    <Typography>R6 Tien woorden Speech</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <R6Speech></R6Speech>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
+        <div className={classes.root}>
+            <CssBaseline/>
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                    <Typography variant="h6" noWrap>
+                        {titel}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <main className={classes.content}>
+                <div className={classes.toolbar}/>
+                {window}
+            </main>
+            <Drawer
+                className={classes.drawer}
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                anchor="right"
+            >
+                <div className={classes.toolbar}/>
+                <Divider/>
+                <List>
+                    {['R0 PreShow', 'R1 Toeval', 'R2 Faal', 'R3 Sommetjes', 'R4 Fake News', 'R5 Finale', 'R6 Speech'].map((text, index) => (
+                        <ListItem
+                        selected={index === ronde}
+                        onClick={() => {
+                            setRonde(index);
+                            setTitel(text)}
+                        } button key={text}>
+                            <ListItemText primary={text}/>
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
         </div>
     );
-};
-
-export default AdminScreen
+}

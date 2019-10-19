@@ -28,3 +28,7 @@ body {
 .rowEven {
     background-color: #a8f6a4;
 }
+
+.MuiCollapse-hidden {
+  display: none
+}
