@@ -9,7 +9,8 @@ export const DisplayWaitScreen = (_: {}) => {
         backgroundSize: 'contain',
         height: 'calc(100% - 100px)',
         width: '100%',
-        margin: '-50px'
+        margin: '-50px',
+        marginLeft: '165px'
     };
     return <div style={logobg}></div>;
 };

@@ -24,7 +24,7 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
     const [questions, setQuestions] = useState([] as Array<string>);
     const [answers, setAnswers] = useState([] as Array<string>);
 
-    const answerOptions = ["De eerste", "De tweede"];
+    const answerOptions = ["A", "B"];
     const vraagJongerentaal = () => {
         openQuestion("R4Ontspanning", "Welk woord gebruik jij, maar je ouders niet?", TextInputType.Text)
     };
