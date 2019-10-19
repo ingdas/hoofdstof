@@ -1,13 +1,12 @@
 import React from "react";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {chartQuestion, multipleChoiceQuestion, pingScreen, roundIntro} from "./action/sendAction";
+import {activateQuestion, chartQuestion, multipleChoiceQuestion, pingScreen, roundIntro} from "./action/sendAction";
 import {isDefined, shuffle} from "../util";
 
 export const R5FinaleC = (adminState: AdminState) => {
@@ -23,12 +22,16 @@ export const R5FinaleC = (adminState: AdminState) => {
             const c = kandidaten.map(function (e, i) {
                 return [e, afbeeldingen[i]];
             });
-            shuffle(c)
+            shuffle(c);
             kandidaten = c.map((e) => e[0]);
             afbeeldingen = c.map((e) => e[1]);
 
             multipleChoiceQuestion("R5Finale", "Welke wetenschapper zoeken we?", kandidaten, afbeeldingen)
         }
+    };
+
+    const startQuiz2 = () => {
+        activateQuestion("R5Finale")
     };
 
     const toonResultaat = () => {
@@ -63,6 +66,11 @@ export const R5FinaleC = (adminState: AdminState) => {
                 <Button
                     onClick={startQuiz}
                 >
+                    Display Quiz
+                </Button>
+                <Button
+                    onClick={startQuiz2}
+                >
                     Start Quiz
                 </Button>
                 <Button
@@ -72,8 +80,6 @@ export const R5FinaleC = (adminState: AdminState) => {
                 </Button>
             </ButtonGroup>
             <SuggestieSelector questionId="R5Finale"/>
-            <br></br>
-            <ATimer time="30"/>
         </div>
     )
 };

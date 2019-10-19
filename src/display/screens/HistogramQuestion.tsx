@@ -1,6 +1,6 @@
 import React from "react";
 // @ts-ignore
-import {Histogram, DensitySeries, BarSeries, withParentSize, XAxis, YAxis} from '@data-ui/histogram';
+import {BarSeries, Histogram, withParentSize, XAxis, YAxis} from '@data-ui/histogram';
 
 export const HistogramQuestion = ({question, answerCount, rightAnswer}: {
     question: string,
@@ -58,10 +58,10 @@ export const HistogramQuestion = ({question, answerCount, rightAnswer}: {
         <YAxis
             label={" "}
             tickLabelProps={() => ({
-            fontSize: "30px",
-            dx: '-30',
-            textAnchor: 'right'
-        })}/>
+                fontSize: "30px",
+                dx: '-30',
+                textAnchor: 'right'
+            })}/>
     </ResponsiveHistogram>
 
 

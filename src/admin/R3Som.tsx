@@ -3,32 +3,39 @@ import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {chartQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {activateQuestion, chartQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {changeListener, isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
 
-const R3SomC = (adminState: AdminState) => {
+interface Props {
+    domain?: number,
+    r3SomAnswers: Record<string, number>
+}
+
+const R3SomC = ({domain, r3SomAnswers}: Props) => {
     const [echteSom, setEchteSom] = useState("0");
     let hintCount = 0;
-    for (const ans of Object.keys(adminState.answers["R3Som"] || {})) {
+    for (const ans of Object.keys(r3SomAnswers)) {
         if (Number(echteSom) * 0.95 <= Number(ans) && Number(ans) <= Number(echteSom) * 1.05) {
-            hintCount += adminState.answers["R3Som"][ans]
+            hintCount += r3SomAnswers[ans]
         }
     }
 
     const vraagSom = () => {
         openQuestion("R3Som", "Wat is de som van alle getallen?", TextInputType.Number)
     };
+    const vraagSom2 = () => {
+        activateQuestion("R3Som")
+    };
     const vraagPlek = () => {
-        openQuestion("R3Plek", "Waar kan je nooit aan wetenschap doen?", TextInputType.Text)
+        openQuestion("R3Plek", "Waar kan je nooit aan wetenschap doen?", TextInputType.Text);
+        activateQuestion("R3Plek")
     };
     const zendHint = () => {
-        const domain = adminState.domain;
         if (isDefined(domain)) {
             showHint(domeinen[domain].hints[2], ["R3Som"], [String(Number(echteSom))])
         }
@@ -60,7 +67,6 @@ const R3SomC = (adminState: AdminState) => {
         </ButtonGroup>
         <br></br>
         <SuggestieSelector questionId="R3Plek"/>
-        <ATimer time="50"/>
 
 
         <ButtonGroup
@@ -71,6 +77,11 @@ const R3SomC = (adminState: AdminState) => {
         >
             <Button
                 onClick={vraagSom}
+            >
+                Display Vraag Som
+            </Button>
+            <Button
+                onClick={vraagSom2}
             >
                 Vraag Som
             </Button>
@@ -90,19 +101,19 @@ const R3SomC = (adminState: AdminState) => {
 
             <Button
                 onClick={zendHint}
+                disabled={!isDefined(domain)}
             >
                 Zend Hint ({hintCount})
             </Button>
         </ButtonGroup>
         <SuggestieSelector questionId="R3Som"/>
         <br></br>
-        <ATimer time="30"/>
     </div>)
 };
 
 
-function mapStateToProps(state: AdminState): AdminState {
-    return state
+function mapStateToProps(state: AdminState): Props {
+    return {domain: state.domain, r3SomAnswers: state.answers["R3Som"] || {}}
 }
 
 function mapDispatchToProps(dispatch: any) {

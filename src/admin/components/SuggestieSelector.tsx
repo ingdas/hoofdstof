@@ -7,7 +7,13 @@ import {Column, Table} from 'react-virtualized';
 import 'react-virtualized/styles.css'
 import {Button} from "@material-ui/core";
 
-function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, questionId: string }) {
+interface Props {
+    answers : Record<string,number>
+    firstOnes : Record<string, string>
+    questionId : string
+}
+
+function SuggestieSelectorC({answers, firstOnes, questionId}: Props) {
 
     function createData(name: string, stemmen: number, eerste: string) {
         return {name, stemmen, eerste};
@@ -22,12 +28,10 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
         name: string, eerste: string, stemmen: number
     }[] = [];
 
-    const answerCollection = adminState.answers[questionId] || {};
-    const firstOneCollection = adminState.firstOne[questionId] || {};
     let totalVotes = 0;
-    for (const k of Object.keys(answerCollection)) {
-        const v = answerCollection[k];
-        const f = firstOneCollection[k];
+    for (const k of Object.keys(answers)) {
+        const v = answers[k];
+        const f = firstOnes[k];
         totalVotes += v;
         rows.push(createData(k, v, f));
     }
@@ -65,7 +69,7 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
                     dataKey='stemmen'
                 />
                 <Column
-                    label={`${totalVotes} / ${adminState.connections}`}
+                    label={`${totalVotes}`}
                     dataKey='name'
                     width={510}
                     cellRenderer={({rowData}) =>
@@ -83,8 +87,10 @@ function SuggestieSelectorC({adminState, questionId}: { adminState: AdminState, 
 }
 
 
-function mapStateToProps(adminState: AdminState): { adminState: AdminState } {
-    return {adminState}
+function mapStateToProps(adminState: AdminState, {questionId} : {questionId : string}): Props {
+    const answers = adminState.answers[questionId] || {};
+    const firstOnes = adminState.firstOne[questionId] || {};
+    return {questionId, answers, firstOnes}
 }
 
 function mapDispatchToProps(dispatch: any) {

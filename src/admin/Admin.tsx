@@ -16,6 +16,11 @@ import {R6Speech} from "./R6Speech";
 import {R2Faal} from "./R2Faal";
 import {R5Finale} from "./R5Finale";
 import {R3Som} from "./R3Som";
+import {AdminState} from "./redux/adminState";
+import {connect} from "react-redux";
+import {domeinen} from "../Config";
+import {isDefined} from "../util";
+import {NewTimer} from "./action/sendAction";
 
 const drawerWidth = 240;
 
@@ -26,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             width: `calc(100% - ${drawerWidth}px)`,
-            marginRight: drawerWidth,
+            marginLeft: drawerWidth,
             backgroundColor: "#28b674"
         },
         drawer: {
@@ -41,11 +46,17 @@ const useStyles = makeStyles((theme: Theme) =>
             flexGrow: 1,
             backgroundColor: theme.palette.background.default,
             padding: theme.spacing(3),
+            marginLeft: drawerWidth
         },
     }),
 );
 
-export default function AdminScreen() {
+interface Props {
+    connections: number,
+    domain: number | undefined
+}
+
+function AdminC({connections, domain}: Props) {
     const classes = useStyles();
 
     const [ronde, setRonde] = useState(0);
@@ -97,23 +108,83 @@ export default function AdminScreen() {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                anchor="right"
+                anchor="left"
             >
-                <div className={classes.toolbar}/>
-                <Divider/>
                 <List>
                     {['R0 PreShow', 'R1 Toeval', 'R2 Faal', 'R3 Sommetjes', 'R4 Fake News', 'R5 Finale', 'R6 Speech'].map((text, index) => (
                         <ListItem
-                        selected={index === ronde}
-                        onClick={() => {
-                            setRonde(index);
-                            setTitel(text)}
-                        } button key={text}>
+                            selected={index === ronde}
+                            onClick={() => {
+                                setRonde(index);
+                                setTitel(text)
+                            }
+                            } button key={text}>
                             <ListItemText primary={text}/>
                         </ListItem>
                     ))}
                 </List>
+                <Divider/>
+                <List dense={true}>
+                    {['3', '10', '20', '30','50', '-1'].map((text, index) => (
+                        <ListItem
+                            onClick={() => {
+                                NewTimer(Number(text))
+                            }
+                            } button key={text}>
+                            <ListItemText primary={text==='-1' ? "Stop Timer" : text + "s"}/>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider/>
+                <List dense={true}>
+                    <ListItem>
+                        <ListItemText>
+                            Connecties: {connections}
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText>
+                            Domein: {isDefined(domain) ? domeinen[domain].naam : "???"}
+                        </ListItemText>
+                    </ListItem>
+                    {isDefined(domain) &&
+                    (<><ListItem>
+                            <ListItemText>
+                                Hint 1: {domeinen[domain].hints[0]}
+                            </ListItemText>
+                        </ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    Hint 2: {domeinen[domain].hints[1]}
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    Hint 3: {domeinen[domain].hints[2]}
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    Hint 4: {domeinen[domain].hints[3]}
+                                </ListItemText>
+                            </ListItem>
+                        </>
+                    )
+                    }
+                </List>
+
             </Drawer>
         </div>
     );
 }
+
+
+function mapStateToProps(adminState: AdminState): Props {
+    return {connections: adminState.connections, domain: adminState.domain}
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminC);

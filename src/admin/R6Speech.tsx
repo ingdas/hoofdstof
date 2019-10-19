@@ -13,8 +13,8 @@ export const R6SpeechC = () => {
     )
 };
 
-function mapStateToProps(state: AdminState): AdminState {
-    return state
+function mapStateToProps(state: AdminState): {} {
+    return {}
 }
 
 function mapDispatchToProps(dispatch: any) {

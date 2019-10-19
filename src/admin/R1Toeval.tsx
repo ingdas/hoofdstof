@@ -1,15 +1,14 @@
 import React, {useState} from "react";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {ATimer} from "./components/ATimer";
 import {WachtBtn} from "./components/WachtBtn";
 import {domeinen, uitvindingen} from "../Config";
-import {chartQuestion, multipleChoiceQuestion, roundIntro, showHint} from "./action/sendAction";
-import {connect} from "react-redux";
-import {AdminState} from "./redux/adminState";
+import {activateQuestion, chartQuestion, multipleChoiceQuestion, roundIntro, showHint} from "./action/sendAction";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {changeListener, isDefined} from "../util";
 import TextField from "@material-ui/core/TextField";
+import {connect} from "react-redux";
+import {AdminState} from "./redux/adminState";
 
 export const R1ToevalC = ({domain}: { domain?: number }) => {
 
@@ -20,12 +19,16 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
 
     const vraagUitvinding = () => {
         multipleChoiceQuestion("R1Uitvinding", "Wat moet er in dit fragment ontdekt worden?", uitvindingen)
+        activateQuestion("R1Uitvinding")
     };
     const toonUitvinding = () => {
         chartQuestion("R1Uitvinding");
     };
     const quizVraag = () => {
         multipleChoiceQuestion("R1Quizvraag", "Welk verhaal is waar?", antwoorden)
+    };
+    const quizVraag2 = () => {
+        activateQuestion("R1Quizvraag")
     };
     const zendHint = (antwoord: number) => () => {
         if (isDefined(domain)) {
@@ -63,8 +66,6 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
             </ButtonGroup>
             <SuggestieSelector questionId="R1Uitvinding"/>
 
-            <br></br>
-            <ATimer time="30"/>
             <ButtonGroup
                 color="secondary"
                 size="large"
@@ -73,6 +74,11 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
             >
                 <Button
                     onClick={quizVraag}
+                >
+                    Display Quiz
+                </Button>
+                <Button
+                    onClick={quizVraag2}
                 >
                     Start Quiz
                 </Button>
@@ -102,16 +108,16 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
                 </Button>
             </ButtonGroup>
             <SuggestieSelector questionId="R1Quizvraag"/>
-            <br></br>
-            <ATimer time="30"/>
-        </div>
+    </div>
     )
 };
 
 
+
 function mapStateToProps(state: AdminState): { domain?: number } {
-    return state
+    return {domain: state.domain}
 }
+
 
 function mapDispatchToProps(dispatch: any) {
     return {};

@@ -1,5 +1,4 @@
 import React from "react";
-import {ATimer} from "./components/ATimer";
 import Button from "@material-ui/core/Button";
 import {ButtonGroup} from "@material-ui/core";
 import {WachtBtn} from "./components/WachtBtn";
@@ -11,7 +10,13 @@ import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import SuggestieSelector from "./components/SuggestieSelector";
 
-const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
+interface Props {
+    domain?: number,
+    dispatch: any
+}
+
+
+const R0PreShowC = ({domain, dispatch}: Props) => {
     const handleOpening = () => {
         const namen = domeinen.map((it) => it.naam);
         openingScreen(namen, speechQuestions);
@@ -58,8 +63,8 @@ const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
             <br/>
 
             <SuggestieSelector questionId="R0Geslacht"/>
-            <SuggestieSelector questionId="R0Vakgebied"/>
             <SuggestieSelector questionId="R0Naam"/>
+            <SuggestieSelector questionId="R0Vakgebied"/>
             <SuggestieSelector questionId="R0Eigenschap"/>
 
 
@@ -68,15 +73,13 @@ const R0PreShowC = ({domain, dispatch}: { domain?: number, dispatch: any }) => {
                     return <Button color={getColor(index)} onClick={setDomain(index)}>{domein.naam}</Button>
                 })}
             </ButtonGroup>
-
-            <ATimer time="60"/>
-        </div>
+     </div>
     )
 };
 
 
 function mapStateToProps(state: AdminState): { domain?: number } {
-    return state
+    return {domain: state.domain}
 }
 
 function mapDispatchToProps(dispatch: any) {

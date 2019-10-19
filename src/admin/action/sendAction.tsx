@@ -61,6 +61,13 @@ export function multipleChoiceQuestion(id: string, question: string, answers: st
     } as MultipleChoiceQuestionAction)
 }
 
+export function activateQuestion(id: string) {
+    send({
+        type: "ActivateQuestion",
+        id
+    } as any)
+}
+
 export function openQuestion(id: string, question: string, textInputType: TextInputType) {
     send({type: "OpenQuestion", openQuestion: {id, question, textInputType}} as OpenQuestionAction)
 }
@@ -83,7 +90,7 @@ export function chartQuestion(questionId: string, rightAnswer?: string) {
 
 export function pingScreen(suggestion: string, source: string) {
     ding();
-    send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction);
+    send({type: ActionType.ChosenSuggestion, suggestion, source: source || "Niemand"} as PingScreenAction);
     send({type: "WaitScreenPlayer"})
 }
 

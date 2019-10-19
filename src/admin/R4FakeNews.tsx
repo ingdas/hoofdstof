@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {ATimer} from "./components/ATimer";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {
+    activateQuestion,
     multipleChoiceQuestion,
     NewTimer,
     openQuestion,
@@ -27,22 +27,23 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
     const answerOptions = ["A", "B"];
     const vraagJongerentaal = () => {
         openQuestion("R4Ontspanning", "Welk woord gebruik jij, maar je ouders niet?", TextInputType.Text)
+        activateQuestion("R4Ontspanning");
     };
     const stelVraag0 = () => {
-        const questionId = `R4GoogleN${currentId}`;
+        const questionId = `R4GoogleAN${currentId}`;
         setQuestions(questions.concat(questionId));
         setAnswers(answers.concat(answerOptions[0]));
         setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
-        NewTimer(20)
+        activateQuestion(questionId);
     };
     const stelVraag1 = () => {
-        const questionId = `R4GoogleN${currentId}`;
+        const questionId = `R4GoogleBN${currentId}`;
         setQuestions(questions.concat(questionId));
         setAnswers(answers.concat(answerOptions[1]));
         setCurrentId(currentId + 1);
         multipleChoiceQuestion(questionId, "Welke uitspraak is correct?", answerOptions);
-        NewTimer(20)
+        activateQuestion(questionId);
     };
 
     const zendHint = () => {
@@ -74,7 +75,6 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
         </ButtonGroup>
         <br></br>
         <SuggestieSelector questionId="R4Ontspanning"/>
-        <ATimer time="50"/>
 
 
         <ButtonGroup
@@ -89,12 +89,12 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
             <Button
                 onClick={stelVraag0}
             >
-                De Eerste Vraag
+                Antwoord A
             </Button>
             <Button
                 onClick={stelVraag1}
             >
-                De Tweede Vraag
+                Antwoord B
             </Button>
 
             <Button
