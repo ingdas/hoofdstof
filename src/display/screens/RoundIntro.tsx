@@ -10,7 +10,7 @@ interface Props {
 
 const RoundIntroC = ({name}: Props) => {
     return (
-        <div>
+        <div style={{paddingTop: "50px"}}>
             <Paper style={{fontSize: "64px"}}>{name}</Paper>
         </div>
     )

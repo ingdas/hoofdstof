@@ -39,9 +39,6 @@ const Modal = posed.div({
 });
 
 const DisplayRoot = ({windowName, pKey}: Props) => {
-    const bumperStyle = {
-        height: "50px"
-    };
     let appWindow;
     switch (windowName) {
         case WindowName.ChartQuestion:
@@ -70,12 +67,10 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
         }
     }
 
-    return (<Container className="fullHeight" maxWidth="md">
-        <div style={bumperStyle}>
-        </div>
+    return (<Container maxWidth="lg">
         <DisplayTimer/>
         <PoseGroup>
-            <Modal style={{height: 'calc(100% - 50px)', width: "100%"}} key={"modal"+pKey}>
+            <Modal style={{height: 'calc( 100vh - 60px ) ', width: "100%"}} key={"modal"+pKey}>
                 {appWindow}
             </Modal>
         </PoseGroup>

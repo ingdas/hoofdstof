@@ -12,7 +12,7 @@ export default styled(connect(mapStateToProps)(RawTimerComponent))({
     height: "100px",
     width: "100px",
     position: "absolute",
-    right: 0,
-    top: 0,
+    right: "50px",
+    top: "50px",
     margin: "10px"
 })

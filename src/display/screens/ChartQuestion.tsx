@@ -31,8 +31,8 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
                      textAnchor="left">({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
-    return (<div className="fullHeight">
-        <div className="qTitle">{question.toString()}</div>
+    return (<div className="fullHeight" style={{marginTop: "50px"}}>
+        {question.toString().length > 0 && <div className="qTitle">{question.toString()}</div>}
         <ResponsiveContainer width="100%" height="70%">
             <BarChart
                 layout="vertical"
@@ -48,7 +48,7 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
                         data.map((entry, index) => {
                             if (isDefined(rightAnswer)) {
                                 const color = entry.name === rightAnswer ? "green" : "red";
-                                return <Cell fill={color}/>;
+                                return <Cell key={index} fill={color}/>;
                             }
                             return "";
                         })

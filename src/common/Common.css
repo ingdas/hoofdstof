@@ -2,15 +2,24 @@ html {
   background-color: #28b674;
 }
 
-html, body, #root, #root>div, .fullHeight {
-  height: 100%
+html, #root, .fullHeight {
+  height: 100%;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
 }
 
 svg {
   overflow: visible;
+}
+
+.MuiContainer-maxWidthMd {
+  max-width: 1200px !important;
+}
+body {
+  height: calc(100% - 50px)
 }

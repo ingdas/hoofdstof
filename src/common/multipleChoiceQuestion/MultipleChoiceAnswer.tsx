@@ -30,7 +30,7 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
     return (
         <Grid item xs={6}>
             <Paper onClick={onClick} className="card" style={{backgroundColor: color}}>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" style={{fontSize: "35px"}}>
                     {answer}
                 </Typography>
                 {isDefined(image) &&

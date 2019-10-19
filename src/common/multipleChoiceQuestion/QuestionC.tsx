@@ -11,11 +11,11 @@ interface Props {
     dispatch: any
 }
 
-export default ({question, playerAnswer, dispatch}: Props) => {
+export default ({question, playerAnswer, dispatch, className}: Props & {className? : string}) => {
     question = question || {};
     const answers = question.answers || [];
     return (
-        <Grid container spacing={3}>
+        <Grid className={className} container spacing={3}>
             <Grid item xs={12} className="qTitle">{question.question}</Grid>
             {answers.map((v, index) =>
                 <MultipleChoiceAnswer

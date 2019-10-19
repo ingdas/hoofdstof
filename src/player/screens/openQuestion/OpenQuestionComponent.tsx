@@ -56,7 +56,7 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
                 color="primary"
                 onClick={onClick}
             >
-                Send
+                Verzenden
                 <Icon>send</Icon>
             </Button>}
         </div>)

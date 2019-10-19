@@ -11,7 +11,7 @@ interface Props {
 
 const PingSuggestionC = ({value, name}: Props) => {
     return (
-        <div>
+        <div style={{marginTop: "50px"}}>
             <Paper style={{padding: "10px", fontSize: "64px"}}>{value}</Paper>
             <Paper style={{padding: "10px", fontSize: "30px", textAlign: "right"}}>Bedacht door: {name}</Paper>
         </div>

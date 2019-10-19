@@ -11,7 +11,7 @@ interface Props {
 
 const OpenQuestionDisplay = ({value}: Props) => {
     return (
-        <div>
+        <div style={{paddingTop: "50px"}}>
             <Paper style={{padding: "10px", fontSize: "64px"}}>{value}</Paper>
         </div>
     )
