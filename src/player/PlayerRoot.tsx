@@ -55,8 +55,8 @@ const PlayerRoot = ({windowName}: Props) => {
     return (<Container className="fullHeight" maxWidth="md">
         <div style={bumperStyle}>
         </div>
-        <PlayerTimer/>
         {appWindow}
+        <PlayerTimer/>
     </Container>);
 
 };

@@ -5,7 +5,8 @@ import './RawTimerComponent.css';
 import {TimerState} from "../timerState";
 import {isDefined} from "../../util";
 
-export default ({timeLeft, totalTime, startTime}: TimerState) => {
+
+export default ({className, timeLeft, totalTime, startTime}: TimerState & {className? : string}) => {
     const [seconds, setSeconds] = useState(timeLeft);
     const [started, setStarted] = useState(0);
 
@@ -27,15 +28,8 @@ export default ({timeLeft, totalTime, startTime}: TimerState) => {
         return <div></div>
     }
     return (
-        <div style={{
-            height: "100px",
-            width: "100px",
-            position: "absolute",
-            cursor: "default",
-            right: 0,
-            margin: "10px"
-        }}>
             <CircularProgressbar
+                className={className}
                 value={totalTime - seconds}
                 maxValue={totalTime}
                 text={""+seconds}
@@ -55,5 +49,5 @@ export default ({timeLeft, totalTime, startTime}: TimerState) => {
                     trailColor: 'transparent'
                 })}
             />
-        </div>);
+    );
 };

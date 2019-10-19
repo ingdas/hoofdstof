@@ -83,7 +83,6 @@ export function chartQuestion(questionId: string, rightAnswer?: string) {
 
 export function pingScreen(suggestion: string, source: string) {
     ding();
-    console.log("ding");
     send({type: ActionType.ChosenSuggestion, suggestion, source} as PingScreenAction);
     send({type: "WaitScreenPlayer"})
 }
