@@ -1,6 +1,4 @@
 import React from "react";
-import "./QuestionC.css"
-import {Grid} from "@material-ui/core";
 import {MultipleChoiceQuestion} from "../../player/interfaces/question";
 import MultipleChoiceAnswer from "./MultipleChoiceAnswer";
 
@@ -15,8 +13,17 @@ export default ({question, playerAnswer, dispatch, className}: Props & {classNam
     question = question || {};
     const answers = question.answers || [];
     return (
-        <Grid className={className} container spacing={3}>
-            <Grid item xs={12} className="qTitle">{question.question}</Grid>
+        <div className={className} style={{
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
+            alignItems: "center"
+        }}>
+            <div style={{
+                fontSize: "5vh",
+                paddingBottom: "25px",
+                textAlign: "center",
+            }}>{question.question}</div>
             {answers.map((v, index) =>
                 <MultipleChoiceAnswer
                     key={index}
@@ -26,5 +33,5 @@ export default ({question, playerAnswer, dispatch, className}: Props & {classNam
                     image={question.images && question.images[index]}
                     dispatch={dispatch}
                 />)}
-        </Grid>)
+        </div>)
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../common/Common.css';
-import {Container} from "@material-ui/core";
+import {Container, createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import {connect} from "react-redux";
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -12,7 +12,7 @@ import WordCloud from "../display/screens/WordCloud";
 import Login from "./screens/Login";
 import {AppState} from "./interfaces/appState";
 import {WaitScreen} from "./screens/WaitScreen";
-import OpenQuestionComponent from "./screens/openQuestion/OpenQuestionComponent";
+import OpenQuestionComponent from "./screens/OpenQuestionComponent";
 import PlayerTimer from "./screens/PlayerTimer";
 import PlayerMultipleChoiceQuestion from "./screens/PlayerMultipleChoiceQuestion";
 
@@ -20,6 +20,15 @@ import PlayerMultipleChoiceQuestion from "./screens/PlayerMultipleChoiceQuestion
 interface Props {
     windowName: WindowName
 }
+
+const theme = createMuiTheme({
+        palette: {
+            primary: {
+                main: 'rgb(102, 44, 143)'
+            }
+        }
+    },
+);
 
 const PlayerRoot = ({windowName}: Props) => {
     const bumperStyle = {
@@ -52,12 +61,18 @@ const PlayerRoot = ({windowName}: Props) => {
             appWindow = <ShowHint/>;
     }
 
-    return (<Container className="fullHeight" maxWidth="md">
-        <div style={bumperStyle}>
-        </div>
-        {appWindow}
-        <PlayerTimer/>
-    </Container>);
+    return (
+        <div className={"player"}>
+            <MuiThemeProvider theme={theme}>
+                <Container className="fullHeight" maxWidth="md">
+                    <div style={bumperStyle}>
+                    </div>
+                    {appWindow}
+                    {windowName !== WindowName.WaitScreen && <div style={{height: "150px"}}/>}
+                    <PlayerTimer/>
+                </Container>
+            </MuiThemeProvider>
+        </div>);
 
 };
 

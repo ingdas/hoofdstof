@@ -32,12 +32,21 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
 
     const CustomBarLabel = (a: any) => {
         const {index, x, y}: { index: number, x: number, y: number, value: string } = a;
-        return <text x={x + 20} y={y + 70} fontSize="50" fill="white"
+        let fillColor = "white";
+        if(isDefined(rightAnswer)){
+            if(data[index]["name"] === rightAnswer){
+                fillColor = "white"
+            }else{
+                fillColor = "grey"
+            }
+        }
+
+        return <text x={x + 20} y={y + 70} fontSize="50" fill={fillColor}
                      textAnchor="left">({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
     return (<div className="fullHeight" style={{marginTop: "50px"}}>
-        {question.toString().length > 0 && <div className="qTitle">{question.toString()}</div>}
+        {question.toString().length > 0 && <div style={{fontSize: "50px", marginBottom: "50px"}}>{question.toString()}</div>}
         <ResponsiveContainer width="100%" height="70%">
             <BarChart
                 layout="vertical"
@@ -48,11 +57,11 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
             >
                 <XAxis type="number" tick={false} axisLine={false}/>
                 <YAxis type="category" tick={false} dataKey="name" axisLine={false}/>
-                <Bar label={CustomBarLabel} dataKey="stemmen" fill="rgb(102, 44, 143)">
+                <Bar label={CustomBarLabel} dataKey="stemmen" fill="rgb(102, 44, 143)" radius={[20, 20, 20, 20]}>
                     {
                         data.map((entry, index) => {
                             if (isDefined(rightAnswer)) {
-                                const color = entry.name === rightAnswer ? "green" : "red";
+                                const color = entry.name === rightAnswer ? "orange" : "rgb(82, 22, 123)";
                                 return <Cell key={index} fill={color}/>;
                             }
                             return "";

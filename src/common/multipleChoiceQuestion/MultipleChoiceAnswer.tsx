@@ -1,7 +1,6 @@
 import React, {MouseEventHandler} from "react";
 import Typography from "@material-ui/core/Typography";
 import "./MultipleChoiceAnswer.css"
-import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {answerQuestion} from "../../player/playerActions";
 import {isDefined, vibrate} from "../../util";
@@ -25,18 +24,35 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
             dispatch(answerQuestion(questionId, answer));
         }
     }) as MouseEventHandler;
-    const color = selected ? "lightblue" : "white";
+    const color = selected ? "orange" : "rgb(82, 22, 123)";
+
+    if (isDefined(image)) {
+        return (
+            <div onClick={onClick} className="card" style={{
+                width: "70%",
+                margin: "10px",
+                backgroundColor: color,
+                display: "flex",
+                flexDirection: "row"
+            }}>
+                <div style={{marginRight: "20px"}}>
+                    <img alt={answer} src={image} style={{height: "15vh"}}/>
+                </div>
+                <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                    <Typography variant="h5" component="h2"
+                                style={{textAlign: "center", color: "white", fontSize: "35px", marginTop: "-5px"}}>
+                        {answer}
+                    </Typography>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <Grid item xs={6}>
-            <Paper onClick={onClick} className="card" style={{backgroundColor: color}}>
-                <Typography variant="h5" component="h2" style={{fontSize: "35px"}}>
-                    {answer}
-                </Typography>
-                {isDefined(image) &&
-                <img alt={answer} src={image} style={{width: "100px"}}/>
-                }
-            </Paper>
-        </Grid>
+        <Paper onClick={onClick} className="card" style={{width: "70%", margin: "10px", backgroundColor: color}}>
+            <Typography variant="h5" component="h2" style={{textAlign: "center", color: "white", fontSize: "35px"}}>
+                {answer}
+            </Typography>
+        </Paper>
     );
 };

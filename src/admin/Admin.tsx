@@ -89,6 +89,7 @@ function AdminC({connections, domain}: Props) {
     }
 
     return (
+        <div className={"administratie"}>
         <div className={classes.root}>
             <CssBaseline/>
             <AppBar position="fixed" className={classes.appBar}>
@@ -174,6 +175,7 @@ function AdminC({connections, domain}: Props) {
                 </List>
 
             </Drawer>
+        </div>
         </div>
     );
 }

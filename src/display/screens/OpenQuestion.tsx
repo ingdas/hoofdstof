@@ -1,5 +1,4 @@
 import React from "react";
-import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
 import {DisplayPosingQuestionState, DisplayState} from "../redux/displayState";
 import {OpenQuestion} from "../../player/interfaces/question";
@@ -11,8 +10,13 @@ interface Props {
 
 const OpenQuestionDisplay = ({value}: Props) => {
     return (
-        <div style={{paddingTop: "50px"}}>
-            <Paper style={{padding: "10px", fontSize: "64px"}}>{value}</Paper>
+        <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%"
+        }}>
+            <div style={{fontSize: "64px", textAlign: "center"}}>{value}</div>
         </div>
     )
 };

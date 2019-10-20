@@ -11,7 +11,7 @@ function mapStateToProps(appState: AppState): TimerState {
 export default styled(connect(mapStateToProps)(RawTimerComponent))({
     height: "100px",
     width: "100px",
-    position: "absolute",
+    position: "fixed",
     right: 0,
     bottom: 0,
     margin: "10px"

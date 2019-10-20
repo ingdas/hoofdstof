@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
 import {changeListener, isDefined} from "../../util";
@@ -103,9 +102,9 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
 
     return (
         <div>
-            <div style={{"backgroundColor": "white"}}>
+            <div>
                 <div style={{padding: "20px"}}>Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen.</div>
-                <div className="qTitle">Is onze wetenschapper een man of een vrouw?</div>
+                <div className="oTitle">Is onze wetenschapper een man of een vrouw?</div>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" name="customized-radios" value={geslacht}
                                 onChange={changeListener(setGeslacht)}>
@@ -113,14 +112,14 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
                 </FormControl>
-                <div className="qTitle">Wat onderzoekt onze wetenschapper?</div>
+                <div className="oTitle">Wat onderzoekt onze wetenschapper?</div>
                 <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
                     {professions.map((v, index) => <FormControlLabel key={index} value={v} control={<StyledRadio/>}
                                                                      label={v}/>)}
                 </RadioGroup>
-                <div className="qTitle">Hoe heet onze wetenschapper?</div>
-                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                <div className="oTitle">Hoe heet onze wetenschapper?</div>
+                <div style={{"padding": "10px"}}>
                     <TextField
                         style={{}}
                         label="Naam"
@@ -128,8 +127,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setNaam)}
                     />
                 </div>
-                <div className="qTitle">Wat maakt onze professor bijzonder?</div>
-                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                <div className="oTitle">Wat maakt onze wetenschapper bijzonder?</div>
+                <div style={{"padding": "10px"}}>
                     <TextField
                         style={{}}
                         label="Eigenschap"
@@ -137,8 +136,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setEigenschap)}
                     />
                 </div>
-                <div className="qTitle">Een zin die wetenschappelijk klinkt</div>
-                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                <div className="oTitle">Een zin die wetenschappelijk klinkt</div>
+                <div style={{"padding": "10px"}}>
                     <TextField
                         style={{}}
                         label="Zin"
@@ -146,8 +145,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setZin)}
                     />
                 </div>
-                <div className="qTitle">{speechQuestion}</div>
-                <div style={{"padding": "10px", "backgroundColor": "white"}}>
+                <div className="oTitle">{speechQuestion}</div>
+                <div style={{"padding": "10px"}}>
                     <TextField
                         style={{}}
                         label="Woord"
@@ -155,16 +154,18 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setWoord)}
                     />
                 </div>
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+
                 <Button
-                    style={{"margin": "20px"}}
+                    style={{"margin": "20px", "width" : "80vw"}}
                     variant="contained"
                     color="primary"
                     onClick={finishForm}
                     disabled={isDisabled}
                 >
                     Start
-                    <Icon>send</Icon>
                 </Button>
+                </div>
             </div>
         </div>)
 };

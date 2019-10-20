@@ -33,7 +33,7 @@ const R2FaalC = ({domain}: { domain?: number }) => {
     return (<div>
         <Button
             color="primary"
-            onClick={() => roundIntro( "Ronde 2: Faalangst")}
+            onClick={() => roundIntro( "2")}
         >Ronde Intro</Button>
         <WachtBtn/>
 

@@ -39,7 +39,7 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
     return (<div>
             <Button
                 color="primary"
-                onClick={() => roundIntro( "Ronde 1: Da's toevallig")}
+                onClick={() => roundIntro( "1")}
             >Ronde Intro</Button>
 
             <WachtBtn/>

@@ -1,5 +1,4 @@
 import React from "react";
-import {Paper} from "@material-ui/core";
 import {connect} from "react-redux";
 import {PlayerHint} from "../interfaces/playerState";
 import {AppState} from "../interfaces/appState";
@@ -14,10 +13,10 @@ interface Props {
 const ShowHintC = ({hint, isRight}: Props) => {
     if (isRight) {
         return (
-            <Paper style={{fontSize: "64px"}}>Onthoud deze hint voor de finale: {hint}</Paper>
+            <div style={{fontSize: "64px"}}>Onthoud deze hint voor de finale: <br/>{hint}</div>
         )
     } else {
-        return <Paper style={{fontSize: "64px"}}>Helaas, je hebt de vraag fout beantwoord</Paper>
+        return <div style={{fontSize: "64px"}}>Helaas, je hebt de vraag fout beantwoord</div>
     }
 };
 

@@ -47,7 +47,7 @@ const R3SomC = ({domain, r3SomAnswers}: Props) => {
     return (<div>
         <Button
             color="primary"
-            onClick={() => roundIntro("Ronde 3: Sommetjes")}
+            onClick={() => roundIntro("3")}
         >Ronde Intro</Button>
         <WachtBtn/>
 

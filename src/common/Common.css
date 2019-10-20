@@ -1,27 +1,39 @@
 html {
-  background-color: #28b674;
+    background-color: #28b674;
 }
 
 html, #root, .fullHeight {
-  height: 100%;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    height: 100%;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: white;
+}
 
+.qTitle {
+    font-size: 45px;
+    padding: 10px;
+}
+
+.oTitle {
+    font-size: 2em;
+    padding-top: 30px;
+    margin-bottom: -5px;
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 svg {
-  overflow: visible;
+    overflow: visible;
 }
 
 .MuiContainer-maxWidthMd {
-  max-width: 1200px !important;
+    max-width: 1200px !important;
 }
+
 body {
-  height: calc(100% - 50px)
+    height: calc(100% - 50px)
 }
 
 
@@ -30,5 +42,23 @@ body {
 }
 
 .MuiCollapse-hidden {
-  display: none
+    display: none
+}
+
+
+.MuiInput-underline:after, .MuiInput-underline:before {
+    border-bottom-color: white !important;
+}
+
+.administratie > .MuiInputBase-input, .administratie > .MuiInputBase-root, .administratie > .MuiInputLabel-formControl, .administratie > input {
+    color: black !important;
+}
+
+.player > .MuiInputBase-input, .player > .MuiInputBase-root, .player > .MuiInputLabel-formControl, .player > input {
+    color: white !important;
+}
+
+.administratie {
+    color: black;
+    background-color: #28b674;
 }

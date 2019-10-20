@@ -47,7 +47,7 @@ export const R5FinaleC = (adminState: AdminState) => {
     return (<div>
             <Button
                 color="primary"
-                onClick={() => roundIntro("De Finale")}
+                onClick={() => roundIntro("5")}
             >Ronde Intro</Button>
             <WachtBtn/>
             <br></br>

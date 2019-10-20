@@ -7,8 +7,8 @@ export const WaitScreen = (_: {}) => {
         backgroundImage: `url(${Background})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
-        height: 'calc(100% - 75px)',
-        width: '100%',
+        height: 'calc(100vh - 75px)',
+        // width: '100vw',
         marginTop: '-25px',
         backgroundPosition: "center",
     };

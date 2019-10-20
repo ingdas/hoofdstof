@@ -2,12 +2,10 @@ import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
-import "./OpenQuestionComponent.css"
-import {answerQuestion} from "../../playerActions";
-import {OpenQuestion, TextInputType} from "../../interfaces/question";
-import {AppState} from "../../interfaces/appState";
-import {PlayerPosingQuestion} from "../../interfaces/playerState";
+import {answerQuestion} from "../playerActions";
+import {OpenQuestion, TextInputType} from "../interfaces/question";
+import {AppState} from "../interfaces/appState";
+import {PlayerPosingQuestion} from "../interfaces/playerState";
 
 interface Props {
     type: TextInputType
@@ -15,7 +13,7 @@ interface Props {
     done: boolean
     dispatch: any
     questionId: string
-    initialAnswer : string
+    initialAnswer: string
 }
 
 const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}: Props) => {
@@ -39,9 +37,27 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
         }
     };
     return (
-        <div style={{"backgroundColor": "white"}}>
-            <div className="qTitle">{question}</div>
-            <div style={{"padding": "10px", "backgroundColor": "white"}}>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignContent: "center"
+        }}>
+            <div style={{
+                padding: "10px",
+                display: "flex",
+                flexDirection: "row",
+                alignSelf: "center",
+                textAlign: "center"
+            }}>
+                <div className="qTitle">{question}</div>
+            </div>
+            <div style={{
+                padding: "10px",
+                display: "flex",
+                flexDirection: "row",
+                alignSelf: "center"
+            }}>
                 <TextField
                     style={{}}
                     label="Antwoord"
@@ -50,15 +66,21 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
                     }) : onChange}
                 />
             </div>
-            {!done && <Button
-                style={{"margin": "20px"}}
-                variant="contained"
-                color="primary"
-                onClick={onClick}
-            >
-                Verzenden
-                <Icon>send</Icon>
-            </Button>}
+            <div style={{
+                padding: "10px",
+                display: "flex",
+                flexDirection: "row",
+                alignSelf: "center"
+            }}>
+                {!done && <Button
+                    style={{"margin": "20px", width: "40vw"}}
+                    variant="contained"
+                    color="primary"
+                    onClick={onClick}
+                >
+                    Verzenden
+                </Button>}
+            </div>
         </div>)
 };
 
@@ -70,7 +92,7 @@ function mapStateToProps(state: AppState) {
         type: questionInfo.textInputType,
         done: currentAnswer !== undefined,
         questionId: questionInfo.id,
-        initialAnswer : currentAnswer || ""
+        initialAnswer: currentAnswer || ""
     }
 }
 

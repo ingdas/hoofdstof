@@ -6,11 +6,11 @@ export const initialAdminState = {
 } as AdminState;
 
 function welcome(str: string) {
-    let audio = new Audio();
-    const escaped = escape(str);
-    audio.src = "https://code.responsivevoice.org/getvoice.php?t=Dag,%20" + escaped + ",%20Welkom%20bij%20hoofdstof&tl=nl&sv=g1&vn=&pitch=0.5&rate=0.5&vol=1&gender=female";
-    audio.load();
-    audio.play();
+    // let audio = new Audio();
+    // const escaped = escape(str);
+    // audio.src = "https://code.responsivevoice.org/getvoice.php?t=Dag,%20" + escaped + ",%20Welkom%20bij%20hoofdstof&tl=nl&sv=g1&vn=&pitch=0.5&rate=0.5&vol=1&gender=female";
+    // audio.load();
+    // audio.play();
 }
 
 export function adminReducer(state: AdminState = initialAdminState, action: any): AdminState {

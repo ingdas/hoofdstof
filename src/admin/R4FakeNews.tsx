@@ -8,11 +8,11 @@ import {connect} from "react-redux";
 import {
     activateQuestion,
     multipleChoiceQuestion,
-    NewTimer,
     openQuestion,
     roundIntro,
     showHint,
-    waitScreenDisplay, waitScreenPlayer
+    waitScreenDisplay,
+    waitScreenPlayer
 } from "./action/sendAction";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
@@ -55,7 +55,7 @@ export const R4FakeNewsC = ({domain}: AdminState) => {
     return (<div>
         <Button
             color="primary"
-            onClick={() => roundIntro( "Ronde 4: Fake News")}
+            onClick={() => roundIntro( "4")}
         >Ronde Intro</Button>
         <WachtBtn/>
 
