@@ -15,6 +15,8 @@ import RoundIntro from "./screens/RoundIntro";
 import {OpeningInfo} from "./screens/OpeningInfo";
 import posed, {PoseGroup} from "react-pose";
 import OpenQuestionDisplay from "./screens/OpenQuestion";
+import ShowImageC from "./screens/ShowImage";
+import ShowImage from "./screens/ShowImage";
 
 interface Props {
     windowName: string
@@ -57,7 +59,10 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
             appWindow = <OpeningInfo key={pKey}/>;
             break;
         case WindowName.TextInput:
-            appWindow = <OpenQuestionDisplay key={pKey}/>
+            appWindow = <OpenQuestionDisplay key={pKey}/>;
+            break;
+        case WindowName.ShowImage:
+            appWindow = <ShowImage key={pKey}/>;
             break;
         case WindowName.WaitScreen:
         default: {

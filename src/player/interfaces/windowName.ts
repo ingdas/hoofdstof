@@ -7,5 +7,6 @@ export enum WindowName {
     Login = "Login",
     Opening = "Opening",
     RoundIntro = "RoundIntro",
-    Ping = "Ping"
+    Ping = "Ping",
+    ShowImage = "ShowImage"
 }

@@ -113,6 +113,10 @@ export function roundIntro(name: string) {
     send({type: "WaitScreenPlayer"})
 }
 
+export function showImage(src: string) {
+    send({type: "ShowImage", src} as any);
+}
+
 function ding() {
     let audio = new Audio();
     audio.src = Ding;

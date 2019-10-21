@@ -12,7 +12,7 @@ import {
     multipleChoiceQuestion,
     NewTimer,
     pingScreen,
-    roundIntro
+    roundIntro, showImage
 } from "./action/sendAction";
 import {isDefined, shuffle} from "../util";
 
@@ -44,6 +44,12 @@ export const R5FinaleC = (adminState: AdminState) => {
 
     const toonResultaat = () => {
         chartQuestion("R5Finale");
+    };
+
+    const toonAntwoord = () => {
+        if(isDefined(domain)){
+            showImage(domeinen[domain].afbeeldingen[domeinen[domain].afbeeldingen.length-1]);
+        }
     };
 
     const showQuote = () => {
@@ -85,6 +91,11 @@ export const R5FinaleC = (adminState: AdminState) => {
                     onClick={toonResultaat}
                 >
                     Toon Resultaat
+                </Button>
+                <Button
+                    onClick={toonAntwoord}
+                >
+                    Toon Antwoord
                 </Button>
             </ButtonGroup>
             <SuggestieSelector questionId="R5Finale"/>
