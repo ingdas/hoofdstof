@@ -41,8 +41,8 @@ const ChartQuestion = ({question, answerCount, rightAnswer}: Props) => {
             }
         }
 
-        return <text x={x + 20} y={y + 70} fontSize="50" fill={fillColor}
-                     textAnchor="left">({data[index]["stemmen"]}) {data[index]["name"]}</text>;
+        return <text x={x} y={y} dx={20} dy={5} fontSize="50" fill={fillColor}
+                      alignmentBaseline={"hanging"} >({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
     return (<div className="fullHeight" style={{marginTop: "50px"}}>

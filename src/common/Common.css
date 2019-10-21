@@ -13,6 +13,10 @@ html, #root, .fullHeight {
     padding: 10px;
 }
 
+.player .qTitle {
+    font-size: 2em;
+}
+
 .oTitle {
     font-size: 2em;
     padding-top: 30px;
@@ -50,15 +54,19 @@ body {
     border-bottom-color: white !important;
 }
 
-.administratie > .MuiInputBase-input, .administratie > .MuiInputBase-root, .administratie > .MuiInputLabel-formControl, .administratie > input {
+.administratie .MuiInputBase-input, .administratie .MuiInputBase-root, .administratie .MuiInputLabel-formControl, .administratie input {
     color: black !important;
 }
 
-.player > .MuiInputBase-input, .player > .MuiInputBase-root, .player > .MuiInputLabel-formControl, .player > input {
+.player .MuiInputBase-input, .player .MuiInputBase-root, .player .MuiInputLabel-formControl, .player input, .player MuiInput-input {
     color: white !important;
 }
 
 .administratie {
     color: black;
     background-color: #28b674;
+}
+
+.player .multiAnswer {
+    font-size: 1em !important;
 }

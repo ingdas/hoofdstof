@@ -2,7 +2,14 @@ import React from "react";
 import {WachtBtn} from "./components/WachtBtn";
 import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {activateQuestion, multipleChoiceQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {
+    activateQuestion,
+    multipleChoiceQuestion,
+    NewTimer,
+    openQuestion,
+    roundIntro,
+    showHint
+} from "./action/sendAction";
 import {domeinen, faalAntwoorden, faalJuistAntwoord, faalVraag} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
@@ -21,7 +28,8 @@ const R2FaalC = ({domain}: { domain?: number }) => {
         multipleChoiceQuestion("R2Quiz", faalVraag, faalAntwoorden)
     };
     const startQuiz2 = () => {
-        activateQuestion("R2Quiz")
+        activateQuestion("R2Quiz");
+        NewTimer(15);
     };
 
     const zendHint = () => {

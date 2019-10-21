@@ -20,7 +20,7 @@ import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
-import {NewTimer} from "./action/sendAction";
+import {deltaSeconds, NewTimer} from "./action/sendAction";
 
 const drawerWidth = 240;
 
@@ -36,17 +36,18 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         drawer: {
             width: drawerWidth,
-            flexShrink: 0,
+            flexShrink: 0
         },
         drawerPaper: {
             width: drawerWidth,
+            backgroundColor: "lightgrey"
         },
         toolbar: theme.mixins.toolbar,
         content: {
             flexGrow: 1,
             backgroundColor: theme.palette.background.default,
             padding: theme.spacing(3),
-            marginLeft: drawerWidth
+            minHeight: "100vh"
         },
     }),
 );
@@ -90,92 +91,105 @@ function AdminC({connections, domain}: Props) {
 
     return (
         <div className={"administratie"}>
-        <div className={classes.root}>
-            <CssBaseline/>
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap>
-                        {titel}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <main className={classes.content}>
-                <div className={classes.toolbar}/>
-                {window}
-            </main>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-                anchor="left"
-            >
-                <List>
-                    {['R0 PreShow', 'R1 Toeval', 'R2 Faal', 'R3 Sommetjes', 'R4 Fake News', 'R5 Finale', 'R6 Speech'].map((text, index) => (
-                        <ListItem
-                            selected={index === ronde}
-                            onClick={() => {
-                                setRonde(index);
-                                setTitel(text)
-                            }
-                            } button key={text}>
-                            <ListItemText primary={text}/>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider/>
-                <List dense={true}>
-                    {['3', '10', '20', '30','50', '-1'].map((text, index) => (
-                        <ListItem
-                            onClick={() => {
-                                NewTimer(Number(text))
-                            }
-                            } button key={text}>
-                            <ListItemText primary={text==='-1' ? "Stop Timer" : text + "s"}/>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider/>
-                <List dense={true}>
-                    <ListItem>
-                        <ListItemText>
-                            Connecties: {connections}
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText>
-                            Domein: {isDefined(domain) ? domeinen[domain].naam : "???"}
-                        </ListItemText>
-                    </ListItem>
-                    {isDefined(domain) &&
-                    (<><ListItem>
+            <div className={classes.root}>
+                <CssBaseline/>
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="h6" noWrap>
+                            {titel}
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    className={classes.drawer}
+                    variant="permanent"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    anchor="left"
+                >
+                    <List>
+                        {['R0 PreShow', 'R1 Toeval', 'R2 Faal', 'R3 Sommetjes', 'R4 Fake News', 'R5 Finale', 'R6 Speech'].map((text, index) => (
+                            <ListItem
+                                selected={index === ronde}
+                                onClick={() => {
+                                    setRonde(index);
+                                    setTitel(text)
+                                }
+                                } button key={text}>
+                                <ListItemText primary={text}/>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider/>
+                    <List dense={true}>
+                        {['3', '10', '20', '-1'].map((text, index) => (
+                            <ListItem
+                                onClick={() => {
+                                    NewTimer(Number(text))
+                                }
+                                } button key={text}>
+                                <ListItemText primary={text === '-1' ? "Stop Timer" : text + "s"}/>
+                            </ListItem>
+                        ))}
+                        {['+5', '-5'].map((text, index) => (
+                            <ListItem
+                                onClick={() => {
+                                    deltaSeconds(Number(text))
+                                }
+                                } button key={text}>
+                                <ListItemText primary={text === '-1' ? "Stop Timer" : text + "s"}/>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider/>
+                    <List dense={true}>
+                        <ListItem>
                             <ListItemText>
-                                Hint 1: {domeinen[domain].hints[0]}
+                                Connecties: {connections}
                             </ListItemText>
                         </ListItem>
-                            <ListItem>
+                        <ListItem>
+                            <ListItemText>
+                                Domein: {isDefined(domain) ? domeinen[domain].naam : "???"}
+                            </ListItemText>
+                        </ListItem>
+                        {isDefined(domain) &&
+                        (<><ListItem>
                                 <ListItemText>
-                                    Hint 2: {domeinen[domain].hints[1]}
+                                    Hint 1: {domeinen[domain].hints[0]}
                                 </ListItemText>
                             </ListItem>
-                            <ListItem>
-                                <ListItemText>
-                                    Hint 3: {domeinen[domain].hints[2]}
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText>
-                                    Hint 4: {domeinen[domain].hints[3]}
-                                </ListItemText>
-                            </ListItem>
-                        </>
-                    )
-                    }
-                </List>
-
-            </Drawer>
-        </div>
+                                <ListItem>
+                                    <ListItemText>
+                                        Hint 2: {domeinen[domain].hints[1]}
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemText>
+                                        Hint 3: {domeinen[domain].hints[2]}
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemText>
+                                        Hint 4: {domeinen[domain].hints[3]}
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemText>
+                                        Gezocht: {domeinen[domain].wetenschapper}
+                                    </ListItemText>
+                                </ListItem>
+                            </>
+                        )
+                        }
+                    </List>
+                </Drawer>
+                <main className={classes.content}>
+                    <div className={classes.toolbar}/>
+                    {window}
+                </main>
+            </div>
         </div>
     );
 }

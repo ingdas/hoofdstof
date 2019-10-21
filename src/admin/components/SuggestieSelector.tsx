@@ -20,7 +20,6 @@ function SuggestieSelectorC({answers, firstOnes, questionId}: Props) {
     }
 
     const goPing = (suggestie: string, naam: string) => () => {
-        console.log("goPing", suggestie, naam);
         pingScreen(suggestie, naam);
     };
 

@@ -28,8 +28,17 @@ export function waitScreenDisplay() {
     send({type: "WaitScreenDisplay"})
 }
 
-export function NewTimer(newTime: number) {
-    send({type: "NewTimer", time: newTime} as NewTimerAction);
+// @ts-ignore
+const getTimeout=function(){var e=setTimeout,b={};setTimeout=function(a,c){var d=e(a,c);b[d]=[Date.now(),c];return d};return function(a){return(a=b[a])?Math.max(a[1]-Date.now()+a[0],0):NaN}}();
+
+export function deltaSeconds(delta : number) {
+    send({type: "DeltaSeconds", delta} as any);
+    scheduleEnd(getTimeout(timeEvent)/1000+delta-1);
+}
+
+
+
+function scheduleEnd(newTime : number){
     clearTimeout(timeEvent);
 
     if (TimerAudio == null) {
@@ -52,6 +61,11 @@ export function NewTimer(newTime: number) {
         TimerAudio.pause();
         TimerAudio.currentTime = 0;
     }
+}
+
+export function NewTimer(newTime: number) {
+    send({type: "NewTimer", time: newTime} as NewTimerAction);
+    scheduleEnd(newTime)
 }
 
 export function multipleChoiceQuestion(id: string, question: string, answers: string[], images?: string[]) {

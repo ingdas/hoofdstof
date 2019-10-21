@@ -20,7 +20,7 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
 
     const onClick = (() => {
         if (active) {
-            vibrate([100]);
+            vibrate([200]);
             dispatch(answerQuestion(questionId, answer));
         }
     }) as MouseEventHandler;
@@ -39,7 +39,7 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
                     <img alt={answer} src={image} style={{height: "15vh"}}/>
                 </div>
                 <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                    <Typography variant="h5" component="h2"
+                    <Typography className="multiAnswer" variant="h5" component="h2"
                                 style={{textAlign: "center", color: "white", fontSize: "35px", marginTop: "-5px"}}>
                         {answer}
                     </Typography>
@@ -50,7 +50,7 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
 
     return (
         <Paper onClick={onClick} className="card" style={{width: "70%", margin: "10px", backgroundColor: color}}>
-            <Typography variant="h5" component="h2" style={{textAlign: "center", color: "white", fontSize: "35px"}}>
+            <Typography variant="h5" className="multiAnswer" component="h2" style={{textAlign: "center", color: "white", fontSize: "35px"}}>
                 {answer}
             </Typography>
         </Paper>

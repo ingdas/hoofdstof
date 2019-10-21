@@ -3,7 +3,14 @@ import {ButtonGroup} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {WachtBtn} from "./components/WachtBtn";
 import {domeinen, uitvindingen} from "../Config";
-import {activateQuestion, chartQuestion, multipleChoiceQuestion, roundIntro, showHint} from "./action/sendAction";
+import {
+    activateQuestion,
+    chartQuestion,
+    multipleChoiceQuestion,
+    NewTimer,
+    roundIntro,
+    showHint
+} from "./action/sendAction";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {changeListener, isDefined} from "../util";
 import TextField from "@material-ui/core/TextField";
@@ -28,7 +35,8 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
         multipleChoiceQuestion("R1Quizvraag", "Welk verhaal is waar?", antwoorden)
     };
     const quizVraag2 = () => {
-        activateQuestion("R1Quizvraag")
+        activateQuestion("R1Quizvraag");
+        NewTimer(15);
     };
     const zendHint = (antwoord: number) => () => {
         if (isDefined(domain)) {

@@ -12,11 +12,12 @@ interface Props {
 
 const ShowHintC = ({hint, isRight}: Props) => {
     if (isRight) {
-        return (
-            <div style={{fontSize: "64px"}}>Onthoud deze hint voor de finale: <br/>{hint}</div>
-        )
+        return (<>
+            <div style={{fontSize: "2em"}}>Onthoud deze hint voor de finale:</div>
+            <div style={{width: "100%", textAlign: "center", fontSize: "2em"}}><br/>{hint}</div>
+        </>)
     } else {
-        return <div style={{fontSize: "64px"}}>Helaas, je hebt de vraag fout beantwoord</div>
+        return <div style={{fontSize: "2em"}}>Helaas, je hebt de vraag fout beantwoord</div>
     }
 };
 

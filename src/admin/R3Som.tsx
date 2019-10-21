@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import SuggestieSelector from "./components/SuggestieSelector";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {activateQuestion, chartQuestion, openQuestion, roundIntro, showHint} from "./action/sendAction";
+import {activateQuestion, chartQuestion, NewTimer, openQuestion, roundIntro, showHint} from "./action/sendAction";
 import {domeinen} from "../Config";
 import {changeListener, isDefined} from "../util";
 import {TextInputType} from "../player/interfaces/question";
@@ -30,6 +30,7 @@ const R3SomC = ({domain, r3SomAnswers}: Props) => {
     };
     const vraagSom2 = () => {
         activateQuestion("R3Som")
+        NewTimer(15);
     };
     const vraagPlek = () => {
         openQuestion("R3Plek", "Waar kan je nooit aan wetenschap doen?", TextInputType.Text);

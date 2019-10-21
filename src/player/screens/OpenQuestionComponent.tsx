@@ -6,6 +6,7 @@ import {answerQuestion} from "../playerActions";
 import {OpenQuestion, TextInputType} from "../interfaces/question";
 import {AppState} from "../interfaces/appState";
 import {PlayerPosingQuestion} from "../interfaces/playerState";
+import {vibrate} from "../../util";
 
 interface Props {
     type: TextInputType
@@ -21,6 +22,7 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
     let [answer, setAnswer] = useState(initialAnswer);
 
     const onClick = (() => {
+        vibrate([200]);
         dispatch(answerQuestion(questionId, answer))
     }) as MouseEventHandler;
 
@@ -64,6 +66,12 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
                     value={answer}
                     onChange={done ? (() => {
                     }) : onChange}
+                    disabled={done}
+                    inputProps={type === TextInputType.Number ? {
+                        type: "number",
+                        pattern: "[0-9]*",
+                        inputMode: "numeric"
+                    } : {}}
                 />
             </div>
             <div style={{

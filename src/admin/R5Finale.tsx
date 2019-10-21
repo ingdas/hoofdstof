@@ -6,7 +6,14 @@ import SuggestieSelector from "./components/SuggestieSelector";
 import {domeinen} from "../Config";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
-import {activateQuestion, chartQuestion, multipleChoiceQuestion, pingScreen, roundIntro} from "./action/sendAction";
+import {
+    activateQuestion,
+    chartQuestion,
+    multipleChoiceQuestion,
+    NewTimer,
+    pingScreen,
+    roundIntro
+} from "./action/sendAction";
 import {isDefined, shuffle} from "../util";
 
 export const R5FinaleC = (adminState: AdminState) => {
@@ -31,7 +38,8 @@ export const R5FinaleC = (adminState: AdminState) => {
     };
 
     const startQuiz2 = () => {
-        activateQuestion("R5Finale")
+        activateQuestion("R5Finale");
+        NewTimer(15);
     };
 
     const toonResultaat = () => {

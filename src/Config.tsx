@@ -33,8 +33,10 @@ export const uitvindingen: Array<string> = [
     "Cornflakes",
     "Post-its",
     "Het theezakje",
-    "LSD",
-    "Röntgenstraling"
+    "Het raketijsje",
+    "Chips",
+    "Play-Doh",
+    "Coca-Cola"
 ];
 
 export const speechQuestions: Array<string> = [
