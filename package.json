@@ -18,7 +18,7 @@
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.9",
     "react-redux": "^7.1.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.4.0",
     "react-virtualized": "^9.21.1",
     "react-wordcloud": "1.0.8",
     "recharts": "^1.6.2",
