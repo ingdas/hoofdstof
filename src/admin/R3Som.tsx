@@ -33,7 +33,7 @@ const R3SomC = ({domain, r3SomAnswers}: Props) => {
         NewTimer(15);
     };
     const vraagPlek = () => {
-        openQuestion("R3Plek", "Waar kan je nooit aan wetenschap doen?", TextInputType.Text);
+        openQuestion("R3Plek", "Op welke plek kan je nooit aan wetenschap doen?", TextInputType.Text);
         activateQuestion("R3Plek")
     };
     const zendHint = () => {

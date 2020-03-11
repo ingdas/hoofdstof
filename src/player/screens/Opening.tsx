@@ -104,7 +104,8 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
         <div>
             <div>
                 <div style={{padding: "20px"}}>Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen.</div>
-                <div className="oTitle">Is onze wetenschapper een man of een vrouw?</div>
+                <div className="oTitle">Jullie beslissen mee hoe onze voorstelling eruit ziet.</div>
+                <div className="oTitle">Wat wil je dat het geslacht is van onze wetenschapper?</div>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" name="customized-radios" value={geslacht}
                                 onChange={changeListener(setGeslacht)}>
@@ -112,7 +113,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
                 </FormControl>
-                <div className="oTitle">Wat onderzoekt onze wetenschapper?</div>
+                <div className="oTitle">Welk domein wil je dat onze wetenschapper onderzoekt?</div>
                 <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
                     {professions.map((v, index) => <FormControlLabel key={index} value={v} control={<StyledRadio/>}

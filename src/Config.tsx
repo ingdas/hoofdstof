@@ -3,10 +3,10 @@ import Newton from './img/fysica/Newton.jpg'
 import Hawking from './img/fysica/Hawking.jpg'
 import Franklin from './img/fysica/Franklin.jpg'
 
-import Aristoteles from './img/biologie/aristoteles.jpeg'
+//import Aristoteles from './img/biologie/aristoteles.jpeg'
 import Campbell from './img/biologie/campbell.jpeg'
 import Darwin from './img/biologie/darwin.jpeg'
-import Leewenhoek from './img/biologie/leeuwenhoek.jpeg'
+//import Leewenhoek from './img/biologie/leeuwenhoek.jpeg'
 import Abdulali from './img/biologie/abdulali.jpg'
 import Carson from './img/biologie/carson.jpg'
 
