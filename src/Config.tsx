@@ -33,7 +33,7 @@ import Mead from './img/antropologie/Mead.jpg'
 import Chomsky from './img/taalkunde/Chomsky.jpg'
 import Pei from './img/taalkunde/Pei.jpg'
 import Pinker from './img/taalkunde/Pinker.jpg'
-import Saussure from './img/taalkunde/Saussure.jpg'
+import Saussure from './img/taalkunde/Saussure.png'
 
 export interface Domein {
     naam: string
@@ -93,7 +93,7 @@ const biologie: Domein = {
     naam: "Biologie",
     wetenschapper: "Charles Darwin",
     quote: "Als iedereen hetzelfde was, zou er niets zoals schoonheid bestaan",
-    afbeeldingen: [Aristoteles, Campbell, Leewenhoek, Darwin],
+    afbeeldingen: [Abdulali, Campbell, Carson, Darwin],
     concurrenten: ["Humayun Abdulali", "Keith Campbell", "Rachel Carson"],
     hints: ["HMS Beagle", "Galapagos", "baard", "19de eeuw"],
 };
