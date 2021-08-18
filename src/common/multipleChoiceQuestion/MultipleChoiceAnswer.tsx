@@ -14,7 +14,7 @@ interface AnswerProps {
     image?: string;
 }
 
-export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps) => {
+const multipleChoiceAnswer = ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps) => {
     const active = !isDefined(playerAnswer);
     const selected = playerAnswer === answer;
 
@@ -56,3 +56,5 @@ export default ({questionId, dispatch, playerAnswer, answer, image}: AnswerProps
         </Paper>
     );
 };
+
+export default multipleChoiceAnswer;

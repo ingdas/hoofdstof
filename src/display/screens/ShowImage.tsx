@@ -1,5 +1,5 @@
 import React from "react";
-import {DisplayState, RoundIntroState} from "../redux/displayState";
+import {DisplayState} from "../redux/displayState";
 import {connect} from "react-redux";
 
 

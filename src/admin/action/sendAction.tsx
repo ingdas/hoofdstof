@@ -109,7 +109,7 @@ export function pingScreen(suggestion: string, source: string) {
 }
 
 export function roundIntro(name: string) {
-    send({type: "RoundIntro", name} as RoundIntroAction);
+    send({type: "RoundIntro", name} as unknown as RoundIntroAction);
     send({type: "WaitScreenPlayer"})
 }
 

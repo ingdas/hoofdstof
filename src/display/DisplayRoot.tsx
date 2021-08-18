@@ -15,7 +15,6 @@ import RoundIntro from "./screens/RoundIntro";
 import {OpeningInfo} from "./screens/OpeningInfo";
 import posed, {PoseGroup} from "react-pose";
 import OpenQuestionDisplay from "./screens/OpenQuestion";
-import ShowImageC from "./screens/ShowImage";
 import ShowImage from "./screens/ShowImage";
 
 interface Props {

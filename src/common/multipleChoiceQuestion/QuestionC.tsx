@@ -9,7 +9,7 @@ interface Props {
     dispatch: any
 }
 
-export default ({question, playerAnswer, dispatch, className}: Props & {className? : string}) => {
+const questionC = ({question, playerAnswer, dispatch, className}: Props & {className? : string}) => {
     question = question || {};
     const answers = question.answers || [];
     return (
@@ -35,3 +35,5 @@ export default ({question, playerAnswer, dispatch, className}: Props & {classNam
                 />)}
         </div>)
 };
+
+export default questionC

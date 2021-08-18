@@ -1,5 +1,4 @@
 import {ThunkAction} from "redux-thunk";
-import {Action} from "redux";
 import {WindowName} from "./interfaces/windowName";
 import {AppState} from "./interfaces/appState";
 import {Player} from "./interfaces/player";
@@ -55,7 +54,7 @@ function dispatchAndEmit(action: Action): ThunkAction<void, AppState, { ws: WebS
 }
 
 export function answerQuestion(questionId: string, answer: string) {
-    const action = {type: "AnswerQuestion", questionId, answer};
+    const action = {type: "AnswerQuestion", questionId, answer} as Action;
     return dispatchAndEmit(action)
 }
 
