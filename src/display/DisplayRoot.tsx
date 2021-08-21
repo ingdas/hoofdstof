@@ -13,7 +13,7 @@ import ChartQuestion from "./screens/ChartQuestion";
 import DisplayMultipleChoiceQuestion from "./screens/DisplayMultipleChoiceQuestion";
 import RoundIntro from "./screens/RoundIntro";
 import {OpeningInfo} from "./screens/OpeningInfo";
-import posed, {PoseGroup} from "react-pose";
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import OpenQuestionDisplay from "./screens/OpenQuestion";
 import ShowImage from "./screens/ShowImage";
 
@@ -22,8 +22,8 @@ interface Props {
     pKey: string
 }
 
-
-const Modal = posed.div({
+/*
+const Modal = motion.div({
     enter: {
         y: 0,
         opacity: 1,
@@ -37,10 +37,11 @@ const Modal = posed.div({
         y: -300,
         opacity: 0,
     }
-});
+});*/
+
 
 const DisplayRoot = ({windowName, pKey}: Props) => {
-    let appWindow;
+    let appWindow : any;
     switch (windowName) {
         case WindowName.ChartQuestion:
             appWindow = <ChartQuestion key={pKey}/>;
@@ -71,13 +72,26 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
         }
     }
 
+    const variants = {
+        initial: { opacity: 0.5, x : 0, y: 1000 },
+        visible: { opacity: 1, x : 0, y: 0 },
+        exit: { opacity: 0.5, x : 0, y: -1000 },
+      }
+
+    
     return (<Container maxWidth="lg">
         <DisplayTimer/>
-        <PoseGroup>
-            <Modal style={{height: 'calc( 100vh - 60px ) ', width: "100%"}} key={"modal"+pKey}>
-                {appWindow}
-            </Modal>
-        </PoseGroup>
+        {Object.values(WindowName).map((cKey) => cKey == windowName && <motion.div
+              initial="initial"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              variants={variants}
+              key={cKey}
+        >
+            {appWindow}
+        </motion.div>)}
+
     </Container>);
 
 };
