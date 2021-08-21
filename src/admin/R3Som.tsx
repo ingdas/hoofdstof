@@ -42,7 +42,7 @@ const R3SomC = ({domain, r3SomAnswers}: Props) => {
         }
     };
     const toonResultaat = () => {
-        chartQuestion("R3Som");
+        chartQuestion("R3Som", String(Number(echteSom)));
     };
 
     return (<div>

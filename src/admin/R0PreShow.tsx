@@ -26,7 +26,7 @@ const R0PreShowC = ({domain, dispatch}: Props) => {
         webSocket.send(JSON.stringify({type: "ClearId"}));
     };
 
-    const setDomain = (index: number) => () => {
+    const setDomain = (index: number | null) => () => {
         const action = {type: "SelectDomain", domain: index};
         webSocket.send(JSON.stringify(action));
         dispatch(action);
@@ -72,6 +72,7 @@ const R0PreShowC = ({domain, dispatch}: Props) => {
                 {domeinen.map((domein, index) => {
                     return <Button color={getColor(index)} onClick={setDomain(index)}>{domein.naam}</Button>
                 })}
+                <Button color="primary" onClick={setDomain(null)}>Reset Domein </Button>
             </ButtonGroup>
      </div>
     )

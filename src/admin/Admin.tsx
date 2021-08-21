@@ -107,8 +107,8 @@ function AdminC({connections, domain}: Props) {
                         paper: classes.drawerPaper,
                     }}
                     anchor="left"
-                >
-                    <List>
+                >{isDefined(domain) && 
+                    [<List>
                         {['R0 PreShow', 'R1 Toeval', 'R2 Faal', 'R3 Sommetjes', 'R4 Fake News', 'R5 Finale', 'R6 Speech'].map((text, index) => (
                             <ListItem
                                 selected={index === ronde}
@@ -120,8 +120,9 @@ function AdminC({connections, domain}: Props) {
                                 <ListItemText primary={text}/>
                             </ListItem>
                         ))}
-                    </List>
-                    <Divider/>
+                    </List>,
+                    <Divider/>]
+                    }
                     <List dense={true}>
                         {['3', '10', '20', '-1'].map((text, index) => (
                             <ListItem
