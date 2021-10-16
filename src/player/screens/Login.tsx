@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {TextField} from "@material-ui/core";
+import {Card, CardContent, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {AppState} from "../interfaces/appState";
 import {LoginState} from "../interfaces/playerState";
 import {waitScreen} from "../playerActions";
+import { type } from "os";
+import { TextInputType } from "../interfaces/question";
 
 
 interface Props {
@@ -19,36 +21,50 @@ const LoginC = ({doLogin, finishLogin}: Props) => {
         <div style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            justifyContent: "center",
+            alignContent: "center"
         }}>
-            <div style={{
-                fontSize: "45px",
-                padding: "10px",
-                textAlign: "center"
-            }}>Welkom bij hoofdstof. <br/> Wat is je naam?
-            </div>
-            <div style={{"padding": "10px"}}>
-                <TextField
+            <Card>
+            <CardContent>
+            <Typography variant="h2" component="div">
+                Welkom bij Hoofdstof!
+            </Typography>
+            </CardContent>
+            </Card>
+
+            <div style={{padding: "20px"}}></div>
+
+            <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+                Wat is je naam?
+            </Typography>
+            <Typography>
+                Wanneer jouw input gebruikt wordt in de show zal je naam getoond worden op het scherm.
+            </Typography>
+
+            <TextField
                     style={{color: "white"}}
-                    label="Naam"
+                    label="Typ je naam hier"
                     value={userName}
                     onChange={(event) => {
                         setName(event.target.value)
                     }}
                 />
-            </div>
-            <Button
-                style={{"margin": "20px"}}
-                variant="contained"
-                color="primary"
-                disabled={userName === ""}
-                onClick={() => {
-                    doLogin(userName);
-                    finishLogin();
-                }}
-            >
-                Log In
-            </Button>
+            </CardContent>
+        </Card>
+        <Button
+            style={{"margin": "20px"}}
+            variant="contained"
+            color="primary"
+            disabled={userName === ""}
+            onClick={() => {
+                doLogin(userName);
+                finishLogin();
+            }}
+        >
+            Log In
+        </Button>
         </div>)
 };
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {Card, CardContent, CardHeader, FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
@@ -62,6 +62,7 @@ const useStyles = makeStyles({
     },
 });
 
+
 function StyledRadio(props: RadioProps) {
     const classes = useStyles();
 
@@ -100,64 +101,102 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
 
     const isDisabled = [geslacht, vakgebied, naam, eigenschap, zin, woord].some(x => x === "");
 
-    return (
-        <div>
-            <div>
-                <div style={{padding: "20px"}}>Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen.</div>
-                <div className="oTitle">Jullie beslissen mee hoe onze voorstelling eruit ziet.</div>
-                <div className="oTitle">Wat wil je dat het geslacht is van onze wetenschapper?</div>
-                <FormControl component="fieldset">
+    return (<div>
+        <Card>
+            <CardContent>
+            <Typography>
+            Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen. Jullie beslissen zo mee hoe onze voorstelling eruit ziet.
+            </Typography>
+            </CardContent>
+        </Card>
+
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            Wat wil je dat het geslacht is van onze wetenschapper?
+            </Typography>
+            <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" name="customized-radios" value={geslacht}
                                 onChange={changeListener(setGeslacht)}>
                         <FormControlLabel value="vrouw" control={<StyledRadio/>} label="Vrouw"/>
                         <FormControlLabel value="man" control={<StyledRadio/>} label="Man"/>
                     </RadioGroup>
                 </FormControl>
-                <div className="oTitle">Welk domein wil je dat onze wetenschapper onderzoekt?</div>
-                <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
+            </CardContent>
+        </Card>
+
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            Welk domein wil je dat onze wetenschapper onderzoekt?
+            </Typography>
+            <RadioGroup aria-label="beroep" value={vakgebied} onChange={changeListener(setVakgebied)}
                             name="customized-radios">
                     {professions.map((v, index) => <FormControlLabel key={index} value={v} control={<StyledRadio/>}
                                                                      label={v}/>)}
-                </RadioGroup>
-                <div className="oTitle">Hoe heet onze wetenschapper?</div>
-                <div style={{"padding": "10px"}}>
-                    <TextField
+            </RadioGroup>
+            </CardContent>
+        </Card>
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            Hoe heet onze wetenschapper?
+            </Typography>
+            <TextField
                         style={{}}
-                        label="Naam"
+                        label="Doe hier een voorstel"
                         value={naam}
                         onChange={changeListener(setNaam)}
                     />
-                </div>
-                <div className="oTitle">Wat maakt onze wetenschapper bijzonder?</div>
-                <div style={{"padding": "10px"}}>
-                    <TextField
+            </CardContent>
+        </Card>
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            Wat maakt onze wetenschapper bijzonder?
+            </Typography>
+            <TextField
                         style={{}}
-                        label="Eigenschap"
+                        label="Doe hier een voorstel"
                         value={eigenschap}
                         onChange={changeListener(setEigenschap)}
                     />
-                </div>
-                <div className="oTitle">Een zin die wetenschappelijk klinkt</div>
-                <div style={{"padding": "10px"}}>
-                    <TextField
+            </CardContent>
+        </Card>
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            Een zin die wetenschappelijk klinkt
+            </Typography>
+            <TextField
                         style={{}}
-                        label="Zin"
+                        label="Het hoeft niet echt te kloppen"
                         value={zin}
                         onChange={changeListener(setZin)}
                     />
-                </div>
-                <div className="oTitle">{speechQuestion}</div>
-                <div style={{"padding": "10px"}}>
-                    <TextField
+            </CardContent>
+        </Card>
+        <div style={{padding: "20px"}}></div>
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            {speechQuestion}
+            </Typography>
+            <TextField
                         style={{}}
                         label="Woord"
                         value={woord}
                         onChange={changeListener(setWoord)}
                     />
-                </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+            </CardContent>
+        </Card>
 
-                <Button
+        <Button
                     style={{"margin": "20px", "width" : "80vw"}}
                     variant="contained"
                     color="primary"
@@ -166,8 +205,6 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                 >
                     Start
                 </Button>
-                </div>
-            </div>
         </div>)
 };
 

@@ -1,4 +1,4 @@
-html {
+html, .player {
     background-color: #28b674;
 }
 
@@ -17,15 +17,14 @@ html, #root, .fullHeight {
     font-size: 2em;
 }
 
-.oTitle {
-    font-size: 2em;
-    padding-top: 30px;
-    margin-bottom: -5px;
-}
-
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%
+}
+
+body {
+    height: calc(100% - 50px)
 }
 
 svg {
@@ -34,10 +33,6 @@ svg {
 
 .MuiContainer-maxWidthMd {
     max-width: 1200px !important;
-}
-
-body {
-    height: calc(100% - 50px)
 }
 
 
@@ -58,10 +53,6 @@ body {
     color: black !important;
 }
 
-.player .MuiInputBase-input, .player .MuiInputBase-root, .player .MuiInputLabel-formControl, .player input, .player MuiInput-input {
-    color: white !important;
-}
-
 .administratie {
     color: black;
     background-color: #28b674;
@@ -69,4 +60,17 @@ body {
 
 .player .multiAnswer {
     font-size: 1em !important;
+}
+
+#openVideo {
+        position: relative;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+        text-align: center; /* Centered text/links */
+}
+
+video {
+    width: inherit;
+    height: inherit;
 }

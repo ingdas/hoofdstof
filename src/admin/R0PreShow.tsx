@@ -5,7 +5,7 @@ import {WachtBtn} from "./components/WachtBtn";
 import {webSocket} from "../index";
 
 import {domeinen, speechQuestions} from "../Config";
-import {openingScreen} from "./action/sendAction";
+import {openingScreen, startVideo} from "./action/sendAction";
 import {AdminState} from "./redux/adminState";
 import {connect} from "react-redux";
 import SuggestieSelector from "./components/SuggestieSelector";
@@ -20,6 +20,9 @@ const R0PreShowC = ({domain, dispatch}: Props) => {
     const handleOpening = () => {
         const namen = domeinen.map((it) => it.naam);
         openingScreen(namen, speechQuestions);
+    };
+    const handleVideo = () => {
+        startVideo();
     };
 
     const handleLogout = () => {
@@ -51,7 +54,12 @@ const R0PreShowC = ({domain, dispatch}: Props) => {
                 >
                     Openingsscherm
                 </Button>
-
+                <Button
+                    color="primary"
+                    onClick={handleVideo}
+                >
+                    Start Video
+                </Button>
                 <Button
                     color="primary"
                     onClick={handleLogout}

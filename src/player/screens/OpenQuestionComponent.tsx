@@ -1,12 +1,12 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
-import {TextField} from "@material-ui/core";
+import {Card, CardContent, FormControl, FormControlLabel, RadioGroup, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {answerQuestion} from "../playerActions";
 import {OpenQuestion, TextInputType} from "../interfaces/question";
 import {AppState} from "../interfaces/appState";
 import {PlayerPosingQuestion} from "../interfaces/playerState";
-import {vibrate} from "../../util";
+import {changeListener, vibrate} from "../../util";
 
 interface Props {
     type: TextInputType
@@ -45,22 +45,12 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
             justifyContent: "center",
             alignContent: "center"
         }}>
-            <div style={{
-                padding: "10px",
-                display: "flex",
-                flexDirection: "row",
-                alignSelf: "center",
-                textAlign: "center"
-            }}>
-                <div className="qTitle">{question}</div>
-            </div>
-            <div style={{
-                padding: "10px",
-                display: "flex",
-                flexDirection: "row",
-                alignSelf: "center"
-            }}>
-                <TextField
+        <Card>
+            <CardContent>
+            <Typography variant="h5" component="div">
+            {question}
+            </Typography>
+            <TextField
                     style={{}}
                     label="Antwoord"
                     value={answer}
@@ -73,13 +63,8 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
                         inputMode: "numeric"
                     } : {}}
                 />
-            </div>
-            <div style={{
-                padding: "10px",
-                display: "flex",
-                flexDirection: "row",
-                alignSelf: "center"
-            }}>
+            </CardContent>
+        </Card>
                 {!done && <Button
                     style={{"margin": "20px", width: "40vw"}}
                     variant="contained"
@@ -88,7 +73,6 @@ const TextInputC = ({initialAnswer, questionId, question, type, done, dispatch}:
                 >
                     Verzenden
                 </Button>}
-            </div>
         </div>)
 };
 

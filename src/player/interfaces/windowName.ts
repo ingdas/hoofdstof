@@ -6,6 +6,7 @@ export enum WindowName {
     WordCloud = "WordCloud",
     Login = "Login",
     Opening = "Opening",
+    VideoStart = "VideoStart",
     RoundIntro = "RoundIntro",
     Ping = "Ping",
     ShowImage = "ShowImage"

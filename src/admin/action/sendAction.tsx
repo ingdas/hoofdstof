@@ -93,6 +93,12 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
     } as OpeningQuestionAction)
 }
 
+export function startVideo() {
+    send({
+        type: "VideoStart"
+    })
+}
+
 export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<string>) {
     send({type: "ShowHint", hint: {hint, questionIds, rightAnswers}} as ShowHintAction)
 }

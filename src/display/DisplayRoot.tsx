@@ -16,33 +16,20 @@ import {OpeningInfo} from "./screens/OpeningInfo";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import OpenQuestionDisplay from "./screens/OpenQuestion";
 import ShowImage from "./screens/ShowImage";
+import Video from "./screens/Video";
+
 
 interface Props {
     windowName: string
     pKey: string
 }
 
-/*
-const Modal = motion.div({
-    enter: {
-        y: 0,
-        opacity: 1,
-        delay: 300,
-        transition: {
-            y: {type: 'spring', stiffness: 100, damping: 5},
-            default: {duration: 300}
-        }
-    },
-    exit: {
-        y: -300,
-        opacity: 0,
-    }
-});*/
-
 
 const DisplayRoot = ({windowName, pKey}: Props) => {
     let appWindow : any;
     switch (windowName) {
+        case WindowName.VideoStart:
+            return <Video key={pKey}/>;
         case WindowName.ChartQuestion:
             appWindow = <ChartQuestion key={pKey}/>;
             break;
@@ -85,7 +72,7 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
               initial="initial"
               animate="visible"
               exit="exit"
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 1.3 }}
               variants={variants}
               key={cKey}
         >

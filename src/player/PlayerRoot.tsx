@@ -1,6 +1,6 @@
 import React from 'react';
 import '../common/Common.css';
-import {Container, createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+import {Container, createTheme, MuiThemeProvider} from "@material-ui/core";
 import {connect} from "react-redux";
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -21,7 +21,7 @@ interface Props {
     windowName: WindowName
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
         palette: {
             primary: {
                 main: 'rgb(102, 44, 143)'
