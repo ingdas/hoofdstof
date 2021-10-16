@@ -61,18 +61,18 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
 
     const variants = {
         initial: { opacity: 0.5, x : 0, y: 1000 },
-        visible: { opacity: 1, x : 0, y: 0 },
+        visible: { opacity: 1, x : 0, y: 0, height: "inherit"},
         exit: { opacity: 0.5, x : 0, y: -1000 },
       }
 
     
-    return (<Container maxWidth="lg">
+    return (<Container maxWidth="lg" className="fullHeight">
         <DisplayTimer/>
         {Object.values(WindowName).map((cKey) => cKey == windowName && <motion.div
               initial="initial"
               animate="visible"
               exit="exit"
-              transition={{ duration: 1.3 }}
+              transition={{ duration: 0.5 }}
               variants={variants}
               key={cKey}
         >

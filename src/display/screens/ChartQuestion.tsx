@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis, } from 'recharts';
+import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis, Label, LabelList} from 'recharts';
 import { ChartQuestionState, DisplayState } from "../redux/displayState";
 import { isDefined, isNumeric } from "../../util";
 
@@ -69,7 +69,8 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
 
 
     const CustomBarLabel = (a: any) => {
-        const { index, x, y }: { index: number, x: number, y: number, value: string } = a;
+        const { index, x, y, height}: { index: number, x: number, y: number, height: number, value: string } = a;
+        console.log(a)
         let fillColor = "white";
         if (isDefined(rightAnswer)) {
             if (data[index]["name"] === rightAnswer) {
@@ -79,8 +80,10 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
             }
         }
 
-        return <text x={x} y={y} dx={20} dy={5} fontSize="50" fill={fillColor}
-            alignmentBaseline={"hanging"} >({data[index]["stemmen"]}) {data[index]["name"]}</text>;
+        const h = height / 2;
+
+        return <text x={x} y={y} dx={20} dy={h} fontSize="50" fill={fillColor}
+            alignmentBaseline={"middle"} >({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
     return (<div className="fullHeight" style={{ marginTop: "50px" }}>
@@ -95,7 +98,7 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
             >
                 <XAxis type="number" tick={false} axisLine={false} />
                 <YAxis type="category" tick={false} dataKey="name" axisLine={false} />
-                <Bar label={CustomBarLabel} dataKey="stemmen" fill="rgb(102, 44, 143)" radius={[20, 20, 20, 20]}>
+                <Bar dataKey="stemmen" fill="rgb(102, 44, 143)" radius={[20, 20, 20, 20]}>
                     {
                         data.map((entry, index) => {
                             if (isDefined(rightAnswer)) {
@@ -104,7 +107,8 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
                             }
                             return "";
                         })
-                    }
+                   }
+                    <LabelList content={CustomBarLabel} dataKey="stemmen" position="center"/>
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
