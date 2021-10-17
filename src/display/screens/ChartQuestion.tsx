@@ -25,15 +25,15 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
 
     if (isNumeric(rightAnswer) && isDefined(rightAnswer)) {
         const data: Record<string, number> = {};
-        
+
         const rightAns = Number(rightAnswer)
         const underBound = Math.round(0.95 * rightAns)
         const upperBound = Math.round(0.95 * rightAns)
-        
-        const keys = ["Veel te laag (<"+ underBound + ")", 
-                      "Net te laag (" + underBound + " - " + (rightAns - 1) + ")", 
-                      "Exact (" + rightAns + ")", 
-                      "Net te hoog (" + (rightAns + 1) + " - " + upperBound + ")", 
+
+        const keys = ["Veel te laag (<"+ underBound + ")",
+                      "Net te laag (" + underBound + " - " + (rightAns - 1) + ")",
+                      "Exact (" + rightAns + ")",
+                      "Net te hoog (" + (rightAns + 1) + " - " + upperBound + ")",
                       "Veel te hoog(>"+ upperBound + ")"
                     ]
         for (const i in keys) {
@@ -86,7 +86,7 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
             alignmentBaseline={"middle"} >({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
-    return (<div className="fullHeight" style={{ marginTop: "50px" }}>
+    return (<div style={{ paddingTop: "50px", height: "calc(100% - 50px)" }}>
         {question.toString().length > 0 && <div style={{ fontSize: "50px", marginBottom: "50px" }}>{question.toString()}</div>}
         <ResponsiveContainer width="100%" height="70%">
             <BarChart

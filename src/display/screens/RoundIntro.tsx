@@ -39,8 +39,8 @@ const RoundIntroC = ({name}: Props) => {
     }
 
     return (
-        <div style={{display: "flex", flexDirection: "column", margin: "-20px", alignContent: "center"}}>
-            <div style={{marginTop: "40px", marginBottom: "-100px"}}>
+        <div style={{display: "flex", flexDirection: "column", padding: "-20px", alignContent: "center"}}>
+            <div style={{paddingTop: "40px", paddingBottom: "-100px"}}>
                 <img
                     alt="hoofdstof"
                     src={img}

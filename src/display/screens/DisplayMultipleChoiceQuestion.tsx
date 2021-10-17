@@ -17,5 +17,7 @@ export function mapDispatchToProps(dispatch: any) {
 }
 
 export default styled(connect(mapStateToProps, mapDispatchToProps)(QuestionC))({
-    marginTop: "50px"
+    paddingTop: "50px",
+    height: "calc(100% - 50px)",
+    justifyContent: "center"
 });

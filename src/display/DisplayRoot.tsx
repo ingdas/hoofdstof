@@ -17,7 +17,7 @@ import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import OpenQuestionDisplay from "./screens/OpenQuestion";
 import ShowImage from "./screens/ShowImage";
 import Video from "./screens/Video";
-
+import background from '../img/background.png'
 
 interface Props {
     windowName: string
@@ -65,8 +65,10 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
         exit: { opacity: 0.5, x : 0, y: -1000 },
       }
 
-    
-    return (<Container maxWidth="lg" className="fullHeight">
+
+    return (
+      <div style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", height: "100vh", width: "100vw"}}>
+      <Container maxWidth="lg" className="fullHeight">
         <DisplayTimer/>
         {Object.values(WindowName).map((cKey) => cKey == windowName && <motion.div
               initial="initial"
@@ -78,8 +80,8 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
         >
             {appWindow}
         </motion.div>)}
-
-    </Container>);
+    </Container>
+  </div>);
 
 };
 

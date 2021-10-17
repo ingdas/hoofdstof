@@ -23,10 +23,6 @@ html, body {
     height: 100%
 }
 
-body {
-    height: calc(100% - 50px)
-}
-
 svg {
     overflow: visible;
 }
