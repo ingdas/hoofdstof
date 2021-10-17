@@ -28,7 +28,7 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
 
         const rightAns = Number(rightAnswer)
         const underBound = Math.round(0.95 * rightAns)
-        const upperBound = Math.round(0.95 * rightAns)
+        const upperBound = Math.round(1.05 * rightAns)
 
         const keys = ["Veel te laag (<"+ underBound + ")",
                       "Net te laag (" + underBound + " - " + (rightAns - 1) + ")",
@@ -36,6 +36,7 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
                       "Net te hoog (" + (rightAns + 1) + " - " + upperBound + ")",
                       "Veel te hoog(>"+ upperBound + ")"
                     ]
+        rightAnswer = keys[2]
         for (const i in keys) {
             data[keys[i]] = 0
         }
