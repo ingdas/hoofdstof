@@ -3,7 +3,6 @@ import {Question} from "../../player/interfaces/question";
 
 export enum DisplayActionType {
     NewDisplayState = "NewDisplayState",
-    Answer = "Answer"
 }
 
 export interface NewDisplayStateAction {

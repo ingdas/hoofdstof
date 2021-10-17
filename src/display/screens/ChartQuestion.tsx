@@ -20,7 +20,6 @@ function toData(count: Record<string, number>): any[] {
 }
 
 const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
-    console.log(question, answerCount, rightAnswer)
     var sort = true
 
     if (isNumeric(rightAnswer) && isDefined(rightAnswer)) {
@@ -71,7 +70,6 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
 
     const CustomBarLabel = (a: any) => {
         const { index, x, y, height}: { index: number, x: number, y: number, height: number, value: string } = a;
-        console.log(a)
         let fillColor = "white";
         if (isDefined(rightAnswer)) {
             if (data[index]["name"] === rightAnswer) {
