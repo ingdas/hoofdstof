@@ -70,16 +70,21 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
       <div style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", height: "100vh", width: "100vw"}}>
       <Container maxWidth="lg" className="fullHeight">
         <DisplayTimer/>
-        {Object.values(WindowName).map((cKey) => cKey == windowName && <motion.div
+        <AnimateSharedLayout>
+        {Object.values(WindowName).map((cKey) =>
+          <AnimatePresence> {cKey == windowName &&
+          <motion.div
               initial="initial"
               animate="visible"
               exit="exit"
-              transition={{ duration: 0.5 }}
+              transition={{ type: 'spring', duration: 0.5 }}
               variants={variants}
+              style={{position: "absolute"}}
               key={cKey}
         >
             {appWindow}
-        </motion.div>)}
+        </motion.div>} </AnimatePresence>)}
+        </AnimateSharedLayout>
     </Container>
   </div>);
 
