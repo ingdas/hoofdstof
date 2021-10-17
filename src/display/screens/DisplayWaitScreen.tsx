@@ -9,6 +9,7 @@ export const DisplayWaitScreen = (_: {}) => {
         backgroundSize: 'contain',
         height: 'calc(100vh - 50px)',
         maxWidth: '100%',
+        width: '60vw',
         paddingTop: '25px',
         backgroundPosition: "center",
     };

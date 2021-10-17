@@ -60,9 +60,9 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
     }
 
     const variants = {
-        initial: { opacity: 0.5, x : 0, y: 1000 },
+        initial: { opacity: 0.5, x : 0, y: 1100 },
         visible: { opacity: 1, x : 0, y: 0, height: "inherit"},
-        exit: { opacity: 0.5, x : 0, y: -1000 },
+        exit: { opacity: 0.5, x : 0, y: -1100 },
       }
 
 
@@ -77,7 +77,7 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
               initial="initial"
               animate="visible"
               exit="exit"
-              transition={{ type: 'spring', duration: 0.5 }}
+              transition={{ type: 'spring', duration: 0.9 }}
               variants={variants}
               style={{position: "absolute"}}
               key={cKey}
