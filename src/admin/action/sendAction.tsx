@@ -16,6 +16,8 @@ import Ding from '../../sounds/ding.wav'
 import TimerSound from "../../sounds/timer.mp3";
 // @ts-ignore
 import TimeUp from "../../sounds/done.wav";
+// @ts-ignore
+import Intro from "../../sounds/intro.mp3";
 
 let TimerAudio: any = null;
 let timeEvent: any = null;
@@ -94,9 +96,8 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
 }
 
 export function startVideo() {
-    send({
-        type: "VideoStart"
-    })
+    send({type: "VideoStart"})
+    introSound()
 }
 
 export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<string>) {
@@ -126,6 +127,13 @@ export function showImage(src: string) {
 function ding() {
     let audio = new Audio();
     audio.src = Ding;
+    audio.load();
+    audio.play();
+}
+
+function introSound() {
+    let audio = new Audio();
+    audio.src = Intro;
     audio.load();
     audio.play();
 }
