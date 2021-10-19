@@ -77,9 +77,9 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
               initial="initial"
               animate="visible"
               exit="exit"
-              transition={{ type: 'spring', duration: 0.9 }}
+              transition={{ type: 'spring', duration: 1.5 }}
               variants={variants}
-              style={{position: "absolute"}}
+              style={{position: "absolute", left: 0, right: 0}}
               key={cKey}
         >
             {appWindow}

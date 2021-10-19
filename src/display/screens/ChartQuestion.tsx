@@ -85,7 +85,7 @@ const ChartQuestion = ({ question, answerCount, rightAnswer }: Props) => {
             alignmentBaseline={"middle"} >({data[index]["stemmen"]}) {data[index]["name"]}</text>;
     };
 
-    return (<div style={{ paddingTop: "50px", height: "calc(100% - 50px)" }}>
+    return (<div style={{ paddingTop: "130px", height: "calc(100% - 50px)", maxWidth: "1280px", left: "0", right: 0, margin: "auto" }}>
         {question.toString().length > 0 && <div style={{ fontSize: "50px", marginBottom: "50px" }}>{question.toString()}</div>}
         <ResponsiveContainer width="100%" height="70%">
             <BarChart
