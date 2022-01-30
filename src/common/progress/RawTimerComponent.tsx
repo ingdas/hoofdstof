@@ -40,10 +40,10 @@ export default ({className, timeLeft, totalTime, startTime}: TimerState & { clas
             className={className}
             value={totalTime - seconds}
             maxValue={totalTime}
-            text={"" + seconds}
+            text={seconds.toString()}
             background
             backgroundPadding={6}
-            styles={buildStyles({
+            styles={{...buildStyles({
                 textSize: '2.5em',
                 pathTransitionDuration: 1,
 
@@ -52,10 +52,17 @@ export default ({className, timeLeft, totalTime, startTime}: TimerState & { clas
 
                 // Colors
                 backgroundColor: '#FFF',
-                textColor: '#28b674',
-                pathColor: '#28b674',
+                textColor: '#52167b',
+                pathColor: '#f7941d',
                 trailColor: 'transparent'
-            })}
+            }),
+            text: {
+                fontSize: "2.5em",
+                fill: '#52167b',
+                verticalAlign: "center",
+                dominantBaseline: 'central'
+            }
+        }}
         />
     );
 };

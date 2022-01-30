@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {PlayerHint} from "../interfaces/playerState";
 import {AppState} from "../interfaces/appState";
 import {isNumeric} from "../../util";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 
 interface Props {
@@ -12,12 +13,24 @@ interface Props {
 
 const ShowHintC = ({hint, isRight}: Props) => {
     if (isRight) {
-        return (<>
-            <div style={{fontSize: "2em"}}>Onthoud deze hint voor de finale:</div>
-            <div style={{width: "100%", textAlign: "center", fontSize: "2em"}}><br/>{hint}</div>
-        </>)
+        return (<Card>
+        <CardContent>
+        <Typography variant="h5" component="div">
+        Onthoud de volgende hint voor de finale:
+        </Typography>
+        <Typography variant="h3" component="div" style={{textAlign: "center"}}>
+        {hint}
+        </Typography>
+        </CardContent>
+    </Card>)
     } else {
-        return <div style={{fontSize: "2em"}}>Helaas, je hebt de vraag fout beantwoord</div>
+        return (<Card>
+        <CardContent>
+        <Typography variant="h5" component="div">
+        Helaas, je hebt de vraag fout beantwoord.
+        </Typography>
+        </CardContent>
+    </Card>)
     }
 };
 
