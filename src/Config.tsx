@@ -48,7 +48,6 @@ export const uitvindingen: Array<string> = [
     "Velcro",
     "Cornflakes",
     "Post-its",
-    "Het theezakje",
     "Het raketijsje",
 //    "Chips",
     "Play-Doh",
