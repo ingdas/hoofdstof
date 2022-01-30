@@ -23,6 +23,7 @@ const questionC = ({question, playerAnswer, dispatch, className}: Props & {class
                 fontSize: "5vh",
                 paddingBottom: "25px",
                 textAlign: "center",
+                whiteSpace: "pre-wrap"
             }}>{question.question}</div>
             {answers.map((v, index) =>
                 <MultipleChoiceAnswer

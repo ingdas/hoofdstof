@@ -16,7 +16,7 @@ const OpenQuestionDisplay = ({value}: Props) => {
             justifyContent: "center",
             height: "100%"
         }}>
-            <div style={{fontSize: "64px", textAlign: "center"}}>{value}</div>
+            <div style={{fontSize: "64px", whiteSpace: "pre-wrap", textAlign: "center"}}>{value}</div>
         </div>
     )
 };

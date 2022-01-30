@@ -75,7 +75,7 @@ export const faalAntwoorden: Array<string> = [
     "D. In beslag genomen"
 ];
 
-export const faalVraag: string = "Wat faalde er bij de legerdemonstratie van het eerste vliegtuig?";
+export const faalVraag: string = "Wat faalde er bij de legerdemonstratie\nvan het eerste vliegtuig?";
 
 export const faalJuistAntwoord: number = 1;
 
