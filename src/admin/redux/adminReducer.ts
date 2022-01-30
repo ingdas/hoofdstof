@@ -16,7 +16,8 @@ function welcome(str: string) {
 export function adminReducer(state: AdminState = initialAdminState, action: any): AdminState {
     switch (action.type) {
         case AdminActionType.NewAdminState: {
-            return (action as unknown as NewAdminStateAction).adminState
+            const outp = (action as unknown as NewAdminStateAction).adminState
+            return outp
         }
         case AdminActionType.SelectDomain : {
             return {
@@ -50,8 +51,17 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
             }
         }
         case "Welcome" : {
-            welcome(action.name)
+            welcome(action.name);
+            break;
         }
+        case "NewLeaderboard": {
+            console.log(action);
+            return {
+                ...state,
+                ...action
+            }
+        }
+        
     }
     return state;
 }

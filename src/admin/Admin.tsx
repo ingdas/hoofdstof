@@ -21,6 +21,7 @@ import {connect} from "react-redux";
 import {domeinen} from "../Config";
 import {isDefined} from "../util";
 import {deltaSeconds, NewTimer} from "./action/sendAction";
+import Leaderboard from './components/Leaderboard';
 
 const drawerWidth = 240;
 
@@ -184,6 +185,8 @@ function AdminC({connections, domain}: Props) {
                             </>
                         )
                         }
+                    <Divider/>
+                    <Leaderboard></Leaderboard>
                     </List>
                 </Drawer>
                 <main className={classes.content}>
