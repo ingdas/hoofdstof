@@ -97,7 +97,12 @@ export function openingScreen(professions: Array<string>, speechQuestions: Array
 
 export function startVideo() {
     send({type: "VideoStart"})
-    introSound()
+    videoSound(0)
+}
+
+export function endVideo() {
+    send({type: "VideoEnd"})
+    videoSound(10)
 }
 
 export function showHint(hint: string, questionIds: Array<string>, rightAnswers: Array<string>) {
@@ -131,9 +136,10 @@ function ding() {
     audio.play();
 }
 
-function introSound() {
+function videoSound(offset : number) {
     let audio = new Audio();
     audio.src = Intro;
+    audio.currentTime = offset;
     audio.load();
     audio.play();
 }

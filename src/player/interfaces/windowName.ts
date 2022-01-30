@@ -7,6 +7,7 @@ export enum WindowName {
     Login = "Login",
     Opening = "Opening",
     VideoStart = "VideoStart",
+    VideoEnd = "VideoEnd",
     RoundIntro = "RoundIntro",
     Ping = "Ping",
     ShowImage = "ShowImage"

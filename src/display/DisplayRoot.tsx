@@ -29,7 +29,9 @@ const DisplayRoot = ({windowName, pKey}: Props) => {
     let appWindow : any;
     switch (windowName) {
         case WindowName.VideoStart:
-            return <Video key={pKey}/>;
+            return <Video key={pKey} offset={0}/>;
+        case WindowName.VideoEnd:
+            return <Video key={pKey} offset={10}/>;
         case WindowName.ChartQuestion:
             appWindow = <ChartQuestion key={pKey}/>;
             break;
