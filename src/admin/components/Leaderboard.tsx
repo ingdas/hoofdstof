@@ -10,8 +10,7 @@ interface Props {
 }
 
 function LeaderboardC({leaderboard}: Props) {
-    console.log(leaderboard);
-    if(leaderboard == undefined){
+    if(leaderboard === undefined){
         return <></>
     }
     return (

@@ -5,8 +5,6 @@ import Button from "@material-ui/core/Button";
 import {AppState} from "../interfaces/appState";
 import {LoginState} from "../interfaces/playerState";
 import {waitScreen} from "../playerActions";
-import { type } from "os";
-import { TextInputType } from "../interfaces/question";
 
 
 interface Props {

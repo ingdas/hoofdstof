@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis, Label, LabelList} from 'recharts';
+import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis, LabelList} from 'recharts';
 import { ChartQuestionState, DisplayState } from "../redux/displayState";
 import { isDefined, isNumeric } from "../../util";
 

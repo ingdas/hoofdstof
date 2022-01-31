@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {Card, CardContent, CardHeader, FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField, Typography} from "@material-ui/core";
+import {Card, CardContent, FormControlLabel, makeStyles, Radio, RadioGroup, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {RadioProps} from "@material-ui/core/Radio";
 import clsx from "clsx";
@@ -82,7 +82,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
         dispatch(waitScreen());
     }
 
-    let [geslacht, setGeslacht] = useState("");
+    // let [geslacht, setGeslacht] = useState("");
     let [vakgebied, setVakgebied] = useState("");
     let [naam, setNaam] = useState("");
     let [eigenschap, setEigenschap] = useState("");
@@ -90,7 +90,6 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
     let [woord, setWoord] = useState("");
 
     const finishForm = () => {
-        dispatch(answerQuestion("R0Geslacht", geslacht));
         dispatch(answerQuestion("R0Vakgebied", vakgebied));
         dispatch(answerQuestion("R0Naam", naam));
         dispatch(answerQuestion("R0Eigenschap", eigenschap));
@@ -214,7 +213,7 @@ function mapStateToProps(state: AppState) {
     const playerId = Math.abs(Number(state.player.id.slice(0, 10)));
     const speechQuestion = speechQuestions[playerId % speechQuestions.length];
 
-    const alreadyDone = isDefined((state.player.answers["R0Geslacht"]));
+    const alreadyDone = isDefined((state.player.answers["R0Naam"]));
 
     return {professions, speechQuestion, alreadyDone}
 }

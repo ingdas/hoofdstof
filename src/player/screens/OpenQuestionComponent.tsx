@@ -1,12 +1,12 @@
 import React, {FormEvent, MouseEventHandler, useState} from "react";
 import {connect} from "react-redux";
-import {Card, CardContent, FormControl, FormControlLabel, RadioGroup, TextField, Typography} from "@material-ui/core";
+import {Card, CardContent, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {answerQuestion} from "../playerActions";
 import {OpenQuestion, TextInputType} from "../interfaces/question";
 import {AppState} from "../interfaces/appState";
 import {PlayerPosingQuestion} from "../interfaces/playerState";
-import {changeListener, vibrate} from "../../util";
+import {vibrate} from "../../util";
 
 interface Props {
     type: TextInputType

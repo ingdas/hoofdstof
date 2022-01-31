@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from '../../img/logo.png';
 import {store} from '../../index'
 
 const endHandler = function(a : any){

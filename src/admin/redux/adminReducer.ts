@@ -55,7 +55,6 @@ export function adminReducer(state: AdminState = initialAdminState, action: any)
             break;
         }
         case "NewLeaderboard": {
-            console.log(action);
             return {
                 ...state,
                 ...action
