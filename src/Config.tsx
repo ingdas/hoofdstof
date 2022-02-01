@@ -135,7 +135,7 @@ const taalkunde : Domein = {
 
 const antropologie : Domein = {
     naam: "Menskunde",
-    quote: "Een fles wijn bevat meer filosofie dan alle boeken van de wereld.",
+    quote: "Het grootste gevaar voor onze toekomst is apathie.",
     wetenschapper: "Jane Goodall",
     concurrenten : ["Zora Neale Hurston", "Clifford Geertz", "Margaret Mead"],
     afbeeldingen : [Hurston, Geertz, Mead, Goodall],

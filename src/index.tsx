@@ -91,6 +91,24 @@ function getName(): string | null {
     return window.localStorage[USERNAMEKEY]
 }
 
+function test(name : string){
+    let webSocket = new ReconnectingWebSocket(getURL());
+    webSocket.send(JSON.stringify({type: "Register", name}));
+    // webSocket.send(JSON.stringify({"type":"AnswerQuestion","questionId":"R0Naam","answer":"Bram" + name}));
+    // if(Math.random() < 0.5){
+    //     webSocket.send(JSON.stringify({"type":"AnswerQuestion","questionId":"R1Quizvraag","answer":"Manier 1"}));
+    // }else{
+    //     webSocket.send(JSON.stringify({"type":"AnswerQuestion","questionId":"R1Quizvraag","answer":"Manier 2"}));
+    // }
+    webSocket.send(JSON.stringify({"type":"AnswerQuestion","questionId":"R3Som","answer": Math.floor(Math.random()*100).toString()}));
+}
+
+if(document.location.pathname === "/test"){
+    for(let i = 1 ; i < 250 ; i++){
+        test("U"+i)
+    }
+}
+
 const rootElement = document.getElementById('root');
 if(AppLocation === Loc.PLAYER){
     ReactDOM.render(
