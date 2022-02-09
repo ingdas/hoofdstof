@@ -105,7 +105,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
         <Card>
             <CardContent>
             <Typography>
-            Via dit formulier help je ons mee de show te starten. Maar leg je gsm niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen. Jullie beslissen zo mee hoe onze voorstelling eruit ziet.
+            Via dit formulier help je ons mee de show te starten. Je mag dit onmiddellijk beginnen invullen en alle antwoorden zelf verzinnen. Leg je gsm hierna niet te ver weg, tijdens de show zullen nieuwe vragen op deze pagina verschijnen. Jullie beslissen zo mee hoe onze voorstelling eruit ziet.
             </Typography>
             </CardContent>
         </Card>
@@ -146,7 +146,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
             Hoe heet onze wetenschapper?
             </Typography>
             <TextField
-                        style={{}}
+                        style={{width: '100%'}}
                         label="Doe hier een voorstel"
                         value={naam}
                         onChange={changeListener(setNaam)}
@@ -160,7 +160,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
             Wat maakt onze wetenschapper bijzonder?
             </Typography>
             <TextField
-                        style={{}}
+                        style={{width: '100%'}}
                         label="Doe hier een voorstel"
                         value={eigenschap}
                         onChange={changeListener(setEigenschap)}
@@ -174,7 +174,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
             Een zin die wetenschappelijk klinkt
             </Typography>
             <TextField
-                        style={{}}
+                        style={{width: '100%'}}
                         label="Het hoeft niet echt te kloppen"
                         value={zin}
                         onChange={changeListener(setZin)}
@@ -188,7 +188,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
             {speechQuestion}
             </Typography>
             <TextField
-                        style={{}}
+                        style={{width: '100%'}}
                         label="Woord"
                         value={woord}
                         onChange={changeListener(setWoord)}

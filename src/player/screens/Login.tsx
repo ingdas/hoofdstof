@@ -34,11 +34,12 @@ const LoginC = ({doLogin, finishLogin}: Props) => {
 
             <Card>
             <CardContent>
+            <Typography>
+                Jij beslist mee hoe de show eruit ziet via je gsm. Begin nu al met je naam in te vullen.
+                Wanneer jouw input gebruikt wordt in de show zal je naam getoond worden op het scherm.
+            </Typography>
             <Typography variant="h5" component="div">
                 Wat is je naam?
-            </Typography>
-            <Typography>
-                Wanneer jouw input gebruikt wordt in de show zal je naam getoond worden op het scherm.
             </Typography>
 
             <TextField
