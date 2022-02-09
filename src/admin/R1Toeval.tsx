@@ -19,8 +19,8 @@ import {AdminState} from "./redux/adminState";
 
 export const R1ToevalC = ({domain}: { domain?: number }) => {
 
-    const [manier1, setManier1] = useState("Manier 1");
-    const [manier2, setManier2] = useState("Manier 2");
+    const [manier1, setManier1] = useState("");
+    const [manier2, setManier2] = useState("");
 
     const antwoorden = [manier1, manier2];
 
@@ -82,11 +82,13 @@ export const R1ToevalC = ({domain}: { domain?: number }) => {
             >
                 <Button
                     onClick={quizVraag}
+                    disabled={manier1 === "" || manier2 === ""}
                 >
                     Display Quiz
                 </Button>
                 <Button
                     onClick={quizVraag2}
+                    disabled={manier1 === "" || manier2 === ""}
                 >
                     Start Quiz
                 </Button>
