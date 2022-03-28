@@ -26,6 +26,10 @@ export enum Loc {
 export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER :
     document.location.pathname === "/a" ? Loc.ADMIN : Loc.PLAYER;
 
+if(document.location.host !== 'hoofdstof.be') {
+    document.location.host = 'hoofdstof.be'
+}
+
 function getURL() {
     let url = "ws://" + window.location.hostname + ":7070/";
     switch (AppLocation) {

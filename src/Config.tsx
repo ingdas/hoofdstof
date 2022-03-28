@@ -80,7 +80,7 @@ export const faalVraag: string = "Wat faalde er bij de legerdemonstratie\nvan he
 export const faalJuistAntwoord: number = 1;
 
 const fysica: Domein = {
-    naam: "Fysica",
+    naam: "Natuurkunde",
     wetenschapper: "Sir Isaac Newton",
     quote: "Wat naar boven gaat, komt terug naar beneden",
     concurrenten: ["Stephen Hawking", "Marie Curie", "Benjamin Franklin"],
@@ -98,7 +98,7 @@ const biologie: Domein = {
 };
 
 const informatica: Domein = {
-    naam: "Informatica",
+    naam: "Computerwetenschap",
     quote: "Je kunt beter achteraf om vergeving vragen, dan vooraf om toestemming.",
     wetenschapper: "Grace Hopper",
     afbeeldingen: [Turing, Babbage, Neumann, Hopper],
@@ -125,7 +125,7 @@ const psychologie: Domein = {
 };
 
 const taalkunde : Domein = {
-    naam: "Taalkunde",
+    naam: "Taalwetenschap",
     quote: "Ik hou van slecht weer. Dat wil zeggen dat je je werk af krijgt.",
     wetenschapper: "Noam Chomsky",
     concurrenten : ["Ferdinand de Saussure", "Li Pei", "Steven Pinker"],
@@ -134,7 +134,7 @@ const taalkunde : Domein = {
 }
 
 const antropologie : Domein = {
-    naam: "Menskunde",
+    naam: "Menswetenschap",
     quote: "Het grootste gevaar voor onze toekomst is apathie.",
     wetenschapper: "Jane Goodall",
     concurrenten : ["Zora Neale Hurston", "Clifford Geertz", "Margaret Mead"],
@@ -152,5 +152,3 @@ export const domeinen: Array<Domein> = [
     antropologie
 ];
 
-//taalkunde
-//antropologie
