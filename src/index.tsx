@@ -27,7 +27,11 @@ export const AppLocation = document.location.pathname === "/d" ? Loc.BEAMER :
     document.location.pathname === "/a" ? Loc.ADMIN : Loc.PLAYER;
 
 if(document.location.host !== 'hoofdstof.be') {
-    document.location.host = 'hoofdstof.be'
+    document.location.host = 'hoofdstof.be';
+}
+
+if(document.location.protocol === 'https:'){
+    document.location.protocol = 'http:';
 }
 
 function getURL() {
