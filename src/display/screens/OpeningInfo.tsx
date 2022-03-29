@@ -25,7 +25,7 @@ export function OpeningInfo() {
                 }}>
                     Neem je GSM<br/>
                     Connecteer met het wifi-netwerk "hoofdstof" <br /> (gebruik geen 4G!)<br/>
-                    <p style={{fontWeight: "bold"}}>Surf naar: http://www.hoofdstof.be</p>
+                    <p style={{fontWeight: "bold"}}>Surf naar: hoofdstof.be</p>
                 </div>
             </div>
     );
