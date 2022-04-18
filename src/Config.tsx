@@ -19,6 +19,7 @@ import Boyle from './img/chemie/boyle.jpg'
 import Nobel from './img/chemie/nobel.jpg'
 import Pasteur from './img/chemie/pasteur.jpg'
 import Lavoisier from './img/chemie/lavoisier.jpg'
+import Mendelev from './img/chemie/mendelev.jpg'
 
 import Bandura from './img/psychologie/bandura.jpg'
 import Freud from './img/psychologie/freud.jpg'
@@ -49,9 +50,7 @@ export const uitvindingen: Array<string> = [
     "Cornflakes",
     "Post-its",
     "Het raketijsje",
-//    "Chips",
-    "Play-Doh",
-//    "Coca-Cola"
+    "Play-Doh"
 ];
 
 export const speechQuestions: Array<string> = [
@@ -103,21 +102,21 @@ const informatica: Domein = {
     wetenschapper: "Grace Hopper",
     afbeeldingen: [Turing, Babbage, Neumann, Hopper],
     concurrenten: ["Alan Turing", "Charles Babbage", "John von Neumann"],
-    hints: ["Wit hemd", "leger", "bril", "20ste eeuw"],
+    hints: ["Wit hemd", "leger", "bril", "20ste eeuw"]
 };
 
 const chemie: Domein = {
     naam: "Chemie",
-    quote: "Verbazing is de eerste stap naar ontdekking",
-    wetenschapper: "Louis Pasteur",
-    afbeeldingen: [Nobel, Lavoisier, Boyle, Pasteur],
-    concurrenten: ["Alfred Nobel", "Antoine Lavoisier", "Robert Boyle"],
+    quote: "Hoe meer we weten, hoe meer we beseffen dat er nog meer te weten is.",
+    wetenschapper: "Jennifer Doudna",
+    afbeeldingen: [Pasteur, Mendelev, Curie],
+    concurrenten: ["Louis Pasteur", "Dmitri Mendelejev", "Marie Curie"],
     hints: ["baard", "Fransman", "Iets met melk", "Vaccins"]
 };
 
 const psychologie: Domein = {
     naam: "Psychologie",
-    quote: "Intelligentie is wat je gebruikt als je niet weet wat gedaan",
+    quote: "Intelligentie is wat je gebruikt als je niet weet wat te doen.",
     wetenschapper: "Jean Piaget",
     concurrenten: ["BF Skinner", "Sigmund Freud", "Albert Bandura"],
     afbeeldingen: [Skinner, Freud, Bandura, Piaget],
@@ -144,7 +143,7 @@ const antropologie : Domein = {
 
 export const domeinen: Array<Domein> = [
     fysica,
-    //chemie,
+    // chemie,
     biologie,
     //psychologie,
     informatica,
