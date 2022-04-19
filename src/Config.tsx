@@ -136,7 +136,9 @@ const antropologie : Domein = {
     naam: "Menswetenschap",
     quote: "Het grootste gevaar voor onze toekomst is apathie.",
     wetenschapper: "Jane Goodall",
-    concurrenten : ["Zora Neale Hurston", "Clifford Geertz", "Margaret Mead"],
+    concurrenten : ["Zora Neale Hurston", //Harlem Renaissance -> Zwart perspectief op de maatschappij
+    "Clifford Geertz", // Symbolie in de maatschappij
+    "Margaret Mead"], // Feminisme
     afbeeldingen : [Hurston, Geertz, Mead, Goodall],
     hints: ["Grijs", "Apen", "Vrouw", "Leeft nog"]
 }

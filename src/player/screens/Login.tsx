@@ -39,12 +39,12 @@ const LoginC = ({doLogin, finishLogin}: Props) => {
                 Wanneer jouw input gebruikt wordt in de show zal je naam getoond worden op het scherm.
             </Typography>
             <Typography variant="h5" component="div">
-                Wat is je naam?
+                Wat is je voornaam?
             </Typography>
 
             <TextField
                     style={{color: "white"}}
-                    label="Typ je naam hier"
+                    label="Typ je voornaam hier"
                     value={userName}
                     onChange={(event) => {
                         setName(event.target.value)
