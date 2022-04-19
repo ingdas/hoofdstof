@@ -9,6 +9,10 @@ html, #root, .fullHeight {
     color: white;
 }
 
+.display {
+    overflow: hidden;
+}
+
 .qTitle {
     font-size: 45px;
     padding: 10px;

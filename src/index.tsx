@@ -133,6 +133,10 @@ if(AppLocation === Loc.PLAYER){
         rootElement
     );
 }else if(AppLocation === Loc.BEAMER){
+    const htmlTag = document.getElementById('htmlTag');
+    if(htmlTag != null){
+        htmlTag.classList.add("display");
+    }
     ReactDOM.render(
         <Provider store={store}>
             <DisplayRoot/>
