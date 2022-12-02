@@ -56,7 +56,7 @@ export const uitvindingen: Array<string> = [
 export const speechQuestions: Array<string> = [
     "Een voorwerp",
     "Een vloekwoord",
-    "Een bekend vlogger",
+    "Een merk",
     "Een liedjestitel",
     "Een plaats waar je op vakantie gaat",
     "Een superkracht",
@@ -136,7 +136,8 @@ const antropologie : Domein = {
     naam: "Menswetenschap",
     quote: "Het grootste gevaar voor onze toekomst is apathie.",
     wetenschapper: "Jane Goodall",
-    concurrenten : ["Zora Neale Hurston", //Harlem Renaissance -> Zwart perspectief op de maatschappij
+    concurrenten : [
+    "Zora Neale Hurston", //Harlem Renaissance -> Zwart perspectief op de maatschappij
     "Clifford Geertz", // Symbolie in de maatschappij
     "Margaret Mead"], // Feminisme
     afbeeldingen : [Hurston, Geertz, Mead, Goodall],
@@ -149,7 +150,7 @@ export const domeinen: Array<Domein> = [
     biologie,
     //psychologie,
     informatica,
-    taalkunde,
+    taalkunde
     antropologie
 ];
 
