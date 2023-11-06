@@ -99,7 +99,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
     };
 
     // const isDisabled = [geslacht, vakgebied, naam, eigenschap, zin, woord].some(x => x === "");
-    const isDisabled = [vakgebied, naam, eigenschap, zin, woord].some(x => x === "");
+    const isDisabled = [vakgebied, naam, eigenschap, woord].some(x => x === "");
 
     return (<div>
         <Card>
@@ -167,7 +167,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                     />
             </CardContent>
         </Card>
-        <div style={{padding: "20px"}}></div>
+{/*        <div style={{padding: "20px"}}></div>
         <Card>
             <CardContent>
             <Typography variant="h5" component="div">
@@ -180,7 +180,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
                         onChange={changeListener(setZin)}
                     />
             </CardContent>
-        </Card>
+        </Card>*/}
         <div style={{padding: "20px"}}></div>
         <Card>
             <CardContent>

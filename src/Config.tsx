@@ -46,7 +46,7 @@ export interface Domein {
 }
 
 export const uitvindingen: Array<string> = [
-    "Velcro",
+    // "Velcro",
     "Cornflakes",
     "Post-its",
     "Het raketijsje",
@@ -150,7 +150,7 @@ export const domeinen: Array<Domein> = [
     biologie,
     //psychologie,
     informatica,
-    taalkunde
+    taalkunde,
     antropologie
 ];
 
