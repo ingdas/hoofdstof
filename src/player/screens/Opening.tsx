@@ -157,7 +157,7 @@ const OpeningC = ({professions, speechQuestion, dispatch, alreadyDone}: Props) =
         <Card>
             <CardContent>
             <Typography variant="h5" component="div">
-            Wat maakt onze wetenschapper bijzonder?
+            Wat maakt onze wetenschapper bijzonder, bijvoorbeeld een speciale hobby of karaktertrek?
             </Typography>
             <TextField
                         style={{width: '100%'}}
